@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex, nofollow">
+  <title>Prototype guide · Angat Buhay</title>
+  <link rel="stylesheet" href="assets/style.css">
+  <script src="assets/data.js" defer></script>
+  <script src="assets/app.js" defer></script>
+</head>
+<body data-page="sitemap">
+<main id="main" class="wrap section">
+  <span class="eyebrow">Prototype guide</span>
+  <h1>How to review this prototype</h1>
+  <p class="lede">This is a <b>low-fidelity structural prototype</b>. It shows what is on each page and how pages connect. It does not show final visual design. Colours, type and imagery will follow the Angat Buhay brand guidelines in the next phase.</p>
+
+  <div class="grid c3" style="margin:24px 0 40px">
+    <div class="card"><div class="body"><h3>Grey boxes with an X</h3><p class="sub">Photos, videos, maps and logos to be supplied.</p></div></div>
+    <div class="card"><div class="body"><h3>[Square brackets]</h3><p class="sub">Copy we still need from the Angat Buhay team.</p></div></div>
+    <div class="card"><div class="body"><h3>Design notes</h3><p class="sub">Dashed boxes explaining each decision, shown on every page once turned on. <span class="sample-tag">SAMPLE</span> marks illustrative content.</p>
+      <button class="btn small" type="button" id="notes-toggle" aria-pressed="false" style="margin-top:8px">Show design notes</button></div></div>
+  </div>
+  <p class="small muted">Photos are linked live from angatbuhay.ph. Matching photos to projects was a best guess from file names. The homepage video is the one the current site plays (Typhoon Tino recovery in Liloan, Cebu).</p>
+
+  <div class="grid c2">
+    <section>
+      <h2>Public website</h2>
+      <ul>
+        <li><a href="index.html"><b>Home</b></a>: featured story, advocacies, impact, presence, be involved</li>
+        <li><a href="stories.html"><b>Stories</b></a>: feed with advocacy / region / format filters, sort, infinite scroll
+          <ul><li><a href="story.html?s=hapag-ng-ani-what-are-we-feeding-our-children">Story: write-up</a></li>
+              <li><a href="story.html?s=from-immediate-relief-to-long-term-recovery">Story: video</a></li>
+              <li><a href="story.html?s=bktk-impact-at-a-glance">Story: infographic</a></li></ul></li>
+        <li><b>Advocacies</b>: projects, impact, team
+          <ul id="sitemap-pillars"></ul></li>
+        <li><b>Projects</b><ul id="sitemap-projects"></ul></li>
+        <li><a href="presence.html"><b>Presence</b></a>: regions → provinces, advocacies, volunteer orgs</li>
+        <li><a href="about.html"><b>About</b></a>: mission, vision, values, <a href="about.html#team">team</a>, <a href="about.html#certifications">certifications</a></li>
+        <li><a href="involved.html"><b>Get involved</b></a>
+          <ul><li><a href="donate.html">Donate</a></li><li><a href="volunteer.html">Volunteer</a></li><li><a href="fundraisers.html">Fundraisers</a></li><li><a href="involved.html#partner">Partner with us</a></li></ul></li>
+        <li><a href="resources.html"><b>Reports &amp; resources</b></a></li>
+        <li><a href="404.html"><b>Page not found</b></a></li>
+      </ul>
+    </section>
+    <section>
+      <h2>Staff admin</h2>
+      <ul>
+        <li><a href="admin/index.html"><b>Content list</b></a>: stories, projects, advocacies and more, with status</li>
+        <li><a href="admin/edit.html?type=stories&amp;id=hapag-ng-ani-what-are-we-feeding-our-children"><b>Edit a story</b></a></li>
+        <li><a href="admin/edit.html?type=projects&amp;id=iloilo-greenhouses"><b>Edit a project</b></a></li>
+      </ul>
+
+      <h2 style="margin-top:40px">Key journeys (from the wireframe)</h2>
+      <ol class="steps">
+        <li>Home hero → <b>Watch more</b> → Stories feed → a story</li>
+        <li>Home → <b>an advocacy</b> → its projects and impact stories → "See other stories" (pre-filtered feed)</li>
+        <li>Advocacy → <b>The team</b> → "Meet the rest of the team" → About</li>
+        <li>Home → <b>Presence</b> map → region/province table</li>
+        <li>Home → Be involved → <b>Donate</b> / Volunteer / <b>Fundraisers</b></li>
+      </ol>
+
+      <h2 style="margin-top:40px">About the content</h2>
+      <p class="small">Story titles, authors and dates, advocacy descriptions, team names, mission/vision and certifications come from angatbuhay.ph. Story formats, project/area tags, project dates, volunteer organizations, fundraiser details and items tagged <span class="sample-tag">SAMPLE</span> are illustrative. Bank account numbers are deliberately left out of the prototype.</p>
+    </section>
+  </div>
+</main>
+</body>
+</html>

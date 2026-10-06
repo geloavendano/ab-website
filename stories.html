@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex, nofollow">
+  <title>Stories · Angat Buhay</title>
+  <link rel="stylesheet" href="assets/style.css">
+  <script src="assets/data.js" defer></script>
+  <script src="assets/app.js" defer></script>
+</head>
+<body data-page="stories">
+<main id="main">
+  <div id="hero"></div>
+
+  <section class="section">
+    <div class="wrap">
+      <h1 style="font-size:clamp(24px,3.4vw,32px)">More impact</h1>
+      <p class="muted">Videos, write-ups and infographics from our programs across the Philippines.</p>
+
+      <form class="filters" role="search" aria-label="Filter stories" onsubmit="return false">
+        <div class="field"><label for="f-pillar">Advocacy</label><select id="f-pillar"></select></div>
+        <div class="field"><label for="f-region">Region</label><select id="f-region"></select></div>
+        <div class="field"><label for="f-format">Format</label><select id="f-format"></select></div>
+        <div class="field"><label for="f-sort">Sort by</label>
+          <select id="f-sort"><option value="newest">Newest first</option><option value="oldest">Oldest first</option></select></div>
+        <div class="field grow"><label for="f-q">Search</label><input id="f-q" type="search" placeholder="Search stories"></div>
+        <button type="button" class="btn small" id="clear">Clear</button>
+      </form>
+      <div class="note">The browser only <em>suggests</em> filters. The server checks them against known values and always applies the visibility rule (published, publish date reached, not archived). Choosing a province such as "Iloilo" also matches stories tagged to its towns (Ajuy, Concepcion…). Filters are kept in the URL so an LGU can share "all stories in Naga".</div>
+
+      <div class="result-bar"><span id="result-count" aria-live="polite"></span></div>
+      <div class="grid c3" id="story-list"></div>
+
+      <div class="loader" id="loader">
+        <div class="dot" aria-hidden="true"></div>
+        <span>Loading more stories…</span>
+        <button class="btn small" id="load-more" type="button">Load more</button>
+      </div>
+      <div class="note">Infinite scroll loads the next batch as you near the bottom. The "Load more" button is the keyboard and screen-reader fallback.</div>
+    </div>
+  </section>
+</main>
+</body>
+</html>
