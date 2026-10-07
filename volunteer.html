@@ -29,8 +29,8 @@
       <h2>How it works</h2>
       <div class="grid c3">
         <div class="card"><div class="body"><span class="eyebrow">Step 1</span><h3>Tell us about you</h3><p class="sub">Where you are, what you'd like to help with, and how much time you have.</p></div></div>
-        <div class="card"><div class="body"><span class="eyebrow">Step 2</span><h3>We match you</h3><p class="sub">[Who reviews, and how long it takes] We connect you with a program or a volunteer organization near you.</p></div></div>
-        <div class="card"><div class="body"><span class="eyebrow">Step 3</span><h3>Show up and serve</h3><p class="sub">[Orientation, schedule, and what to bring]</p></div></div>
+        <div class="card"><div class="body"><span class="eyebrow">Step 2</span><h3>We match you</h3><p class="sub">Our volunteer coordinator reviews sign-ups every week and connects you with a program or a volunteer organization near you, usually within 5 working days. <span class="sample-tag">PLACEHOLDER</span></p></div></div>
+        <div class="card"><div class="body"><span class="eyebrow">Step 3</span><h3>Show up and serve</h3><p class="sub">Join a 1-hour online orientation, then your first activity. We tell you the schedule, the place and what to bring at least a week ahead. <span class="sample-tag">PLACEHOLDER</span></p></div></div>
       </div>
       <div class="note">The current Volunteer and Partner buttons just open an email app with no explanation (audit finding). This lays out the process first.</div>
     </div>
@@ -42,20 +42,25 @@
       <div class="note">OPEN DECISION: an on-site form means storing personal data (consent, retention, access control under the Data Privacy Act). The alternative is linking to the network's existing sign-up process. This form shows the on-site option.</div>
       <form id="volunteer-form">
         <div class="grid c2" style="gap:0 16px">
-          <div class="field"><label for="v-name">Full name</label><input id="v-name" type="text" autocomplete="name"></div>
-          <div class="field"><label for="v-email">Email</label><input id="v-email" type="email" autocomplete="email"></div>
+          <div class="field"><label for="v-name" class="req">Full name</label><input id="v-name" type="text" autocomplete="name" required></div>
+          <div class="field"><label for="v-email" class="req">Email</label><input id="v-email" type="email" autocomplete="email" required></div>
           <div class="field"><label for="v-phone">Mobile number (optional)</label><input id="v-phone" type="tel" autocomplete="tel"></div>
-          <div class="field"><label for="volunteer-region">Where are you based?</label><select id="volunteer-region"></select></div>
+          <div class="field"><label for="volunteer-region" class="req">Where are you based?</label><select id="volunteer-region" required></select></div>
         </div>
         <fieldset class="field" style="border:1px solid var(--line);border-radius:var(--radius);padding:12px 16px">
-          <legend style="font-weight:600;font-size:14px;padding:0 4px">Advocacies you'd like to support</legend>
+          <legend style="font-weight:600;font-size:14px;padding:0 4px" class="req">Advocacies you'd like to support</legend>
           <div id="volunteer-pillars" style="display:grid;gap:4px"></div>
+          <p id="v-pillars-error" class="small" role="alert" hidden style="margin:8px 0 0;font-weight:700">Choose at least one advocacy.</p>
         </fieldset>
         <div class="field"><label for="v-org">Are you part of an organization? (optional)</label><input id="v-org" type="text"></div>
-        <div class="field"><label style="font-weight:400"><input type="checkbox" required> I agree that Angat Buhay may use these details to contact me about volunteering, as described in the <a href="#">privacy notice</a>. [Retention period]</label></div>
+        <p class="small muted">Fields marked * are required.</p>
+        <div class="field"><label style="font-weight:400"><input type="checkbox" required> I agree that Angat Buhay may use these details to contact me about volunteering, as described in the <a href="privacy.html">privacy notice</a>. We keep volunteer sign-ups for 12 months, then delete them unless you join an activity. <span class="sample-tag">PLACEHOLDER</span></label></div>
         <button class="btn solid" type="submit">Send</button>
       </form>
-      <div id="volunteer-done" class="banner" hidden>Thank you! [Confirmation message: what happens next and when.]</div>
+      <div id="volunteer-done" class="banner" hidden tabindex="-1" role="status">
+        <p style="margin:0 0 8px">Salamat, <span id="v-done-name"></span>! We'll email <b id="v-done-email"></b> within 5 working days with an orientation schedule. <span class="sample-tag">PLACEHOLDER</span></p>
+        <p class="small" style="margin:0;font-weight:400"><b>Prototype only:</b> nothing was sent or stored. The live form will save to the CMS and send this confirmation by email.</p>
+      </div>
     </div>
   </section>
 </main>

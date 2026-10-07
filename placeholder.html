@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex, nofollow">
+  <title>Placeholder destination · Angat Buhay</title>
+  <link rel="stylesheet" href="assets/style.css">
+  <script src="assets/data.js" defer></script>
+  <script src="assets/app.js" defer></script>
+</head>
+<body data-page="placeholder">
+<main id="main" class="wrap section" style="max-width:720px">
+  <span class="eyebrow">Placeholder destination <span class="sample-tag">PLACEHOLDER</span></span>
+  <h1 id="ph-what">External page</h1>
+  <p class="lede">In the live site this button opens the real page, usually an external registration or ticketing service. Angat Buhay will supply the link, and editors set it in the CMS.</p>
+  <p><button class="btn" type="button" onclick="history.length > 1 ? history.back() : (location.href = 'index.html')">← Go back</button></p>
+</main>
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    var w = new URLSearchParams(location.search).get("what");
+    if (w) { document.getElementById("ph-what").textContent = w; document.title = w + " · Placeholder · Angat Buhay"; }
+  });
+</script>
+</body>
+</html>

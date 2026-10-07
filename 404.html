@@ -2,6 +2,14 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
+  <script>
+    // GitHub Pages serves this file at whatever missing URL was requested (e.g. /ab-website/old/page/),
+    // so relative links would resolve inside that missing folder. Pin every link and asset to the site root.
+    (function () {
+      var root = /^\/ab-website(\/|$)/.test(location.pathname) ? "/ab-website/" : "/";
+      document.write('<base href="' + root + '">');
+    })();
+  </script>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="robots" content="noindex, nofollow">
   <title>Page not found · Angat Buhay</title>

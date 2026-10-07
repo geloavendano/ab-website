@@ -5,7 +5,7 @@
 :root {
   --ink: #111;
   --ink-2: #4a4a4a;
-  --ink-3: #8a8a8a;
+  --ink-3: #5f5f5f;   /* ≥4.5:1 on white, --fill-2 and --fill (WCAG AA small text) */
   --line: #d6d6d6;
   --fill: #e4e4e4;
   --fill-2: #f3f3f3;
@@ -96,30 +96,49 @@ video.media[controls] { object-fit: contain; background: #000; }
 /* ---------- Header ---------- */
 .site-header { border-bottom: 1px solid var(--line); background: var(--bg); position: sticky; top: 0; z-index: 20; }
 .site-header .wrap { display: flex; align-items: center; justify-content: space-between; gap: 16px; min-height: 64px; }
-.logo { display: flex; align-items: center; gap: 10px; text-decoration: none; font-weight: 800; }
+.logo { display: flex; align-items: center; gap: 10px; text-decoration: none; font-weight: 800; white-space: nowrap; }
 .logo .ph { width: 36px; height: 36px; font-size: 9px; }
 .nav { display: flex; align-items: center; gap: 4px; }
-.nav > a, .nav summary { padding: 8px 10px; text-decoration: none; font-weight: 500; cursor: pointer; border-radius: var(--radius); list-style: none; }
+.nav > a, .nav summary { padding: 8px 10px; text-decoration: none; font-weight: 500; cursor: pointer; border-radius: var(--radius); list-style: none; white-space: nowrap; }
 .nav summary::-webkit-details-marker { display: none; }
 .nav summary::after { content: " ▾"; font-size: 11px; color: var(--ink-3); }
 .nav > a:hover, .nav summary:hover { background: var(--fill-2); }
 .nav a[aria-current="page"] { text-decoration: underline; text-underline-offset: 6px; text-decoration-thickness: 2px; }
 .nav details { position: relative; }
+.nav details.menu-end .menu { left: auto; right: 0; }
 .nav .menu {
   position: absolute; top: calc(100% + 6px); left: 0; min-width: 260px; background: var(--bg);
   border: 1px solid var(--line); border-radius: var(--radius); padding: 6px; display: grid; box-shadow: 0 6px 20px rgba(0,0,0,.08);
+  max-width: calc(100vw - 2 * var(--gutter));
 }
 .nav .menu a { padding: 8px 10px; text-decoration: none; border-radius: var(--radius); }
 .nav .menu a:hover { background: var(--fill-2); }
 .site-header .menu-toggle { display: none; }
+.header-tools { display: flex; align-items: center; gap: 8px; order: 3; }
+.nav { order: 2; }
+.lang-switch { display: inline-flex; border: 1px solid var(--ink); border-radius: var(--radius); overflow: hidden; }
+.lang-switch button { border: 0; background: var(--bg); padding: 5px 9px; font-size: 12px; font-weight: 700; cursor: pointer; }
+.lang-switch button + button { border-left: 1px solid var(--ink); }
+.lang-switch button[aria-pressed="true"] { background: var(--ink); color: var(--bg); }
+.lang-banner { background: var(--fill-2); border-bottom: 1px solid var(--line); padding: 8px 0; }
+.lang-banner .wrap { display: flex; gap: 8px 12px; align-items: center; flex-wrap: wrap; }
+.mono { font-variant-numeric: tabular-nums; letter-spacing: .02em; }
+legend.req::after, label.req::after { content: " *"; }
 
-@media (max-width: 860px) {
+@media (max-width: 940px) {
   .site-header .menu-toggle { display: inline-flex; }
   .nav { display: none; position: absolute; left: 0; right: 0; top: 100%; background: var(--bg); border-bottom: 1px solid var(--line); flex-direction: column; align-items: stretch; padding: 8px var(--gutter) 16px; }
   .nav.open { display: flex; }
   .nav details[open] .menu, .nav .menu { position: static; box-shadow: none; border: 0; padding: 0 0 0 12px; min-width: 0; }
   .nav .btn { margin-top: 8px; justify-content: center; }
 }
+/* Same collapsed layout, applied by app.js whenever the full nav doesn't fit on one row
+   (e.g. longer Filipino labels), so no language needs its own breakpoint. */
+.site-header.compact .menu-toggle { display: inline-flex; }
+.site-header.compact .nav { display: none; position: absolute; left: 0; right: 0; top: 100%; background: var(--bg); border-bottom: 1px solid var(--line); flex-direction: column; align-items: stretch; padding: 8px var(--gutter) 16px; }
+.site-header.compact .nav.open { display: flex; }
+.site-header.compact .nav .menu { position: static; box-shadow: none; border: 0; padding: 0 0 0 12px; min-width: 0; }
+.site-header.compact .nav .btn { margin-top: 8px; justify-content: center; }
 
 /* ---------- Buttons, chips, forms ---------- */
 .btn {
@@ -305,3 +324,10 @@ body.show-notes .note { display: block; }
 
 /* Vertical social video (Instagram reel) embed */
 .embed-vertical { display: block; width: 100%; max-width: 420px; height: 760px; margin: 0 auto; border: 1px solid var(--line); border-radius: var(--radius); background: var(--bg); }
+
+/* Very narrow phones: the logo link keeps its aria-label; the wordmark text yields room to EN/FIL + Menu. */
+@media (max-width: 360px) {
+  .logo > span:last-child { display: none; }
+}
+.contact-card { flex-direction: row; flex-wrap: wrap; align-items: center; gap: 16px; padding: 16px; margin-top: 16px; }
+.contact-card > div:nth-child(2) { flex: 1 1 200px; min-width: 0; }

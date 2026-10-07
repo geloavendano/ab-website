@@ -97,44 +97,44 @@ window.AB = {
 
   /* ---------- Project (implementation dates ≠ publish dates) ---------- */
   projects: [
-    { id: "bayan-ko-titser-ko", image: "2024/09/Day-7_Don-Abella-CS-60-1024x683.jpg", pillar: "public-education", title: "Bayan Ko, Titser Ko",
+    { id: "bayan-ko-titser-ko", participation: { status: "open", label: "Accepting new partner schools for SY 2027–2028", who: "Public elementary schools and LGUs with Grade 1–3 learners reading below grade level." }, image: "2024/09/Day-7_Don-Abella-CS-60-1024x683.jpg", pillar: "public-education", title: "Bayan Ko, Titser Ko",
       summary: "Literacy and numeracy program for struggling early-grade learners, delivered by trained volunteer tutors.",
       areas: ["naga", "iloilo", "quezon-city"], start: "2022-09-01", end: null, status: "published" },
-    { id: "early-learning-spaces", image: "2026/02/AB-Small-Spaces-1.jpg", pillar: "public-education", title: "Early Learning Spaces",
+    { id: "early-learning-spaces", participation: { status: "open", label: "Accepting proposals from barangays", who: "Barangays with no Child Development Center or one housed in a temporary space." }, image: "2026/02/AB-Small-Spaces-1.jpg", pillar: "public-education", title: "Early Learning Spaces",
       summary: "Classrooms and community-based Educare centers that give young learners safe, conducive spaces to learn.",
       areas: ["naga"], start: "2023-06-01", end: null, status: "published" },
-    { id: "dormitory-young-women", image: "2024/09/SorSuDorm_Turnover-6-1024x683.jpg", pillar: "public-education", title: "Dormitory for Young Women",
+    { id: "dormitory-young-women", participation: { status: "closed", label: "Completed. Not accepting new sites", who: "State universities serving young women from far-flung municipalities." }, image: "2024/09/SorSuDorm_Turnover-6-1024x683.jpg", pillar: "public-education", title: "Dormitory for Young Women",
       summary: "Safe, secure living spaces for young women from far-flung areas so they can pursue their education.",
       areas: ["sorsogon", "palawan"], start: "2023-01-15", end: "2024-03-30", status: "published" },
 
-    { id: "iloilo-greenhouses", image: "2026/02/AB-Greenhouse-2.jpg", pillar: "health-nutrition-food-security", title: "Hapag ng Ani: Iloilo Greenhouses",
+    { id: "iloilo-greenhouses", participation: { status: "waitlist", label: "Waitlist open for 2027 sites", who: "Municipalities with an active nutrition council and land for a 120 m² greenhouse." }, image: "2026/02/AB-Greenhouse-2.jpg", pillar: "health-nutrition-food-security", title: "Hapag ng Ani: Iloilo Greenhouses",
       summary: "Community-owned greenhouse facilities supporting a malnutrition-free Iloilo, turned over in Carles, Cabatuan, Ajuy and Concepcion.",
       areas: ["carles", "cabatuan", "ajuy", "concepcion"], start: "2024-02-01", end: "2026-01-31", status: "published" },
-    { id: "school-feeding", image: "2024/09/IMG_1853-1024x683.jpg", pillar: "health-nutrition-food-security", title: "School-Based Feeding Program",
+    { id: "school-feeding", participation: { status: "open", label: "Accepting partner schools in current Bayan Ko, Titser Ko sites", who: "Schools already in the Bayan Ko, Titser Ko program." }, image: "2024/09/IMG_1853-1024x683.jpg", pillar: "health-nutrition-food-security", title: "School-Based Feeding Program",
       summary: "Nutritious meals for early-grade learners enrolled in Bayan Ko, Titser Ko.",
       areas: ["naga", "iloilo"], start: "2023-08-01", end: null, status: "published" },
-    { id: "e-konsulta", image: "2024/09/IMG_1927-1024x683.jpg", pillar: "health-nutrition-food-security", title: "Bayanihan E-Konsulta",
+    { id: "e-konsulta", participation: { status: "open", label: "Open to patients nationwide", who: "Anyone in the Philippines without easy access to a doctor." }, image: "2024/09/IMG_1927-1024x683.jpg", pillar: "health-nutrition-food-security", title: "Bayanihan E-Konsulta",
       summary: "Free teleconsultations bringing healthcare closer to underserved communities.",
       areas: ["ncr"], start: "2022-10-01", end: null, status: "published" },
 
-    { id: "disaster-relief-2025", image: "2024/09/Polillo-Islands-Turnover_4-e1726462290178.jpg", pillar: "climate-action-sustainability", title: "Typhoon Response 2025",
+    { id: "disaster-relief-2025", participation: { status: "closed", label: "Response completed. Contact us for current operations", who: "Typhoon-affected LGUs coordinated through local DRRM offices." }, image: "2024/09/Polillo-Islands-Turnover_4-e1726462290178.jpg", pillar: "climate-action-sustainability", title: "Typhoon Response 2025",
       summary: "From hot meals and food packs to shelter repair kits and livelihood boats: relief and recovery after Typhoons Tino and Uwan.",
       areas: ["liloan", "cebu", "catanduanes"], start: "2025-11-04", end: "2026-05-31", status: "published" },
-    { id: "angat-kalikasan", image: "2024/09/22-1024x683.jpg", pillar: "climate-action-sustainability", title: "Angat Kalikasan",
+    { id: "angat-kalikasan", participation: { status: "waitlist", label: "Expressions of interest open for the 2027 cohort", who: "Sangguniang Kabataan councils endorsed by their municipal LGU." }, image: "2024/09/22-1024x683.jpg", pillar: "climate-action-sustainability", title: "Angat Kalikasan",
       summary: "Training Sangguniang Kabataan members in environmental governance, leadership and sustainability.",
       areas: ["iloilo", "davao-del-sur"], start: "2024-03-01", end: "2024-11-30", status: "published" },
 
-    { id: "abvn", image: "2024/09/baklaya-9-1024x768.jpg", pillar: "community-engagement", title: "Angat Bayanihan Volunteer Network",
+    { id: "abvn", participation: { status: "open", label: "Accepting new member organizations", who: "Registered or community-based volunteer groups and civil society organizations." }, image: "2024/09/baklaya-9-1024x768.jpg", pillar: "community-engagement", title: "Angat Bayanihan Volunteer Network",
       summary: "A network of civil society organizations and individual volunteers across 48 provinces and 11 countries.",
       areas: ["ncr", "r5", "r6", "r7", "r11"], start: "2022-07-01", end: null, status: "published" },
 
-    { id: "angat-sining-fellowship", image: "2024/09/weaving-3.jpg", pillar: "arts-culture", title: "Angat Sining Fellowship for Visual Arts",
+    { id: "angat-sining-fellowship", participation: { status: "waitlist", label: "Next call for fellows: early 2027", who: "Filipino visual artists aged 18–35." }, image: "2024/09/weaving-3.jpg", pillar: "arts-culture", title: "Angat Sining Fellowship for Visual Arts",
       summary: "Mentorship and exhibition opportunities for emerging young Filipino visual artists.",
       areas: ["ncr"], start: "2023-05-01", end: null, status: "published" },
-    { id: "angat-sining-arkitektura", image: "2026/01/AB-building-with-people-1-1024x683.jpg", pillar: "arts-culture", title: "Angat Sining Arkitektura Internship",
+    { id: "angat-sining-arkitektura", participation: { status: "closed", label: "2025 cycle completed. Next call to be announced", who: "Architecture students and recent graduates." }, image: "2026/01/AB-building-with-people-1-1024x683.jpg", pillar: "arts-culture", title: "Angat Sining Arkitektura Internship",
       summary: "Young architects design for communities at the margins, guided by practitioners.",
       areas: ["ncr", "naga"], start: "2025-03-01", end: "2025-08-31", status: "published" },
-    { id: "museo-ng-pag-asa", pillar: "arts-culture", title: "Museo ng Pag-asa",
+    { id: "museo-ng-pag-asa", participation: { status: "open", label: "Open to visitors and school group tours", who: "Schools, organizations and the general public." }, pillar: "arts-culture", title: "Museo ng Pag-asa",
       summary: "A museum of the 2022 volunteer campaign, inviting visitors into community service and active citizenship.",
       areas: ["quezon-city"], start: "2022-10-01", end: null, status: "published" }
   ],
@@ -146,7 +146,7 @@ window.AB = {
       subheading: "Volunteers, partners and communities across the Philippines, in their own words.",
       pillar: "community-engagement", project: "abvn", areas: ["ncr", "r5", "r6", "r7", "r11"],
       author: "Angat Buhay", status: "published", publishedAt: "2026-03-01T09:00:00+08:00",
-      videoUrl: "https://www.neithan.rocks/mid.mp4",
+      videoUrl: "https://www.neithan.rocks/mid.mp4", image: "2024/09/22-1024x683.jpg",
       body: [
         "[This is the 3:52 montage the current homepage plays: farms and community gardens, volunteers on stage, and testimonials from community members. Real title, description and date to be supplied by the comms team.]"
       ] },
@@ -295,8 +295,9 @@ window.AB = {
     { pillar: "climate-action-sustainability", value: "8,965", label: "relief packs and hot meals distributed during disasters" },
     { pillar: "arts-culture", value: "2,043", label: "Museo ng Pag-asa visitors" }
   ],
-  impactAsOf: "[Reporting period — to confirm]",
-  impactSource: "[Source — e.g. Annual Report 2024]",
+  impactAsOf: "31 December 2024",
+  impactAsOfPlaceholder: true,
+  impactSource: "Angat Buhay Annual Report 2023–2024",
 
   /* ---------- TeamMember (photos in the same order as the live Team page) ---------- */
   team: {
@@ -334,19 +335,19 @@ window.AB = {
     { name: "PCNC Accreditation", issuer: "Philippine Council for NGO Certification", detail: "Three-year accreditation affirming compliance with non-profit management standards." },
     { name: "ISO 9001:2015", issuer: "Quality management systems", detail: "Surveillance audit passed; internationally recognized benchmark for quality management." },
     { name: "License to Operate", issuer: "Department of Social Welfare and Development (DSWD)", detail: "Auxiliary Social Welfare and Development Agency." },
-    { name: "Public Solicitation Permit", issuer: "DSWD", detail: "Permit No. DSWD-SB-PSP-S-2025-000049. [Validity date — to confirm]" },
+    { name: "Public Solicitation Permit", issuer: "DSWD", detail: "Permit No. DSWD-SB-PSP-S-2025-000049. Valid until 31 December 2026.", placeholder: "validity date" },
     { name: "Donee Institution Status", issuer: "Bureau of Internal Revenue", detail: "Donations are tax-deductible." },
     { name: "Member", issuer: "Association of Foundations (AF)", detail: "A network of NGOs developing sustainable community programs." }
   ],
 
   /* ---------- Fundraiser ---------- */
   fundraisers: [
-    { slug: "angat-buhay-makati", name: "Angat Buhay Makati", date: "[Date]", location: "Makati City", sample: true,
-      description: "[Short description of the event, what funds raised support, and how to take part.]" },
-    { slug: "angat-buhay-run-naga", name: "Angat Buhay Run Naga", date: "[Date]", location: "Naga City", sample: true,
-      description: "[Fun run details: categories, registration, beneficiary program.]" },
-    { slug: "alab", name: "ALAB", date: "[Date]", location: "[Venue]", sample: true,
-      description: "[What ALAB is, past editions, how to attend or support.]" }
+    { slug: "angat-buhay-makati", name: "Angat Buhay Makati", date: "15 November 2026", location: "Makati City", placeholder: true,
+      description: "An evening of performances and stories from our programs. Ticket sales fund Bayan Ko, Titser Ko literacy sites for the 2027 school year." },
+    { slug: "angat-buhay-run-naga", name: "Angat Buhay Run Naga", date: "7 February 2027", location: "Naga City", placeholder: true,
+      description: "3K, 5K and 10K categories. Registration includes a race kit; proceeds support school-based feeding in Camarines Sur." },
+    { slug: "alab", name: "ALAB", date: "March 2027", location: "Metro Manila venue to be announced", placeholder: true,
+      description: "An art sale featuring Angat Sining fellows and established artists. Proceeds fund the next Angat Sining fellowship cycle." }
   ],
 
   /* ---------- DonationChannel (account numbers managed in CMS) ---------- */
@@ -360,18 +361,21 @@ window.AB = {
       accounts: [["BPI (USD)", "Angat Pinas, Inc."]], swift: "BOPIPHMM",
       steps: ["From a BPI account: Fund Transfer → Third-party BPI account → select USD.", "From another bank or overseas: request an international wire with the details below.", "Confirm fees and processing time with your bank.", "Keep the transaction receipt."] },
     { id: "bpi-edonate", name: "BPI eDonate", currency: "PHP",
-      steps: ["[Steps for BPI eDonate — to confirm]"] },
+      placeholder: true,
+      steps: ["Open the BPI app and go to “Pay Bills”.", "Search for “Angat Pinas Inc.” as the biller.", "Enter the amount and your email address as the reference number.", "Confirm, then keep the confirmation for your records."] },
     { id: "myriad-au", name: "Myriad Australia", currency: "AUD",
-      steps: ["[Steps for donating through Myriad Australia — tax-deductible in Australia]"] },
+      placeholder: true,
+      steps: ["Go to the Myriad Australia donation page for Angat Buhay.", "Choose a one-off or monthly gift in AUD.", "Myriad issues an Australian tax-deductible receipt by email.", "Myriad transfers the funds to Angat Buhay quarterly."] },
     { id: "myriad-us", name: "Myriad USA", currency: "USD",
-      steps: ["[Steps for donating through Myriad USA — tax-deductible in the US]"] }
+      placeholder: true,
+      steps: ["Go to the Myriad USA donation page for Angat Buhay.", "Give by card, bank transfer (ACH) or donor-advised fund in USD.", "Myriad USA issues a US tax-deductible receipt by email.", "Myriad USA grants the funds to Angat Buhay."] }
   ],
 
   /* ---------- Resource ---------- */
   resources: [
-    { title: "Annual Report 2023–2024", type: "Annual report", year: 2024, format: "PDF", size: "[x MB]" },
-    { title: "Annual Report 2022–2023", type: "Annual report", year: 2023, format: "PDF", size: "[x MB]" },
-    { title: "Angat Kalikasan Toolkit 2024", type: "Toolkit", year: 2024, format: "PDF", size: "[x MB]" },
-    { title: "Audited Financial Statements 2024", type: "Transparency", year: 2024, format: "PDF", size: "[x MB]", sample: true }
+    { title: "Annual Report 2023–2024", type: "Annual report", year: 2024, format: "PDF", size: "1 KB", file: "annual-report-2023-2024.pdf" },
+    { title: "Annual Report 2022–2023", type: "Annual report", year: 2023, format: "PDF", size: "1 KB", file: "annual-report-2022-2023.pdf" },
+    { title: "Angat Kalikasan Toolkit 2024", type: "Toolkit", year: 2024, format: "PDF", size: "1 KB", file: "angat-kalikasan-toolkit-2024.pdf" },
+    { title: "Audited Financial Statements 2024", type: "Transparency", year: 2024, format: "PDF", size: "1 KB", file: "audited-financial-statements-2024.pdf" }
   ]
 };
