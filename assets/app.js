@@ -328,7 +328,8 @@
 
   function homeHero() {
     const s = listedStories().find((x) => x.featured) || listedStories()[0];
-    const media = s && s.videoUrl ? `<video class="home-hero-media" data-src="${esc(s.videoUrl)}" poster="${esc(M(s.image || D.media.heroPoster))}" muted playsinline preload="none" aria-label="${esc(s.title)} (muted background video)"></video>
+    const version = document.body.dataset.version || "v0.3";
+    const media = version === "v0.3" && s && s.videoUrl ? `<video class="home-hero-media" data-src="${esc(s.videoUrl)}" poster="${esc(M(s.image || D.media.heroPoster))}" muted playsinline preload="none" aria-label="${esc(s.title)} (muted background video)"></video>
       <button class="video-toggle" type="button">▶ Play video</button>` : "";
     const story = s ? `<a class="home-featured-story" href="story.html?s=${esc(s.slug)}">
       <span>Featured story</span>

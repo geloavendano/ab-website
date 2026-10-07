@@ -4,6 +4,7 @@ Each approved design checkpoint is committed and tagged before the next directio
 
 ## v0.1 - Playful / doodle-forward
 
+- Review page: `homepage-v0.1.html`
 - Git tag: `homepage-v0.1-playful`
 - Commit: `5c291c3`
 - First translation of the 2025 brand guide into interface components.
@@ -12,6 +13,7 @@ Each approved design checkpoint is committed and tagged before the next directio
 
 ## v0.2 - Cinematic / documentary
 
+- Review page: `homepage-v0.2.html`
 - Git tag: `homepage-v0.2-cinematic`
 - Documentary photography became the main emotional layer.
 - Grain, sky color, and sketch texture moved into the background.
@@ -20,6 +22,7 @@ Each approved design checkpoint is committed and tagged before the next directio
 
 ## v0.3 - Video-led / connective doodle folds
 
+- Review page: `homepage-v0.3.html`
 - Git tag: `homepage-v0.3-video-folds`
 - Restores video as the homepage hero content.
 - Uses sparse transparent doodle clusters at selected section folds and corners.
