@@ -171,7 +171,7 @@
     const langBtn = (code, label, name) => `<button type="button" data-lang="${code}" aria-pressed="${LANG === code}" lang="${code}" aria-label="${name}">${label}</button>`;
     return `<a class="skip" href="#main">${t("Skip to content")}</a>
     <header class="site-header"><div class="wrap">
-      <a class="logo" href="index.html" aria-label="Angat Buhay home"><span class="ph"><span>LOGO</span></span><span>Angat Buhay</span></a>
+      <a class="logo" href="index.html" aria-label="Angat Buhay home"><img class="brand-logo" src="assets/media/angat-buhay-logo.png" alt="Angat Buhay"></a>
       <div class="header-tools">
         <div class="lang-switch" role="group" aria-label="Language / Wika">${langBtn("en", "EN", "English")}${langBtn("fil", "FIL", "Filipino")}</div>
         <button class="btn small menu-toggle" aria-expanded="false" aria-controls="nav">Menu</button>
@@ -326,10 +326,40 @@
     </section>`;
   }
 
+  function homeHero() {
+    const s = listedStories().find((x) => x.featured) || listedStories()[0];
+    const story = s ? `<a class="home-featured-story" href="story.html?s=${esc(s.slug)}">
+      <span>Featured story</span>
+      <strong>${esc(s.title)}</strong>
+      <b>Watch the story</b>
+    </a>` : "";
+    return `<section class="home-hero" aria-labelledby="home-hero-title">
+      <div class="wrap home-hero-inner">
+        <div class="home-hero-paper">
+          <p class="eyebrow">Bayanihan in action</p>
+          <h1 id="home-hero-title">Bayanihan is how we rise.</h1>
+          <p>When communities lead and people show up for one another, hope becomes something we can build together.</p>
+          <div class="button-row">
+            <a class="btn solid" href="involved.html">Join the movement</a>
+            <a class="btn light" href="#advocacies">Explore our work</a>
+          </div>
+        </div>
+        ${story}
+      </div>
+    </section>`;
+  }
+
+  function homePillarCard(p, index) {
+    return `<a class="pillar-card pillar-card-${index + 1}" href="advocacy.html?p=${esc(p.slug)}" style="--pillar-image:url('${esc(M(p.image))}')">
+      <span class="pillar-number">0${index + 1}</span>
+      <span class="pillar-card-copy"><strong>${esc(p.name)}</strong><small>${esc(p.tagline)}</small><b>Explore advocacy</b></span>
+    </a>`;
+  }
+
   pages.home = () => {
-    fill("hero", featuredHero("stories.html", "Watch more", "h1"));
-    fill("pillars", D.pillars.map((p) => `<a class="tile" href="advocacy.html?p=${p.slug}"><span>${esc(p.name)}<small>${esc(p.tagline)}</small></span></a>`).join(""));
-    fill("latest", listedStories().slice(0, 3).map(storyCard).join(""));
+    fill("hero", homeHero());
+    fill("pillars", D.pillars.map(homePillarCard).join(""));
+    fill("latest", listedStories().filter((s) => s.image).slice(0, 3).map(storyCard).join(""));
   };
 
   pages.stories = () => {
