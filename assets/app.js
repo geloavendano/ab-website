@@ -361,6 +361,13 @@
   }
 
   pages.home = () => {
+    const version = document.body.dataset.version;
+    if (!version) {
+      fill("hero", featuredHero("stories.html", "Watch more", "h1"));
+      fill("pillars", D.pillars.map((p) => `<a class="tile" href="advocacy.html?p=${p.slug}"><span>${esc(p.name)}<small>${esc(p.tagline)}</small></span></a>`).join(""));
+      fill("latest", listedStories().slice(0, 3).map(storyCard).join(""));
+      return;
+    }
     fill("hero", homeHero());
     fill("pillars", D.pillars.map(homePillarCard).join(""));
     fill("latest", listedStories().filter((s) => s.image).slice(0, 3).map(storyCard).join(""));

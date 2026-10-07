@@ -2,6 +2,8 @@
 
 Each approved design checkpoint is committed and tagged before the next direction is developed.
 
+`index.html` remains the neutral structural prototype for client discussions about content, hierarchy, and page flow. The versioned pages below are separate visual-design explorations.
+
 ## v0.1 - Playful / doodle-forward
 
 - Review page: `homepage-v0.1.html`

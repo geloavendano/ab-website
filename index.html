@@ -4,90 +4,59 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="robots" content="noindex, nofollow">
-  <meta name="description" content="Angat Buhay brings communities, volunteers and partners together through bayanihan programs across the Philippines.">
-  <title>Angat Buhay — Bayanihan in action</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Kalam:wght@400;700&amp;family=Rubik:wght@500;600;700;800;900&amp;family=Work+Sans:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
-  <link rel="icon" type="image/svg+xml" href="assets/media/favicon.svg">
-  <link rel="stylesheet" href="assets/style.css">
-  <link rel="stylesheet" href="assets/home-cinematic.css">
-  <link rel="stylesheet" href="assets/home-continuity.css">
+  <title>Angat Buhay</title>
+  <link rel="stylesheet" href="assets/style.css?v=structural-home">
   <script src="assets/data.js" defer></script>
   <script src="assets/app.js" defer></script>
 </head>
-<body data-page="home" data-version="v0.3">
+<body data-page="home">
 <main id="main">
 
-  <!-- Expressive brand hero -->
+  <!-- Featured story (wireframe: hero with Story Title / Subheading / Watch More) -->
   <div id="hero"></div>
+  <div class="wrap"><div class="note">The hero is the story an editor marks "Featured" in the admin. Here it's a video story, so it plays muted on loop with a pause button (needed for accessibility, and it won't autoplay for people who've asked their device to reduce motion). "Watch more" opens the Stories feed, which starts with the same story (per wireframe). Impact is told through stories rather than a statistics block.</div></div>
 
-  <section class="section home-intro" aria-labelledby="home-intro-title">
-    <div class="wrap home-intro-grid">
-      <div>
-        <p class="home-script" aria-hidden="true">Sama-sama, may nagagawa.</p>
-        <p class="eyebrow">Our work begins with people</p>
-        <h2 id="home-intro-title">Every community has the power to rise.</h2>
-      </div>
-      <div class="home-intro-copy">
-        <p class="lede">We empower Filipinos to become communities of active citizens by mobilizing the country’s largest volunteer network and turning bayanihan into programs that last.</p>
-        <div class="button-row">
-          <a class="btn solid" href="about.html">Meet Angat Buhay</a>
-          <a class="btn text-link" href="presence.html">See where we work</a>
-        </div>
-      </div>
+  <section class="section">
+    <div class="wrap">
+      <p class="lede" style="font-size:clamp(20px,2.6vw,26px);color:var(--ink);font-weight:600;max-width:42ch">
+        We empower Filipinos to become communities of active citizens by mobilizing the largest volunteer network in implementing Bayanihan programs.
+      </p>
+      <a class="link-arrow" href="about.html">About Angat Buhay</a>
     </div>
   </section>
 
-  <section class="section home-advocacies" id="advocacies" aria-labelledby="advocacies-title">
+  <section class="section" id="advocacies">
     <div class="wrap">
-      <div class="section-head home-section-head">
-        <div><p class="eyebrow">Five ways we move together</p><h2 id="advocacies-title">Our advocacies</h2></div>
-        <p>From classrooms and clinics to climate resilience and culture, our work follows what communities say they need most.</p>
-      </div>
+      <div class="section-head"><h2>Advocacies</h2></div>
       <div class="grid c3" id="pillars"></div>
+      <div class="note">Five advocacy pillars from the CMS. Each opens its own page with projects, impact stories and team.</div>
     </div>
   </section>
 
-  <section class="section home-presence" id="presence" aria-labelledby="presence-title">
-    <div class="wrap presence-grid">
-      <div class="presence-photo" role="img" aria-label="Angat Buhay volunteers working together in a community"></div>
-      <div class="presence-copy">
-        <p class="home-script" aria-hidden="true">Bayanihan, wherever it’s needed.</p>
-        <p class="eyebrow">Across the Philippines and beyond</p>
-        <h2 id="presence-title">A network built on trust, local knowledge, and shared action.</h2>
-        <p>Our partners and volunteers show up where they are needed—supporting communities with programs shaped by the people who live there.</p>
-        <div class="presence-facts" aria-label="Angat Bayanihan Volunteer Network reach">
-          <div><strong>48</strong><span>provinces reached</span></div>
-          <div><strong>87</strong><span>civil society groups</span></div>
-          <div><strong>11</strong><span>countries connected</span></div>
-        </div>
-        <a class="btn solid" href="presence.html">Explore our presence</a>
-      </div>
-    </div>
-  </section>
-
-  <section class="section home-stories" aria-labelledby="stories-title">
+  <section class="section" id="presence">
     <div class="wrap">
-      <div class="section-head home-section-head">
-        <div><p class="eyebrow">From the ground</p><h2 id="stories-title">Stories of impact</h2></div>
-        <a class="btn text-link" href="stories.html">Read all stories</a>
-      </div>
+      <div class="section-head"><h2>Presence</h2><a class="link-arrow" href="presence.html">See where we work</a></div>
+      <a href="presence.html" style="display:block;text-decoration:none">
+        <div class="ph r-16x9" role="img" aria-label="Map of the Philippines showing communities and volunteer network"><span>&lt;map illustration of PH communities and volunteer network&gt;</span></div>
+      </a>
+      <div class="note">On the next page the map has an accessible table behind it, so phone users and screen readers can still find work in their province (audit finding).</div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <div class="section-head"><h2>Stories of impact</h2><a class="link-arrow" href="stories.html">All stories</a></div>
       <div class="grid c3" id="latest"></div>
     </div>
   </section>
 
-  <section class="section home-involved" id="involved" aria-labelledby="involved-title">
+  <section class="section" id="involved">
     <div class="wrap">
-      <div class="involved-heading">
-        <p class="home-script" aria-hidden="true">May puwang ka rito.</p>
-        <p class="eyebrow">Be part of the movement</p>
-        <h2 id="involved-title">Choose how you want to help.</h2>
-      </div>
-      <div class="involved-grid">
-        <a class="involved-card involved-card-pink" href="donate.html"><span class="involved-number">01</span><strong>Donate</strong><span>Your support helps community-led programs go further.</span><b>Give today</b></a>
-        <a class="involved-card involved-card-yellow" href="volunteer.html"><span class="involved-number">02</span><strong>Volunteer</strong><span>Share your time and skills with the Angat Bayanihan Volunteer Network.</span><b>Join the network</b></a>
-        <a class="involved-card involved-card-teal" href="fundraisers.html"><span class="involved-number">03</span><strong>Fundraise</strong><span>Turn your event, idea, or community into a force for good.</span><b>See fundraisers</b></a>
+      <div class="section-head"><h2>Be involved</h2></div>
+      <div class="grid c3">
+        <a class="tile" href="donate.html" style="min-height:160px"><span>Donate<small>GCash, bank transfer, USD and overseas options</small></span></a>
+        <a class="tile" href="volunteer.html" style="min-height:160px"><span>Volunteer<small>Join the Angat Bayanihan Volunteer Network</small></span></a>
+        <a class="tile" href="fundraisers.html" style="min-height:160px"><span>Fundraisers<small>Angat Buhay Makati, Run Naga, ALAB</small></span></a>
       </div>
     </div>
   </section>
