@@ -20,7 +20,7 @@ Each approved design checkpoint is committed and tagged before the next directio
 
 ## v0.3 - Video-led / connective doodle folds
 
-- Working version; tag will be created when the pass is complete.
+- Git tag: `homepage-v0.3-video-folds`
 - Restores video as the homepage hero content.
 - Uses sparse transparent doodle clusters at selected section folds and corners.
 - Keeps the cinematic and institutional component language from v0.2.

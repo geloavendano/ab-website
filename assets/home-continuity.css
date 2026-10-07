@@ -1,0 +1,160 @@
+/* Homepage direction 03: video-led hero and connective corner doodles. */
+
+body[data-page="home"] .home-hero {
+  background-color: #17394d;
+}
+
+body[data-page="home"] main,
+body[data-page="home"] [id] { scroll-margin-top: 76px; }
+
+body[data-page="home"] .home-hero-media {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  background: #17394d;
+  filter: saturate(.82) contrast(1.03);
+}
+
+body[data-page="home"] .home-hero::before {
+  z-index: 1;
+  background:
+    linear-gradient(90deg, rgba(13, 38, 54, .92) 0%, rgba(21, 52, 70, .72) 38%, rgba(20, 51, 68, .2) 74%, rgba(15, 34, 45, .22) 100%),
+    linear-gradient(0deg, rgba(12, 29, 39, .58), transparent 54%);
+}
+
+body[data-page="home"] .home-hero::after { z-index: 1; opacity: .08; }
+body[data-page="home"] .home-hero-inner { z-index: 2; }
+
+body[data-page="home"] .home-hero .video-toggle {
+  position: absolute;
+  top: 22px;
+  right: var(--gutter);
+  z-index: 3;
+  padding: 9px 12px;
+  border: 1px solid rgba(255,255,255,.62);
+  border-radius: 2px;
+  background: rgba(18, 44, 59, .58);
+  color: #fff;
+  font-family: "Work Sans", system-ui, sans-serif;
+  font-size: .72rem;
+  font-weight: 600;
+  letter-spacing: .04em;
+  cursor: pointer;
+  backdrop-filter: blur(8px);
+}
+
+body[data-page="home"] .home-hero .video-toggle:hover,
+body[data-page="home"] .home-hero .video-toggle:focus-visible {
+  border-color: #fff;
+  background: rgba(18, 44, 59, .82);
+}
+
+/* Doodle overlays stay at section folds and never become the content itself. */
+body[data-page="home"] .home-advocacies,
+body[data-page="home"] .home-stories {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+}
+
+body[data-page="home"] .home-advocacies > .wrap,
+body[data-page="home"] .home-stories > .wrap {
+  position: relative;
+  z-index: 1;
+}
+
+body[data-page="home"] .home-advocacies::after {
+  content: "";
+  position: absolute;
+  top: -72px;
+  left: -68px;
+  z-index: 0;
+  width: clamp(350px, 44vw, 690px);
+  aspect-ratio: 1.22;
+  opacity: .55;
+  background: url("media/doodle-corners-v1.png") left top / 138% auto no-repeat;
+  pointer-events: none;
+}
+
+body[data-page="home"] .home-stories::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  opacity: .72;
+  background: url("media/doodle-corners-v1.png") center / 100% 100% no-repeat;
+  pointer-events: none;
+}
+
+body[data-page="home"] .home-stories::before { content: none; }
+
+body[data-page="home"] .home-stories .home-section-head,
+body[data-page="home"] .home-stories #latest {
+  position: relative;
+  z-index: 1;
+}
+
+/* Keep content legible when a corner stroke runs behind it. */
+body[data-page="home"] .home-stories .card {
+  background: rgba(255,255,255,.92);
+  backdrop-filter: blur(2px);
+}
+
+@media (max-width: 900px) {
+  body[data-page="home"] .home-advocacies::after {
+    top: -44px;
+    left: -112px;
+    width: 560px;
+    opacity: .44;
+  }
+
+  body[data-page="home"] .home-stories::after {
+    opacity: .5;
+    background-size: auto 100%;
+    background-position: center;
+  }
+}
+
+@media (max-width: 700px) {
+  body[data-page="home"] .home-hero .video-toggle {
+    top: 16px;
+    right: 16px;
+  }
+
+  body[data-page="home"] .home-advocacies::after {
+    top: -20px;
+    left: -156px;
+    width: 500px;
+    opacity: .36;
+  }
+
+  body[data-page="home"] .home-stories::after {
+    inset: 0 auto auto -126px;
+    width: 470px;
+    height: 360px;
+    opacity: .42;
+    background-size: 138% auto;
+    background-position: left top;
+  }
+
+  body[data-page="home"] .home-stories::before {
+    content: "";
+    position: absolute;
+    right: -138px;
+    bottom: -54px;
+    z-index: 0;
+    width: 460px;
+    height: 400px;
+    opacity: .38;
+    background: url("media/doodle-corners-v1.png") right bottom / 138% auto no-repeat;
+    pointer-events: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  body[data-page="home"] .home-hero-media,
+  body[data-page="home"] .home-hero .video-toggle { display: none; }
+}

@@ -256,7 +256,7 @@
     return matchMedia("(min-width: 1024px)").matches;
   }
   function wireHeroVideo() {
-    const v = $(".hero video"), b = $(".hero .video-toggle");
+    const v = $(".hero video, .home-hero video"), b = $(".hero .video-toggle, .home-hero .video-toggle");
     if (!v || !b) return;
     const load = () => { if (!v.getAttribute("src")) v.src = `${v.dataset.src}#t=0,${HERO_SEGMENT_S}`; };
     const sync = () => { b.textContent = v.paused ? "▶ Play video" : "❚❚ Pause video"; b.setAttribute("aria-pressed", String(v.paused)); };
@@ -328,12 +328,15 @@
 
   function homeHero() {
     const s = listedStories().find((x) => x.featured) || listedStories()[0];
+    const media = s && s.videoUrl ? `<video class="home-hero-media" data-src="${esc(s.videoUrl)}" poster="${esc(M(s.image || D.media.heroPoster))}" muted playsinline preload="none" aria-label="${esc(s.title)} (muted background video)"></video>
+      <button class="video-toggle" type="button">▶ Play video</button>` : "";
     const story = s ? `<a class="home-featured-story" href="story.html?s=${esc(s.slug)}">
       <span>Featured story</span>
       <strong>${esc(s.title)}</strong>
       <b>Watch the story</b>
     </a>` : "";
     return `<section class="home-hero" aria-labelledby="home-hero-title">
+      ${media}
       <div class="wrap home-hero-inner">
         <div class="home-hero-paper">
           <p class="eyebrow">Bayanihan in action</p>
