@@ -46,10 +46,10 @@
 <!-- ============ HERO: video, graded + grain + doodles on top ============ -->
 <section class="hero hero--video film" id="top" aria-labelledby="hero-title">
   <div class="hero__media">
-    <!-- PROTOTYPE: streams the live site's 411 MB montage from its current host.
-         Production: a 15–30 s, ≤10 MB loop on Angat Buhay storage (see system-architecture.md). -->
-    <video data-hero-video data-src="https://www.neithan.rocks/mid.mp4" data-start="20" data-end="78"
-           poster="https://www.angatbuhay.ph/wp-content/uploads/2024/09/22-1024x683.jpg"
+    <!-- 58 s loop cut from the homepage montage (0:20–1:18, b-roll only), 960×540 H.264, no audio, 9.3 MB.
+         Encoded with ffmpeg -crf 28; see VERSIONS.md for the command. -->
+    <video data-hero-video data-src="media/hero-loop-v2.mp4"
+           poster="media/hero-poster-v2.jpg"
            muted playsinline preload="none" aria-hidden="true" tabindex="-1"></video>
   </div>
   <div class="hero__grade" aria-hidden="true"></div>

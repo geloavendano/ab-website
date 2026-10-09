@@ -34,7 +34,9 @@ Same system as v1; only the hero changes. v1 stays as the "sky" alternative.
 - **Text on white over footage.** The scrim is tuned for the brightest frames (open sky); on tablet and phone it runs bottom-up because the copy spans the full width.
 - **"Now playing" strip** takes over from the featured-story card: title, subheading, a link to the full story, and a crayon progress line that tracks the loop.
 - **Behaviour:** JS starts the video (no `autoplay` attribute), so reduced-motion and Save-Data visitors get the poster and a play button. Pause button (WCAG 2.2.2). The video pauses when scrolled away and resumes on return.
-- **Loop window 0:20–1:18** of the montage (`data-start` / `data-end`): b-roll only. Later sections have burned-in subtitles that clash with the headline.
-- **Prototype caveat:** this streams the live site's 411 MB montage from the third-party host it uses today. For production, export a 20–60 s, ≤10 MB H.264 + WebM loop of the same window to Angat Buhay storage.
+- **Loop window 0:20–1:18** of the montage: b-roll only. Later sections have burned-in subtitles that clash with the headline.
+- **Hero video file:** `ui/media/hero-loop-v2.mp4`, a 58 s cut of that window at 960×540 H.264 with no audio, **9.3 MB** (the full montage is 411 MB). Poster is its first frame. Re-encode with:
+  `ffmpeg -ss 20 -i <montage>.mp4 -t 58 -an -vf scale=960:-2 -c:v libx264 -preset slow -crf 28 -profile:v high -pix_fmt yuv420p -movflags +faststart hero-loop-v2.mp4`
+  (`data-start` / `data-end` on the `<video>` can still set a loop window inside a longer file.)
 - Header turns white over the video, then back to navy once it goes solid.
 - **Revision (2026-10-07):** removed the pillar-colour dots from advocacy cards and tags. Pillar colour now shows only in the hover underline.
