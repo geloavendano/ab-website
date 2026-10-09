@@ -97,7 +97,7 @@
     "Reports & resources": "Mga ulat at resources", "Explore": "Tuklasin", "Contact": "Makipag-ugnayan", "About us": "Tungkol sa amin",
     "Privacy notice": "Abiso sa privacy", "Staff login": "Login ng staff", "Prototype guide": "Gabay sa prototype",
     "Featured story": "Tampok na kuwento", "Watch more": "Manood pa", "About Angat Buhay": "Tungkol sa Angat Buhay",
-    "See where we work": "Tingnan kung saan kami naroroon", "Stories of impact": "Mga kuwento ng pagbabago", "All stories": "Lahat ng kuwento",
+    "See where we work": "Tingnan kung saan kami naroroon", "Stories of impact": "Mga kuwento ng pagbabago", "Our impact so far": "Ang aming nagawa sa ngayon", "All stories": "Lahat ng kuwento",
     "Be involved": "Makilahok", "More impact": "Higit pang pagbabago", "Advocacy": "Adbokasiya", "Region": "Rehiyon",
     "Sort by": "Ayusin ayon sa", "Search": "Maghanap", "Clear": "I-clear", "Load more": "Magpakita pa", "Projects": "Mga Proyekto",
     "Impact": "Epekto", "The team": "Ang aming team", "Meet the rest of the team": "Kilalanin ang buong team",
@@ -365,6 +365,8 @@
     if (!version) {
       fill("hero", featuredHero("stories.html", "Watch more", "h1"));
       fill("pillars", D.pillars.map((p) => `<a class="tile" href="advocacy.html?p=${p.slug}"><span>${esc(p.name)}<small>${esc(p.tagline)}</small></span></a>`).join(""));
+      // Headline figure per pillar: the first impact stat listed for each, in pillar order.
+      fill("home-stats", statsBlock(D.pillars.map((p) => D.impactStats.find((s) => s.pillar === p.slug)).filter(Boolean)));
       fill("latest", listedStories().slice(0, 3).map(storyCard).join(""));
       return;
     }
