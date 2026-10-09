@@ -1,0 +1,345 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex, nofollow">
+  <title>Angat Buhay · Homepage UI v1</title>
+  <link rel="icon" href="../assets/media/favicon.svg">
+  <link rel="stylesheet" href="ab-ui-v1.css">
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+
+<!-- ============ HEADER ============ -->
+<header class="site-header" data-header>
+  <div class="container site-header__bar">
+    <a class="brand" href="#top" aria-label="Angat Buhay home">
+      <img src="../assets/media/angat-buhay-logo.png" alt="Angat Buhay" width="82" height="46">
+    </a>
+    <nav class="site-nav" aria-label="Main">
+      <a class="nav-link" href="#advocacies">Advocacies<svg class="doodle draw-on-hover doodle--fine" viewBox="0 0 300 24" aria-hidden="true"><use href="#d-underline-single"/></svg></a>
+      <a class="nav-link" href="#stories">Stories<svg class="doodle draw-on-hover doodle--fine" viewBox="0 0 300 24" aria-hidden="true"><use href="#d-underline-single"/></svg></a>
+      <a class="nav-link" href="#presence">Presence<svg class="doodle draw-on-hover doodle--fine" viewBox="0 0 300 24" aria-hidden="true"><use href="#d-underline-single"/></svg></a>
+      <a class="nav-link" href="#involved">Be involved<svg class="doodle draw-on-hover doodle--fine" viewBox="0 0 300 24" aria-hidden="true"><use href="#d-underline-single"/></svg></a>
+      <a class="nav-link" href="#about">About<svg class="doodle draw-on-hover doodle--fine" viewBox="0 0 300 24" aria-hidden="true"><use href="#d-underline-single"/></svg></a>
+    </nav>
+    <div class="site-header__actions">
+      <button class="lang" type="button" aria-label="Language: English. Switch to Filipino"><b>EN</b> / FIL</button>
+      <a class="btn btn--attention btn--sm" href="#involved">
+        Donate
+        <svg class="doodle btn__spark doodle--fine" viewBox="0 0 100 100" aria-hidden="true"><use href="#d-sparkle"/></svg>
+      </a>
+      <button class="menu-btn" type="button" aria-expanded="false" aria-controls="mobile-nav" data-menu-btn>
+        <span class="visually-hidden">Menu</span>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h10"/></svg>
+      </button>
+    </div>
+  </div>
+  <nav class="mobile-nav" id="mobile-nav" aria-label="Main" hidden data-menu>
+    <a href="#advocacies">Advocacies</a><a href="#stories">Stories</a><a href="#presence">Presence</a><a href="#involved">Be involved</a><a href="#about">About</a>
+  </nav>
+</header>
+
+<main id="main">
+
+<!-- ============ HERO: sky on film ============ -->
+<section class="hero sky" id="top" aria-labelledby="hero-title">
+  <!-- Doodles: big gestures at the edges, small accents near the headline -->
+  <svg class="doodle doodle--draw c-pink hide-mobile" style="--delay:.9s; bottom:-2%; right:-2%; width:min(300px,24vw); height:auto; aspect-ratio:200/120; transform:rotate(-14deg); stroke-width:3" viewBox="0 0 200 120" aria-hidden="true"><use href="#d-arcs"/></svg>
+  <svg class="doodle doodle--draw c-blue hide-tablet" style="--delay:1.2s; top:84px; right:9%; width:min(340px,26vw); height:auto; aspect-ratio:2/1; stroke-width:6" viewBox="0 0 600 300" aria-hidden="true"><use href="#d-swoop"/></svg>
+  <svg class="doodle doodle--draw c-yellow hide-mobile" style="--delay:1.5s; bottom:9%; left:4%; width:220px; height:60px; stroke-width:4" viewBox="0 0 300 80" aria-hidden="true"><use href="#d-spring"/></svg>
+  <svg class="doodle doodle--draw c-pink-soft hide-tablet" style="--delay:1.7s; bottom:16%; right:34%; width:120px; height:24px; stroke-width:4" viewBox="0 0 200 40" aria-hidden="true"><use href="#d-zigzag"/></svg>
+
+  <div class="container hero__inner">
+    <div class="hero__copy">
+      <p class="hand c-pink-ink">Bayanihan in action</p>
+      <h1 class="display" id="hero-title">
+        <span style="position:relative; display:inline-block">Lifting
+          <svg class="doodle doodle--draw c-yellow doodle--fine" style="--delay:.5s; left:-58px; top:-6px; width:52px; height:38px; stroke-width:6; transform:rotate(-25deg)" viewBox="0 0 100 70" aria-hidden="true"><use href="#d-rays"/></svg>
+        </span> lives,<br>
+        <span class="circled">together.
+          <svg class="doodle doodle--draw c-pink" style="--delay:.2s" viewBox="0 0 300 120" preserveAspectRatio="none" aria-hidden="true"><use href="#d-encircle"/></svg>
+        </span>
+        <svg class="doodle doodle--draw c-yellow doodle--inline doodle--fine" style="--delay:.8s; width:.42em; height:.42em; stroke-width:9; vertical-align:top" viewBox="0 0 100 100" aria-hidden="true"><use href="#d-sparkle"/></svg>
+      </h1>
+      <p class="lede">Angat Buhay mobilizes the country’s largest volunteer network to bring learning, health and recovery to the communities that need it most.</p>
+      <div class="hero__ctas">
+        <a class="btn btn--primary btn--lg" href="#featured">
+          <span class="play"><svg viewBox="0 0 10 12" fill="currentColor" aria-hidden="true"><path d="M0 0l10 6-10 6z"/></svg></span>
+          Watch our story
+        </a>
+        <a class="btn btn--glass btn--lg" href="#involved">Find ways to help</a>
+      </div>
+    </div>
+
+    <a class="card card--glass hero__feature" id="featured" href="#">
+      <div class="card__media">
+        <img src="https://www.angatbuhay.ph/wp-content/uploads/2024/09/22-1024x683.jpg" alt="Volunteers and community members working together outdoors" width="1024" height="683">
+        <span class="play media-play"><svg viewBox="0 0 10 12" fill="currentColor" aria-hidden="true"><path d="M0 0l10 6-10 6z"/></svg></span>
+      </div>
+      <div class="card__body">
+        <div class="tags">
+          <span class="tag tag--glass" style="--pillar:var(--pillar-community)">Featured story</span>
+          <span class="tag tag--glass tag--format">Video · 3:52</span>
+        </div>
+        <h2 class="h3 card__title">Bayanihan in Action
+          <svg class="doodle draw-on-hover" viewBox="0 0 300 24" preserveAspectRatio="none" aria-hidden="true"><use href="#d-underline-single"/></svg>
+        </h2>
+        <p>Volunteers, partners and communities across the Philippines, in their own words.</p>
+      </div>
+    </a>
+  </div>
+
+  <svg class="torn" viewBox="0 0 1440 60" preserveAspectRatio="none" aria-hidden="true"><path d="M0 60 L0 22.0 L26.3 18.0 L48.3 21.5 L70.8 24.6 L91.9 22.9 L103.2 19.2 L124.6 14.8 L140.9 26.9 L149.6 21.2 L170.7 23.0 L196.8 26.7 L210.2 25.7 L219.5 18.2 L232.0 27.1 L254.1 29.0 L272.4 21.1 L282.6 30.4 L296.2 23.3 L313.5 16.3 L325.8 19.1 L339.1 21.4 L350.2 26.7 L375.2 22.9 L392.6 21.1 L419.2 19.6 L430.8 22.2 L444.0 19.5 L469.3 15.6 L477.1 19.7 L484.8 27.9 L504.7 16.0 L523.7 15.9 L549.2 26.5 L575.2 24.7 L581.4 17.5 L601.0 17.2 L617.7 23.6 L643.1 17.3 L668.8 15.7 L674.9 26.8 L701.2 14.3 L711.3 27.6 L732.2 17.7 L742.8 29.6 L764.3 24.0 L771.0 15.5 L779.8 23.6 L786.7 26.4 L814.5 27.4 L829.7 17.5 L855.1 19.6 L870.1 26.4 L883.8 22.7 L897.2 24.2 L907.5 18.4 L935.4 22.9 L961.6 16.8 L970.6 21.0 L993.5 27.2 L1003.7 20.3 L1024.2 21.3 L1041.4 24.6 L1063.9 14.4 L1081.8 16.8 L1094.2 17.3 L1109.7 15.1 L1133.8 26.8 L1154.8 35.0 L1174.0 24.1 L1180.8 17.0 L1188.7 14.1 L1215.5 18.7 L1236.3 17.4 L1264.2 19.9 L1287.2 19.6 L1294.6 17.2 L1322.0 16.1 L1339.2 15.7 L1358.4 19.1 L1378.7 21.8 L1406.5 15.1 L1419.4 18.2 L1427.5 17.3 L1440.0 24.7 L1440 60 Z"/></svg>
+</section>
+
+<!-- ============ ADVOCACIES ============ -->
+<section class="section" id="advocacies" aria-labelledby="adv-title">
+  <div class="container">
+    <div class="section-head">
+      <div>
+        <p class="hand c-teal-ink">What we work on</p>
+        <h2 class="h2" id="adv-title">Five ways we
+          <span class="scribble">lift<svg class="doodle doodle--draw c-teal" viewBox="0 0 300 40" preserveAspectRatio="none" aria-hidden="true"><use href="#d-underline"/></svg></span>
+          communities</h2>
+      </div>
+      <a class="link-doodle" href="#">All advocacies <span class="arrow" aria-hidden="true">→</span>
+        <svg class="doodle draw-on-hover doodle--fine c-teal" viewBox="0 0 300 24" preserveAspectRatio="none" aria-hidden="true"><use href="#d-underline-single"/></svg></a>
+    </div>
+
+    <div class="pillar-grid">
+      <a class="card card--pillar" href="#" style="--pillar:var(--pillar-education)">
+        <span class="pillar-dot" aria-hidden="true"></span>
+        <div class="card__media"><img src="https://www.angatbuhay.ph/wp-content/uploads/2024/09/Day-7_Don-Abella-CS-12-1024x683.jpg" alt="" loading="lazy"></div>
+        <div class="card__body">
+          <h3 class="h3 card__title">Public Education<svg class="doodle draw-on-hover" viewBox="0 0 300 24" preserveAspectRatio="none" aria-hidden="true"><use href="#d-underline-single"/></svg></h3>
+          <p>Accessible, inclusive, quality education for every Filipino.</p>
+        </div>
+      </a>
+      <a class="card card--pillar" href="#" style="--pillar:var(--pillar-health)">
+        <span class="pillar-dot" aria-hidden="true"></span>
+        <div class="card__media"><img src="https://www.angatbuhay.ph/wp-content/uploads/2024/09/IMG_1853-1024x683.jpg" alt="" loading="lazy"></div>
+        <div class="card__body">
+          <h3 class="h3 card__title">Health, Nutrition &amp; Food Security<svg class="doodle draw-on-hover" viewBox="0 0 300 24" preserveAspectRatio="none" aria-hidden="true"><use href="#d-underline-single"/></svg></h3>
+          <p>Quality healthcare and proper nutrition within reach.</p>
+        </div>
+      </a>
+      <a class="card card--pillar" href="#" style="--pillar:var(--pillar-climate)">
+        <span class="pillar-dot" aria-hidden="true"></span>
+        <div class="card__media"><img src="https://www.angatbuhay.ph/wp-content/uploads/2024/09/22-1024x683.jpg" alt="" loading="lazy"></div>
+        <div class="card__body">
+          <h3 class="h3 card__title">Climate Action &amp; Sustainability<svg class="doodle draw-on-hover" viewBox="0 0 300 24" preserveAspectRatio="none" aria-hidden="true"><use href="#d-underline-single"/></svg></h3>
+          <p>Resilience that softens the blow of the next disaster.</p>
+        </div>
+      </a>
+      <a class="card card--pillar" href="#" style="--pillar:var(--pillar-community)">
+        <span class="pillar-dot" aria-hidden="true"></span>
+        <div class="card__media"><img src="https://www.angatbuhay.ph/wp-content/uploads/2024/09/Kababaihan-10-e1726462055812.jpg" alt="" loading="lazy"></div>
+        <div class="card__body">
+          <h3 class="h3 card__title">Community Engagement<svg class="doodle draw-on-hover" viewBox="0 0 300 24" preserveAspectRatio="none" aria-hidden="true"><use href="#d-underline-single"/></svg></h3>
+          <p>Sectors and volunteers moving together as active citizens.</p>
+        </div>
+      </a>
+      <a class="card card--pillar" href="#" style="--pillar:var(--pillar-arts)">
+        <span class="pillar-dot" aria-hidden="true"></span>
+        <div class="card__media"><img src="https://www.angatbuhay.ph/wp-content/uploads/2024/09/weaving-3.jpg" alt="" loading="lazy"></div>
+        <div class="card__body">
+          <h3 class="h3 card__title">Arts &amp; Culture<svg class="doodle draw-on-hover" viewBox="0 0 300 24" preserveAspectRatio="none" aria-hidden="true"><use href="#d-underline-single"/></svg></h3>
+          <p>A platform for young Filipino artists and inclusive learning.</p>
+        </div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ============ IMPACT NUMBERS ============ -->
+<section class="section tint paper-grain" aria-labelledby="impact-title">
+  <div class="container">
+    <div class="section-head">
+      <div>
+        <p class="hand c-pink-ink">So far, together</p>
+        <h2 class="h2" id="impact-title">Small acts, counted</h2>
+      </div>
+    </div>
+    <div class="stats">
+      <div class="stat" style="--pillar:var(--pillar-community)">
+        <span class="stat__value">1,456<svg class="doodle doodle--draw" viewBox="0 0 300 24" preserveAspectRatio="none" aria-hidden="true"><use href="#d-underline-single"/></svg></span>
+        <span class="stat__label">unique volunteers mobilized</span>
+      </div>
+      <div class="stat" style="--pillar:var(--pillar-climate)">
+        <span class="stat__value">8,965<svg class="doodle doodle--draw" style="--delay:.15s" viewBox="0 0 300 24" preserveAspectRatio="none" aria-hidden="true"><use href="#d-underline-single"/></svg></span>
+        <span class="stat__label">relief packs and hot meals distributed during disasters</span>
+      </div>
+      <div class="stat" style="--pillar:var(--pillar-education)">
+        <span class="stat__value">1,156<svg class="doodle doodle--draw" style="--delay:.3s" viewBox="0 0 300 24" preserveAspectRatio="none" aria-hidden="true"><use href="#d-underline-single"/></svg></span>
+        <span class="stat__label">struggling learners in 18 sites improved their literacy</span>
+      </div>
+      <div class="stat" style="--pillar:var(--pillar-health)">
+        <span class="stat__value">269<svg class="doodle doodle--draw" style="--delay:.45s" viewBox="0 0 300 24" preserveAspectRatio="none" aria-hidden="true"><use href="#d-underline-single"/></svg></span>
+        <span class="stat__label">patients accessed free teleconsultations</span>
+      </div>
+    </div>
+    <p class="stats-note">As of 31 December 2024 · Source: Angat Buhay Annual Report 2023–2024 <span class="muted">[date to confirm]</span></p>
+  </div>
+</section>
+
+<!-- ============ STORIES ============ -->
+<section class="section" id="stories" aria-labelledby="stories-title">
+  <div class="container">
+    <div class="section-head">
+      <div>
+        <p class="hand c-teal-ink">From the ground</p>
+        <h2 class="h2" id="stories-title">More
+          <span class="scribble">impact<svg class="doodle doodle--draw c-pink" viewBox="0 0 300 40" preserveAspectRatio="none" aria-hidden="true"><use href="#d-underline"/></svg></span></h2>
+      </div>
+      <a class="link-doodle" href="#">See all stories <span class="arrow" aria-hidden="true">→</span>
+        <svg class="doodle draw-on-hover doodle--fine c-teal" viewBox="0 0 300 24" preserveAspectRatio="none" aria-hidden="true"><use href="#d-underline-single"/></svg></a>
+    </div>
+
+    <div class="story-grid">
+      <a class="card card--story is-feature" href="#" style="--pillar:var(--pillar-health)">
+        <div class="card__media rough-bottom"><img src="https://www.angatbuhay.ph/wp-content/uploads/2026/02/AB-Hapag-ng-Ani-4-1.jpg" alt="" loading="lazy"></div>
+        <div class="card__body">
+          <div class="tags"><span class="tag">Health, Nutrition &amp; Food Security</span><span class="tag tag--format">Article</span></div>
+          <h3 class="card__title h3">Hapag ng Ani: What Are We Feeding Our Children?<svg class="doodle draw-on-hover" viewBox="0 0 300 24" preserveAspectRatio="none" aria-hidden="true"><use href="#d-underline-single"/></svg></h3>
+          <p>Two greenhouses in Ajuy and Isla Tambaliza join Iloilo’s push for a malnutrition-free province.</p>
+          <span class="card__meta">3 Feb 2026 · Ajuy &amp; Concepcion, Iloilo</span>
+        </div>
+      </a>
+      <div class="story-stack">
+        <a class="card card--story is-row" href="#" style="--pillar:var(--pillar-education)">
+          <div class="card__media"><img src="https://www.angatbuhay.ph/wp-content/uploads/2026/02/AB-Small-Spaces-1.jpg" alt="" loading="lazy"></div>
+          <div class="card__body">
+            <div class="tags"><span class="tag">Public Education</span></div>
+            <h3 class="card__title h3">Small Spaces, Big Beginnings<svg class="doodle draw-on-hover" viewBox="0 0 300 24" preserveAspectRatio="none" aria-hidden="true"><use href="#d-underline-single"/></svg></h3>
+            <span class="card__meta">3 Feb 2026 · Naga City</span>
+          </div>
+        </a>
+        <a class="card card--story is-row" href="#" style="--pillar:var(--pillar-health)">
+          <div class="card__media">
+            <img src="https://www.angatbuhay.ph/wp-content/uploads/2026/02/AB-Cabanatuan-Demo-Farm-3.jpg" alt="" loading="lazy">
+            <span class="play media-play" style="font-size:1.25rem; left:10px; bottom:10px"><svg viewBox="0 0 10 12" fill="currentColor" aria-hidden="true"><path d="M0 0l10 6-10 6z"/></svg></span>
+          </div>
+          <div class="card__body">
+            <div class="tags"><span class="tag">Health &amp; Food</span><span class="tag tag--format">Video</span></div>
+            <h3 class="card__title h3">SustainABLE: Cabatuan Demo Farm grows more than crops<svg class="doodle draw-on-hover" viewBox="0 0 300 24" preserveAspectRatio="none" aria-hidden="true"><use href="#d-underline-single"/></svg></h3>
+            <span class="card__meta">3 Feb 2026 · Cabatuan, Iloilo</span>
+          </div>
+        </a>
+        <a class="card card--story is-row" href="#" style="--pillar:var(--pillar-climate)">
+          <div class="card__media"><img src="https://www.angatbuhay.ph/wp-content/uploads/2026/01/Dinagat.jpg" alt="" loading="lazy"></div>
+          <div class="card__body">
+            <div class="tags"><span class="tag">Climate Action</span></div>
+            <h3 class="card__title h3">Nationwide relief after Super Typhoons Tino and Uwan<svg class="doodle draw-on-hover" viewBox="0 0 300 24" preserveAspectRatio="none" aria-hidden="true"><use href="#d-underline-single"/></svg></h3>
+            <span class="card__meta">30 Jan 2026 · 16 provinces</span>
+          </div>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ PRESENCE: a second, contained sky ============ -->
+<section class="section" id="presence" aria-labelledby="presence-title" style="padding-top:0">
+  <div class="container">
+    <div class="sky sky--panel presence">
+      <svg class="doodle doodle--draw c-yellow hide-mobile" style="--delay:.4s; top:-30px; right:-20px; width:180px; height:108px; stroke-width:3; transform:rotate(-12deg)" viewBox="0 0 200 120" aria-hidden="true"><use href="#d-arcs"/></svg>
+      <div>
+        <p class="hand c-pink-ink">Where we are</p>
+        <h2 class="h2" id="presence-title">Across the islands, through local hands</h2>
+        <p class="lede">Through partners and volunteer organizations, Angat Buhay reaches communities in these regions, with more joining every year.</p>
+        <a class="btn btn--white" href="#">Explore our presence <span aria-hidden="true">→</span></a>
+      </div>
+      <div style="position:relative">
+        <svg class="doodle doodle--draw c-blue hide-mobile" style="--delay:.7s; left:-58px; top:-74px; width:64px; height:64px; stroke-width:4; transform:rotate(10deg)" viewBox="0 0 120 120" aria-hidden="true"><use href="#d-arrow-curl"/></svg>
+        <ul class="region-list" aria-label="Regions with Angat Buhay programs">
+          <li>National Capital Region</li>
+          <li>Bicol <span class="muted small">Region V</span></li>
+          <li>MIMAROPA</li>
+          <li>Western Visayas <span class="muted small">Region VI</span></li>
+          <li>Central Visayas <span class="muted small">Region VII</span></li>
+          <li>Davao <span class="muted small">Region XI</span></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ BE INVOLVED ============ -->
+<section class="section" id="involved" aria-labelledby="involved-title" style="padding-top:0">
+  <div class="container">
+    <div class="section-head">
+      <div>
+        <p class="hand c-teal-ink">Your turn</p>
+        <h2 class="h2" id="involved-title">Be
+          <span class="scribble">involved<svg class="doodle doodle--draw c-yellow" viewBox="0 0 300 40" preserveAspectRatio="none" aria-hidden="true"><use href="#d-underline"/></svg></span></h2>
+      </div>
+    </div>
+
+    <div class="involve-grid">
+      <!-- The one loud card on the page -->
+      <div class="card card--attention sky sky--pink">
+        <svg class="doodle doodle--draw c-yellow" style="--delay:.3s; top:18px; right:22px; width:74px; height:50px; stroke-width:5; transform:rotate(12deg)" viewBox="0 0 120 80" aria-hidden="true"><use href="#d-crown"/></svg>
+        <svg class="doodle doodle--draw doodle--fine c-white" style="--delay:.6s; bottom:24px; right:28px; width:34px; height:34px; stroke-width:9" viewBox="0 0 100 100" aria-hidden="true"><use href="#d-sparkle"/></svg>
+        <svg class="doodle doodle--draw doodle--fine c-white" style="--delay:.75s; bottom:64px; right:70px; width:20px; height:20px; stroke-width:10" viewBox="0 0 100 100" aria-hidden="true"><use href="#d-sparkle"/></svg>
+        <div class="card__body">
+          <p class="hand" style="color:var(--ink)">Give where it’s needed</p>
+          <h3 class="h2" style="font-size:clamp(2rem,3.4vw,2.75rem)">Donate</h3>
+          <p>GCash, bank transfer or card. Give to a cause you care about, or where the need is greatest right now.</p>
+          <div><a class="btn btn--ink btn--lg" href="#">Donate now <span aria-hidden="true">→</span></a></div>
+        </div>
+      </div>
+
+      <a class="card" href="#">
+        <div class="card__body">
+          <svg class="doodle card__icon c-teal" viewBox="0 0 160 120" aria-hidden="true"><use href="#d-speech"/></svg>
+          <h3 class="h3 card__title" style="--pillar:var(--teal-500)">Volunteer<svg class="doodle draw-on-hover" viewBox="0 0 300 24" preserveAspectRatio="none" aria-hidden="true"><use href="#d-underline-single"/></svg></h3>
+          <p>Join one of the volunteer organizations in our network, close to where you live.</p>
+          <span class="link-doodle" style="margin-top:auto">Find an organization <span class="arrow" aria-hidden="true">→</span></span>
+        </div>
+      </a>
+
+      <a class="card" href="#">
+        <div class="card__body">
+          <svg class="doodle card__icon c-pink" viewBox="0 0 100 90" aria-hidden="true"><use href="#d-heart"/></svg>
+          <h3 class="h3 card__title" style="--pillar:var(--pink-500)">Join a fundraiser<svg class="doodle draw-on-hover" viewBox="0 0 300 24" preserveAspectRatio="none" aria-hidden="true"><use href="#d-underline-single"/></svg></h3>
+          <p>Runs, concerts and art fairs that fund our programs.</p>
+          <div class="event"><span class="small muted">Next up · 15 Nov 2026</span><b>Angat Buhay Makati</b></div>
+          <span class="link-doodle" style="margin-top:.5rem">All fundraisers <span class="arrow" aria-hidden="true">→</span></span>
+        </div>
+      </a>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- ============ FOOTER ============ -->
+<footer class="site-footer" id="about">
+  <svg class="doodle doodle--draw c-teal-300" style="top:-34px; right:6%; width:220px; height:60px; color:var(--teal-300); stroke-width:4" viewBox="0 0 300 80" aria-hidden="true"><use href="#d-spring"/></svg>
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <span class="footer-logo"><img src="../assets/media/angat-buhay-logo.png" alt="Angat Buhay" width="82" height="46"></span>
+        <p class="small" style="max-width:34em; margin-top:1.25rem">Angat Buhay is a non-government organization accredited by the Philippine Council for NGO Certification (PCNC) and certified with ISO 9001:2015, ensuring its commitment to transparency, accountability and operational excellence.</p>
+      </div>
+      <div>
+        <h4>Explore</h4>
+        <ul><li><a href="#advocacies">Advocacies</a></li><li><a href="#stories">Stories</a></li><li><a href="#presence">Presence</a></li><li><a href="#">About us</a></li><li><a href="#">Resources</a></li></ul>
+      </div>
+      <div>
+        <h4>Follow</h4>
+        <ul><li><a href="https://www.facebook.com/angatbuhaypilipinas">Facebook</a></li><li><a href="https://www.instagram.com/angatbuhay/">Instagram</a></li><li><a href="https://www.tiktok.com/@angatbuhaypinas">TikTok</a></li><li><a href="https://x.com/angatbuhay_ph">X</a></li></ul>
+      </div>
+    </div>
+    <div class="footer-legal">
+      <span>© 2026 Angat Pinas, Inc. · DSWD Solicitation Permit DSWD-SB-PSP-S-2025-000049</span>
+      <span><a href="#">Privacy notice</a> · <a href="mailto:info@angatbuhay.ph">info@angatbuhay.ph</a></span>
+    </div>
+  </div>
+</footer>
+
+<script src="ab-doodles-v1.js"></script>
+</body>
+</html>

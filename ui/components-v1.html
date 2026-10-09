@@ -1,0 +1,277 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex, nofollow">
+  <title>Angat Buhay · Components v1</title>
+  <link rel="icon" href="../assets/media/favicon.svg">
+  <link rel="stylesheet" href="ab-ui-v1.css">
+  <style>
+    /* Sheet-only layout (not part of the system) */
+    .sheet-nav { position: sticky; top: 0; z-index: 40; background: rgba(251,247,239,.9); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); box-shadow: 0 1px 0 var(--line); }
+    .sheet-nav .container { display: flex; gap: 1.25rem; align-items: center; height: 60px; overflow-x: auto; scrollbar-width: none; }
+    .sheet-nav a { font: 500 .875rem/1 var(--font-display); color: var(--navy); text-decoration: none; white-space: nowrap; }
+    .sheet-nav .brand { flex: none; }
+    .sheet-nav .brand img { height: 34px; width: auto; }
+    .block { padding-block: 3.5rem; border-bottom: 1px solid var(--line); }
+    .block > .container > h2 { font-size: 1.75rem; margin-bottom: .35rem; }
+    .block > .container > .intro { color: var(--text-muted); max-width: 46em; margin: 0 0 2rem; }
+    .row { display: flex; flex-wrap: wrap; gap: 1rem; align-items: center; }
+    .label { font: 600 .75rem/1.2 var(--font-display); letter-spacing: .06em; text-transform: uppercase; color: var(--text-muted); margin: 1.75rem 0 .75rem; }
+    .grid-2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.25rem; }
+    .grid-3 { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1.25rem; }
+    .swatch { border-radius: var(--r-md); overflow: hidden; background: #fff; box-shadow: var(--shadow-1); }
+    .swatch i { display: block; height: 76px; }
+    .swatch div { padding: .65rem .8rem; font-size: .8125rem; line-height: 1.4; }
+    .swatch b { font-family: var(--font-display); color: var(--navy); display: block; }
+    .surface-demo { min-height: 220px; border-radius: var(--r-lg); padding: 1.5rem; display: flex; flex-direction: column; justify-content: flex-end; }
+    .surface-demo > * { position: relative; z-index: 2; }
+    .on-sky { padding: 1.5rem; border-radius: var(--r-lg); }
+    .doodle-cell { position: relative; background: var(--surface); border-radius: var(--r-md); box-shadow: var(--shadow-1); padding: 1rem; display: flex; flex-direction: column; gap: .5rem; align-items: center; cursor: default; }
+    .doodle-cell svg { position: static; width: 100%; height: 90px; stroke-width: 5; }
+    .doodle-cell code { font-size: .75rem; color: var(--text-muted); }
+    .rules { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1.25rem; }
+    .rule { background: var(--surface); border-radius: var(--r-lg); padding: 1.4rem 1.5rem; box-shadow: var(--shadow-1); }
+    .rule h3 { font-size: 1.0625rem; margin-bottom: .4rem; }
+    .rule p { margin: 0; color: var(--text-muted); font-size: .9375rem; }
+    .type-row { display: grid; grid-template-columns: 180px 1fr; gap: 1rem; align-items: baseline; padding: 1rem 0; border-bottom: 1px dashed var(--line); }
+    .type-row small { color: var(--text-muted); font-size: .8125rem; }
+    @media (max-width: 640px) { .type-row { grid-template-columns: 1fr; } }
+  </style>
+</head>
+<body>
+
+<nav class="sheet-nav" aria-label="Sections">
+  <div class="container">
+    <a class="brand" href="homepage-v1.html" aria-label="Back to homepage v1"><img src="../assets/media/angat-buhay-logo.png" alt="Angat Buhay"></a>
+    <a href="#principles">Principles</a><a href="#surfaces">Surfaces</a><a href="#color">Colour</a><a href="#type">Type</a><a href="#buttons">Buttons</a><a href="#links">Links &amp; tags</a><a href="#cards">Cards</a><a href="#doodles">Doodles</a>
+    <a href="homepage-v1.html" style="margin-left:auto; color:var(--teal-700)">Homepage v1 →</a>
+  </div>
+</nav>
+
+<header class="sky" style="padding: 5rem 0 4.5rem">
+  <svg class="doodle doodle--draw c-yellow" style="--delay:.3s; top:22%; right:8%; width:140px; height:84px; stroke-width:4" viewBox="0 0 200 120" aria-hidden="true"><use href="#d-arcs"/></svg>
+  <div class="container" style="position:relative; z-index:2">
+    <p class="hand c-pink-ink">UI kit · v1</p>
+    <h1 class="display" style="font-size:clamp(2.5rem,6vw,4.5rem)">Sky on
+      <span class="circled">film<svg class="doodle doodle--draw c-pink" style="--delay:.2s" viewBox="0 0 300 120" preserveAspectRatio="none" aria-hidden="true"><use href="#d-encircle"/></svg></span></h1>
+    <p class="lede" style="margin-top:1.25rem">Blurred sky, film grain and crayon doodles for the big moments; calm paper and clean cards for everything people actually read.</p>
+  </div>
+  <svg class="torn" viewBox="0 0 1440 60" preserveAspectRatio="none" aria-hidden="true"><path d="M0 60 L0 22 L60 18 L120 26 L190 16 L260 27 L330 19 L410 24 L480 15 L560 26 L640 18 L720 28 L800 17 L880 25 L960 16 L1040 27 L1120 18 L1200 24 L1280 15 L1360 23 L1440 19 L1440 60 Z"/></svg>
+</header>
+
+<!-- PRINCIPLES -->
+<section class="block" id="principles">
+  <div class="container">
+    <h2>Principles</h2>
+    <p class="intro">How the mood and the components share a page without fighting.</p>
+    <div class="rules">
+      <div class="rule"><h3>Two registers</h3><p>Sky + grain + doodles are for <b>hero moments</b>: the homepage hero, one contained panel per page, and the Donate card. Everything else sits on warm paper.</p></div>
+      <div class="rule"><h3>One loud thing per screen</h3><p>Brand pink is the attention colour. Use it for Donate (or the one action a page exists for), never for two buttons in the same view.</p></div>
+      <div class="rule"><h3>Doodles reward, they don’t decorate</h3><p>On calm surfaces a doodle only appears when something happens: it draws in on scroll, or under a title on hover. One scribble per section title, max.</p></div>
+      <div class="rule"><h3>Colour as a signal, not as text</h3><p>Brand teal and pink fail contrast as text. Pillar colours live in dots, underlines and tags; text uses navy, ink, or the darker teal/pink steps.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- SURFACES -->
+<section class="block" id="surfaces">
+  <div class="container">
+    <h2>Surfaces</h2>
+    <p class="intro">The sky is pure CSS (stacked radial gradients, blurred and slowly drifting) with an SVG noise tile on top, so it scales to any size and weighs nothing. Grain and drift stop for people who prefer reduced motion.</p>
+    <div class="grid-3">
+      <div class="sky surface-demo"><p class="hand c-pink-ink" style="margin:0">.sky</p><p style="margin:0">Hero. Full-bleed, torn edge into paper.</p></div>
+      <div class="sky sky--panel surface-demo"><p class="hand c-pink-ink" style="margin:0">.sky.sky--panel</p><p style="margin:0">Contained panel inside a section.</p></div>
+      <div class="sky sky--panel sky--pink surface-demo"><p class="hand" style="margin:0; color:var(--ink)">.sky--pink</p><p style="margin:0">Warm variant for the attention card.</p></div>
+      <div class="surface-demo" style="background:var(--paper); box-shadow: inset 0 0 0 1px var(--line)"><p class="hand c-teal-ink" style="margin:0">paper</p><p style="margin:0">Default page background.</p></div>
+      <div class="surface-demo tint paper-grain"><p class="hand c-teal-ink" style="margin:0">.tint.paper-grain</p><p style="margin:0">Band for numbers and quotes.</p></div>
+      <div class="surface-demo card"><p class="hand c-teal-ink" style="margin:0">.card</p><p style="margin:0">White, 22px radius, soft navy shadow.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- COLOUR -->
+<section class="block" id="color">
+  <div class="container">
+    <h2>Colour</h2>
+    <p class="intro">From the 2025 guide. Contrast is measured against white. The two “ink” steps are additions so teal and pink can be used for text and links.</p>
+    <p class="label">Brand</p>
+    <div class="grid-3" style="grid-template-columns:repeat(auto-fill,minmax(150px,1fr))">
+      <div class="swatch"><i style="background:var(--teal-500)"></i><div><b>Teal</b>#14AEBB · 2.7:1</div></div>
+      <div class="swatch"><i style="background:var(--teal-300)"></i><div><b>Teal light</b>#54BEC3 · 2.2:1</div></div>
+      <div class="swatch"><i style="background:var(--pink-500)"></i><div><b>Pink</b>#FA3B99 · ink on it 5.1:1</div></div>
+      <div class="swatch"><i style="background:var(--pink-300)"></i><div><b>Pink light</b>#EC75B8 · 2.7:1</div></div>
+      <div class="swatch"><i style="background:var(--blue-500)"></i><div><b>Blue</b>#3F58A6 · 6.7:1</div></div>
+      <div class="swatch"><i style="background:var(--yellow-400)"></i><div><b>Yellow</b>#FDC463 · ink only</div></div>
+      <div class="swatch"><i style="background:var(--beige-300)"></i><div><b>Beige</b>#EFCB97</div></div>
+      <div class="swatch"><i style="background:var(--beige-100)"></i><div><b>Beige light</b>#F5EEDC</div></div>
+    </div>
+    <p class="label">Text &amp; neutrals</p>
+    <div class="grid-3" style="grid-template-columns:repeat(auto-fill,minmax(150px,1fr))">
+      <div class="swatch"><i style="background:var(--navy)"></i><div><b>Navy</b>#24435A · 10.4:1 · headings</div></div>
+      <div class="swatch"><i style="background:var(--ink)"></i><div><b>Ink</b>#1A1A1A · 17.4:1</div></div>
+      <div class="swatch"><i style="background:var(--teal-700)"></i><div><b>Teal ink</b>#0A7A85 · 5.1:1 · links</div></div>
+      <div class="swatch"><i style="background:var(--pink-700)"></i><div><b>Pink ink</b>#C8106A · 5.6:1</div></div>
+      <div class="swatch"><i style="background:var(--paper); box-shadow: inset 0 -1px 0 var(--line)"></i><div><b>Paper</b>#FBF7EF</div></div>
+      <div class="swatch"><i style="background:var(--gray-300)"></i><div><b>Gray</b>#C9C9C9 · lines</div></div>
+    </div>
+    <p class="label">Pillars</p>
+    <div class="tags">
+      <span class="tag" style="--pillar:var(--pillar-education)">Public Education</span>
+      <span class="tag" style="--pillar:var(--pillar-health)">Health, Nutrition &amp; Food Security</span>
+      <span class="tag" style="--pillar:var(--pillar-climate)">Climate Action &amp; Sustainability</span>
+      <span class="tag" style="--pillar:var(--pillar-community)">Community Engagement</span>
+      <span class="tag" style="--pillar:var(--pillar-arts)">Arts &amp; Culture</span>
+    </div>
+  </div>
+</section>
+
+<!-- TYPE -->
+<section class="block" id="type">
+  <div class="container">
+    <h2>Type</h2>
+    <p class="intro">Rubik (the logo face) for headings and buttons. Figtree stands in for Proxima Nova, which needs an Adobe Fonts licence; swapping is one variable. Kalam is the handwritten voice, for short phrases only.</p>
+    <div class="type-row"><small>Display · Rubik 800</small><span class="display" style="font-size:clamp(2.25rem,5vw,3.75rem)">Lifting lives</span></div>
+    <div class="type-row"><small>H2 · Rubik 700</small><span class="h2">Five ways we lift communities</span></div>
+    <div class="type-row"><small>H3 · Rubik 600</small><span class="h3">Small Spaces, Big Beginnings</span></div>
+    <div class="type-row"><small>Hand · Kalam 700</small><span class="hand c-pink-ink">Bayanihan in action</span></div>
+    <div class="type-row"><small>Lede · Figtree 400</small><span class="lede">Angat Buhay mobilizes the country’s largest volunteer network.</span></div>
+    <div class="type-row"><small>Body · Figtree 400</small><span>In Naga City, a chapel becomes a classroom for a community Educare center.</span></div>
+    <div class="type-row"><small>Meta · Figtree 400</small><span class="card__meta">3 Feb 2026 · Naga City</span></div>
+  </div>
+</section>
+
+<!-- BUTTONS -->
+<section class="block" id="buttons">
+  <div class="container">
+    <h2>Buttons</h2>
+    <p class="intro">Pill shaped, Rubik 600. Hover lifts slightly; press shrinks a touch. Only the attention button gets a doodle (a sparkle pops on hover).</p>
+    <p class="label">On paper</p>
+    <div class="row">
+      <a class="btn btn--attention" href="#buttons">Donate<svg class="doodle btn__spark doodle--fine" viewBox="0 0 100 100" aria-hidden="true"><use href="#d-sparkle"/></svg></a>
+      <a class="btn btn--primary" href="#buttons">Explore projects</a>
+      <a class="btn btn--primary" href="#buttons"><span class="play"><svg viewBox="0 0 10 12" fill="currentColor" aria-hidden="true"><path d="M0 0l10 6-10 6z"/></svg></span>Watch our story</a>
+      <a class="btn btn--secondary" href="#buttons">Read more</a>
+      <a class="btn btn--ink" href="#buttons">Donate now →</a>
+      <button class="btn btn--primary" disabled>Disabled</button>
+    </div>
+    <p class="label">Sizes</p>
+    <div class="row">
+      <a class="btn btn--attention btn--sm" href="#buttons">Small · 40</a>
+      <a class="btn btn--attention" href="#buttons">Default · 50</a>
+      <a class="btn btn--attention btn--lg" href="#buttons">Large · 58</a>
+    </div>
+    <p class="label">On sky</p>
+    <div class="sky sky--panel on-sky">
+      <div class="row" style="position:relative; z-index:2">
+        <a class="btn btn--primary" href="#buttons">Primary</a>
+        <a class="btn btn--glass" href="#buttons">Glass</a>
+        <a class="btn btn--white" href="#buttons">White</a>
+        <a class="btn btn--attention" href="#buttons">Donate<svg class="doodle btn__spark doodle--fine" viewBox="0 0 100 100" aria-hidden="true"><use href="#d-sparkle"/></svg></a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- LINKS & TAGS -->
+<section class="block" id="links">
+  <div class="container">
+    <h2>Links &amp; tags</h2>
+    <p class="intro">Standalone links draw their own crayon underline on hover. Tags carry the pillar colour as a dot so the label text stays readable.</p>
+    <div class="row">
+      <a class="link-doodle" href="#links">See all stories <span class="arrow" aria-hidden="true">→</span><svg class="doodle draw-on-hover doodle--fine c-teal" viewBox="0 0 300 24" preserveAspectRatio="none" aria-hidden="true"><use href="#d-underline-single"/></svg></a>
+      <a class="nav-link" href="#links">Nav link (hover)<svg class="doodle draw-on-hover doodle--fine" viewBox="0 0 300 24" aria-hidden="true"><use href="#d-underline-single"/></svg></a>
+      <a class="nav-link" href="#links" aria-current="page">Current page<svg class="doodle draw-on-hover doodle--fine" viewBox="0 0 300 24" aria-hidden="true"><use href="#d-underline-single"/></svg></a>
+    </div>
+    <p class="label">Tags</p>
+    <div class="tags">
+      <span class="tag" style="--pillar:var(--pillar-health)">Health &amp; Food</span>
+      <span class="tag tag--format">Article</span>
+      <span class="tag tag--format">Video · 3:52</span>
+      <span class="tag tag--format">Infographic</span>
+      <span class="tag" style="--pillar:var(--pillar-climate)">Cebu</span>
+    </div>
+  </div>
+</section>
+
+<!-- CARDS -->
+<section class="block" id="cards">
+  <div class="container">
+    <h2>Cards</h2>
+    <p class="intro">Hover a card: it lifts, the photo eases in, and a crayon line draws under the title in that pillar’s colour. At rest they’re plain.</p>
+    <p class="label">Pillar · Story · Story row</p>
+    <div class="grid-3" style="align-items:start">
+      <a class="card card--pillar" href="#cards" style="--pillar:var(--pillar-education)">
+        <span class="pillar-dot" aria-hidden="true"></span>
+        <div class="card__media"><img src="https://www.angatbuhay.ph/wp-content/uploads/2024/09/Day-7_Don-Abella-CS-12-1024x683.jpg" alt=""></div>
+        <div class="card__body"><h3 class="h3 card__title">Public Education<svg class="doodle draw-on-hover" viewBox="0 0 300 24" preserveAspectRatio="none" aria-hidden="true"><use href="#d-underline-single"/></svg></h3><p>Accessible, inclusive, quality education for every Filipino.</p></div>
+      </a>
+      <a class="card card--story" href="#cards" style="--pillar:var(--pillar-education)">
+        <div class="card__media rough-bottom"><img src="https://www.angatbuhay.ph/wp-content/uploads/2026/01/AB-eyesight-1.jpg" alt=""></div>
+        <div class="card__body">
+          <div class="tags"><span class="tag">Public Education</span><span class="tag tag--format">Article</span></div>
+          <h3 class="card__title h3">Free check-ups and glasses for learners in Naga<svg class="doodle draw-on-hover" viewBox="0 0 300 24" preserveAspectRatio="none" aria-hidden="true"><use href="#d-underline-single"/></svg></h3>
+          <span class="card__meta">30 Jan 2026 · Naga City</span>
+        </div>
+      </a>
+      <div style="display:grid; gap:1.25rem">
+        <a class="card card--story is-row" href="#cards" style="--pillar:var(--pillar-arts)">
+          <div class="card__media"><img src="https://www.angatbuhay.ph/wp-content/uploads/2026/01/AB-building-with-people-1-1024x683.jpg" alt=""></div>
+          <div class="card__body"><div class="tags"><span class="tag">Arts &amp; Culture</span></div><h3 class="card__title h3">Building With People at the Center<svg class="doodle draw-on-hover" viewBox="0 0 300 24" preserveAspectRatio="none" aria-hidden="true"><use href="#d-underline-single"/></svg></h3><span class="card__meta">21 Jan 2026</span></div>
+        </a>
+        <div class="card"><div class="card__body"><div class="stat" style="--pillar:var(--pillar-climate)"><span class="stat__value">8,965<svg class="doodle doodle--draw" viewBox="0 0 300 24" preserveAspectRatio="none" aria-hidden="true"><use href="#d-underline-single"/></svg></span><span class="stat__label">relief packs and hot meals distributed</span></div></div></div>
+      </div>
+    </div>
+    <p class="label">Attention · Calm · On sky</p>
+    <div class="grid-3" style="align-items:stretch">
+      <div class="card card--attention sky sky--pink">
+        <svg class="doodle doodle--draw c-yellow" style="top:16px; right:18px; width:64px; height:44px; stroke-width:5; transform:rotate(12deg)" viewBox="0 0 120 80" aria-hidden="true"><use href="#d-crown"/></svg>
+        <div class="card__body"><p class="hand" style="color:var(--ink); margin:0">Give where it’s needed</p><h3 class="h2" style="font-size:2rem">Donate</h3><p>GCash, bank transfer or card.</p><div><a class="btn btn--ink" href="#cards">Donate now →</a></div></div>
+      </div>
+      <a class="card" href="#cards">
+        <div class="card__body" style="padding:1.75rem">
+          <svg class="doodle card__icon c-teal" viewBox="0 0 160 120" aria-hidden="true"><use href="#d-speech"/></svg>
+          <h3 class="h3 card__title" style="--pillar:var(--teal-500)">Volunteer<svg class="doodle draw-on-hover" viewBox="0 0 300 24" preserveAspectRatio="none" aria-hidden="true"><use href="#d-underline-single"/></svg></h3>
+          <p class="muted" style="margin:0">Join a volunteer organization near you.</p>
+        </div>
+      </a>
+      <div class="sky sky--panel" style="padding:1.25rem; display:flex; align-items:center">
+        <a class="card card--glass" href="#cards" style="position:relative; z-index:2; width:100%">
+          <div class="card__body"><div class="tags"><span class="tag tag--glass" style="--pillar:var(--pillar-community)">Featured story</span></div><h3 class="h3 card__title">Bayanihan in Action<svg class="doodle draw-on-hover" viewBox="0 0 300 24" preserveAspectRatio="none" aria-hidden="true"><use href="#d-underline-single"/></svg></h3><p style="margin:0">Glass card, used only on sky.</p></div>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- DOODLES -->
+<section class="block" id="doodles" style="border-bottom:0">
+  <div class="container">
+    <h2>Doodles</h2>
+    <p class="intro">Hand-drawn SVG paths, roughened by a shared “crayon” filter (wobble + grit). They take any brand colour, scale cleanly, and can draw themselves in. Hover a tile to redraw it. From the guide’s element list: arrows, swirls, sparkles, crown, rays, encircle, speech bubble, spring, zigzag, underline swashes.</p>
+    <div class="grid-3" style="grid-template-columns:repeat(auto-fill,minmax(160px,1fr))" data-doodle-grid></div>
+  </div>
+</section>
+
+<script src="ab-doodles-v1.js"></script>
+<script>
+  // Build the doodle library from the sprite so this sheet never drifts from it.
+  const colors = ["c-pink", "c-teal", "c-blue", "c-yellow", "c-pink-soft"];
+  const grid = document.querySelector("[data-doodle-grid]");
+  Object.entries(window.AB_DOODLES).forEach(([name, [viewBox]], i) => {
+    const cell = document.createElement("div");
+    cell.className = "doodle-cell";
+    cell.tabIndex = 0;
+    cell.innerHTML = `<svg class="doodle draw-on-hover ${colors[i % colors.length]}" viewBox="${viewBox}" aria-hidden="true"><use href="#d-${name}"/></svg><code>#d-${name}</code><code>${viewBox}</code>`;
+    grid.appendChild(cell);
+  });
+  // Show them drawn at rest on this sheet; hover redraws.
+  const style = document.createElement("style");
+  style.textContent = `.doodle-cell .draw-on-hover use{stroke-dashoffset:0}
+    .doodle-cell:is(:hover,:focus-visible) .draw-on-hover use{animation:redraw .9s cubic-bezier(.2,.8,.2,1)}
+    @keyframes redraw{from{stroke-dashoffset:1.05}to{stroke-dashoffset:0}}`;
+  document.head.appendChild(style);
+</script>
+</body>
+</html>
