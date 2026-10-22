@@ -18,7 +18,10 @@ window.AB = {
   media: {
     base: "https://www.angatbuhay.ph/wp-content/uploads/",
     heroVideo: "https://www.neithan.rocks/mid.mp4",
-    heroPoster: "2024/09/22-1024x683.jpg"
+    heroPoster: "2024/09/22-1024x683.jpg",
+    // Self-hosted 58 s, 9.3 MB cut of the montage's b-roll (0:20–1:18) for hero loops.
+    heroLoop: "ui/media/hero-loop-v2.mp4",
+    heroLoopPoster: "ui/media/hero-poster-v2.jpg"
   },
 
   org: {

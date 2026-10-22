@@ -5,66 +5,174 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="robots" content="noindex, nofollow">
   <title>Angat Buhay</title>
-  <link rel="stylesheet" href="assets/style.css?v=structural-home">
+  <link rel="icon" href="assets/media/favicon.svg">
+  <link rel="stylesheet" href="ui/ab-ui-v3.css">
   <script src="assets/data.js" defer></script>
   <script src="assets/app.js" defer></script>
+  <script src="ui/ab-doodles-v3.js" defer></script>
 </head>
 <body data-page="home">
 <main id="main">
 
-  <!-- Featured story (wireframe: hero with Story Title / Subheading / Watch More) -->
-  <div id="hero"></div>
-  <div class="wrap"><div class="note">The hero is the story an editor marks "Featured" in the admin. Here it's a video story, so it plays muted on loop with a pause button (needed for accessibility, and it won't autoplay for people who've asked their device to reduce motion). "Watch more" opens the Stories feed, which starts with the same story (per wireframe).</div></div>
+<section class="hero hero--video film" id="top" aria-labelledby="hero-title">
+  <div class="hero__media">
+    <!-- 58 s loop cut from the homepage montage (0:20–1:18, b-roll only), 960×540 H.264, no audio, 9.3 MB.
+         Encoded with ffmpeg -crf 28; see ui/VERSIONS.md for the command. -->
+    <video data-hero-video data-src="ui/media/hero-loop-v2.mp4"
+           poster="ui/media/hero-poster-v2.jpg"
+           muted playsinline preload="none" aria-hidden="true" tabindex="-1"></video>
+  </div>
+  <div class="hero__grade" aria-hidden="true"></div>
+  <div class="hero__scrim" aria-hidden="true"></div>
 
-  <section class="section">
-    <div class="wrap">
-      <p class="lede" style="font-size:clamp(20px,2.6vw,26px);color:var(--ink);font-weight:600;max-width:42ch">
-        We empower Filipinos to become communities of active citizens by mobilizing the largest volunteer network in implementing Bayanihan programs.
-      </p>
-      <a class="link-arrow" href="about.html">About Angat Buhay</a>
+  <!-- Doodles ride on top of the footage: brighter colours, thicker strokes -->
+  <svg class="doodle doodle--draw c-yellow hide-tablet" style="--delay:1.1s; top:110px; right:7%; width:min(420px,30vw); height:auto; aspect-ratio:2/1; stroke-width:6" viewBox="0 0 600 300" aria-hidden="true"><use href="#d-swoop"/></svg>
+  <svg class="doodle doodle--draw c-pink hide-mobile" style="--delay:1.4s; bottom:4%; right:-2%; width:min(320px,26vw); height:auto; aspect-ratio:200/120; transform:rotate(-14deg); stroke-width:4" viewBox="0 0 200 120" aria-hidden="true"><use href="#d-arcs"/></svg>
+  <svg class="doodle doodle--draw c-teal hide-mobile" style="--delay:1.6s; top:24%; right:30%; width:120px; height:32px; stroke-width:5; color:var(--teal-300)" viewBox="0 0 300 80" aria-hidden="true"><use href="#d-spring"/></svg>
+  <svg class="doodle doodle--draw doodle--fine c-white hide-tablet" style="--delay:1.8s; top:38%; right:16%; width:34px; height:34px; stroke-width:9" viewBox="0 0 100 100" aria-hidden="true"><use href="#d-sparkle"/></svg>
+  <svg class="doodle doodle--draw doodle--fine c-yellow hide-tablet" style="--delay:1.9s; top:46%; right:12%; width:20px; height:20px; stroke-width:10" viewBox="0 0 100 100" aria-hidden="true"><use href="#d-sparkle"/></svg>
+
+  <div class="container hero__inner">
+    <div class="hero__copy">
+      <p class="hand c-yellow">Bayanihan in action</p>
+      <h1 class="display" id="hero-title">
+        <span style="position:relative; display:inline-block">Lifting
+          <svg class="doodle doodle--draw c-pink doodle--fine" style="--delay:.5s; left:-58px; top:-6px; width:52px; height:38px; stroke-width:7; transform:rotate(-25deg)" viewBox="0 0 100 70" aria-hidden="true"><use href="#d-rays"/></svg>
+        </span> lives,<br>
+        <span class="circled">together.
+          <svg class="doodle doodle--draw c-yellow" style="--delay:.2s; stroke-width:6" viewBox="0 0 300 120" preserveAspectRatio="none" aria-hidden="true"><use href="#d-encircle"/></svg>
+        </span>
+        <svg class="doodle doodle--draw c-pink doodle--inline doodle--fine" style="--delay:.8s; width:.42em; height:.42em; stroke-width:9; vertical-align:top" viewBox="0 0 100 100" aria-hidden="true"><use href="#d-sparkle"/></svg>
+      </h1>
+      <p class="lede">Angat Buhay mobilizes the country’s largest volunteer network to bring learning, health and recovery to the communities that need it most.</p>
+      <div class="hero__ctas">
+        <a class="btn btn--white btn--lg" href="story.html?s=bayanihan-in-action">
+          <span class="play"><svg viewBox="0 0 10 12" fill="currentColor" aria-hidden="true"><path d="M0 0l10 6-10 6z"/></svg></span>
+          Watch with sound
+        </a>
+        <a class="btn btn--glass-dark btn--lg" href="involved.html">Find ways to help</a>
+      </div>
     </div>
-  </section>
 
-  <section class="section" id="advocacies">
+    <div class="hero__now">
+      <a class="now-playing" id="now-playing" href="stories.html">
+        <span class="hand c-yellow">Now playing</span>
+        <strong id="now-title">Bayanihan in Action</strong>
+        <span class="sub" id="now-sub">Volunteers, partners and communities across the Philippines, in their own words.</span>
+        <span class="watch">Watch the full story · 3:52 →</span>
+        <svg class="doodle doodle--fine progress progress--track" viewBox="0 0 300 24" preserveAspectRatio="none" aria-hidden="true"><use href="#d-underline-single"/></svg>
+        <svg class="doodle doodle--fine progress progress--fill" data-video-progress viewBox="0 0 300 24" preserveAspectRatio="none" aria-hidden="true"><use href="#d-underline-single"/></svg>
+      </a>
+      <button class="video-btn" type="button" data-video-toggle data-state="paused" aria-label="Play background video">
+        <svg class="icon-pause" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><rect x="3" y="2" width="3.6" height="12" rx="1.2"/><rect x="9.4" y="2" width="3.6" height="12" rx="1.2"/></svg>
+        <svg class="icon-play" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M4 2.2v11.6c0 .8.9 1.3 1.6.8l8.6-5.8c.6-.4.6-1.2 0-1.6L5.6 1.4C4.9.9 4 1.4 4 2.2z"/></svg>
+      </button>
+    </div>
+  </div>
+
+  <svg class="torn" viewBox="0 0 1440 60" preserveAspectRatio="none" aria-hidden="true"><path d="M0 60 L0 22.0 L26.3 18.0 L48.3 21.5 L70.8 24.6 L91.9 22.9 L103.2 19.2 L124.6 14.8 L140.9 26.9 L149.6 21.2 L170.7 23.0 L196.8 26.7 L210.2 25.7 L219.5 18.2 L232.0 27.1 L254.1 29.0 L272.4 21.1 L282.6 30.4 L296.2 23.3 L313.5 16.3 L325.8 19.1 L339.1 21.4 L350.2 26.7 L375.2 22.9 L392.6 21.1 L419.2 19.6 L430.8 22.2 L444.0 19.5 L469.3 15.6 L477.1 19.7 L484.8 27.9 L504.7 16.0 L523.7 15.9 L549.2 26.5 L575.2 24.7 L581.4 17.5 L601.0 17.2 L617.7 23.6 L643.1 17.3 L668.8 15.7 L674.9 26.8 L701.2 14.3 L711.3 27.6 L732.2 17.7 L742.8 29.6 L764.3 24.0 L771.0 15.5 L779.8 23.6 L786.7 26.4 L814.5 27.4 L829.7 17.5 L855.1 19.6 L870.1 26.4 L883.8 22.7 L897.2 24.2 L907.5 18.4 L935.4 22.9 L961.6 16.8 L970.6 21.0 L993.5 27.2 L1003.7 20.3 L1024.2 21.3 L1041.4 24.6 L1063.9 14.4 L1081.8 16.8 L1094.2 17.3 L1109.7 15.1 L1133.8 26.8 L1154.8 35.0 L1174.0 24.1 L1180.8 17.0 L1188.7 14.1 L1215.5 18.7 L1236.3 17.4 L1264.2 19.9 L1287.2 19.6 L1294.6 17.2 L1322.0 16.1 L1339.2 15.7 L1358.4 19.1 L1378.7 21.8 L1406.5 15.1 L1419.4 18.2 L1427.5 17.3 L1440.0 24.7 L1440 60 Z"/></svg>
+</section>
+  <div class="wrap"><div class="note">The hero loops a 58-second, 9.3 MB cut of the homepage montage (b-roll only), muted, with a pause button. It doesn't start for people who've asked for reduced motion or turned on data saver. "Now playing" and "Watch with sound" open the featured story, which an editor marks "Featured" in the admin.</div></div>
+
+  <section class="section" id="advocacies" aria-labelledby="adv-title">
     <div class="wrap">
-      <div class="section-head"><h2>Advocacies</h2></div>
-      <div class="grid c3" id="pillars"></div>
+      <div class="section-head">
+        <div>
+          <p class="hand c-teal-ink">What we work on</p>
+          <h2 class="h2" id="adv-title">Five ways we
+            <span class="scribble">lift<svg class="doodle doodle--draw c-teal" viewBox="0 0 300 40" preserveAspectRatio="none" aria-hidden="true"><use href="#d-underline"/></svg></span>
+            communities</h2>
+        </div>
+      </div>
+      <div class="pillar-grid" id="pillars"></div>
       <div class="note">Five advocacy pillars from the CMS. Each opens its own page with projects, impact stories and team.</div>
     </div>
   </section>
 
-  <section class="section" id="impact">
+  <section class="section tint paper-grain" id="impact" aria-labelledby="impact-title">
     <div class="wrap">
-      <div class="section-head"><h2>Our impact so far</h2><a class="link-arrow" href="resources.html">Reports &amp; resources</a></div>
+      <div class="section-head">
+        <div>
+          <p class="hand c-pink-ink">So far, together</p>
+          <h2 class="h2" id="impact-title">Our impact so far</h2>
+        </div>
+        <a class="link-arrow" href="resources.html">Reports &amp; resources</a>
+      </div>
       <div id="home-stats"></div>
       <div class="note">One headline figure per advocacy pillar, taken from the impact figures each pillar page already shows (CMS "Impact stats"). Every figure names its source report, and the source links to Reports &amp; resources, where the annual reports and audited financial statements can be downloaded.</div>
     </div>
   </section>
 
-  <section class="section" id="presence">
+  <section class="section" id="stories" aria-labelledby="stories-title">
     <div class="wrap">
-      <div class="section-head"><h2>Presence</h2><a class="link-arrow" href="presence.html">See where we work</a></div>
-      <a href="presence.html" style="display:block;text-decoration:none">
-        <div class="ph r-16x9" role="img" aria-label="Map of the Philippines showing communities and volunteer network"><span>&lt;map illustration of PH communities and volunteer network&gt;</span></div>
-      </a>
-      <div class="note">On the next page the map has an accessible table behind it, so phone users and screen readers can still find work in their province (audit finding).</div>
+      <div class="section-head">
+        <div>
+          <p class="hand c-teal-ink">From the ground</p>
+          <h2 class="h2" id="stories-title">More
+            <span class="scribble">impact<svg class="doodle doodle--draw c-pink" viewBox="0 0 300 40" preserveAspectRatio="none" aria-hidden="true"><use href="#d-underline"/></svg></span></h2>
+        </div>
+        <a class="link-arrow" href="stories.html">See all stories</a>
+      </div>
+      <div class="story-grid" id="latest"></div>
     </div>
   </section>
 
-  <section class="section">
+  <section class="section" id="presence" aria-labelledby="presence-title" style="padding-top:0">
     <div class="wrap">
-      <div class="section-head"><h2>Stories of impact</h2><a class="link-arrow" href="stories.html">All stories</a></div>
-      <div class="grid c3" id="latest"></div>
+      <div class="sky sky--panel presence">
+        <svg class="doodle doodle--draw c-yellow hide-mobile" style="--delay:.4s; top:-30px; right:-20px; width:180px; height:108px; stroke-width:3; transform:rotate(-12deg)" viewBox="0 0 200 120" aria-hidden="true"><use href="#d-arcs"/></svg>
+        <div>
+          <p class="hand c-pink-ink">Where we are</p>
+          <h2 class="h2" id="presence-title">Across the islands, through local hands</h2>
+          <p class="lede">Through partners and volunteer organizations, Angat Buhay reaches communities in these regions, with more joining every year.</p>
+          <a class="btn btn--white" href="presence.html">See where we work <span aria-hidden="true">→</span></a>
+        </div>
+        <div style="position:relative">
+          <svg class="doodle doodle--draw c-blue hide-mobile" style="--delay:.7s; left:-58px; top:-74px; width:64px; height:64px; stroke-width:4; transform:rotate(10deg)" viewBox="0 0 120 120" aria-hidden="true"><use href="#d-arrow-curl"/></svg>
+          <ul class="region-list" id="home-regions" aria-label="Regions with Angat Buhay programs"></ul>
+        </div>
+      </div>
+      <div class="note">Regions come from the areas tagged on projects, stories and volunteer organizations. The Presence page has the full province table behind the map, so phone and screen-reader users can still find work in their province (audit finding).</div>
     </div>
   </section>
 
-  <section class="section" id="involved">
+  <section class="section" id="involved" aria-labelledby="involved-title" style="padding-top:0">
     <div class="wrap">
-      <div class="section-head"><h2>Be involved</h2></div>
-      <div class="grid c3">
-        <a class="tile" href="donate.html" style="min-height:160px"><span>Donate<small>GCash, bank transfer, USD and overseas options</small></span></a>
-        <a class="tile" href="volunteer.html" style="min-height:160px"><span>Volunteer<small>Join the Angat Bayanihan Volunteer Network</small></span></a>
-        <a class="tile" href="fundraisers.html" style="min-height:160px"><span>Fundraisers<small>Angat Buhay Makati, Run Naga, ALAB</small></span></a>
+      <div class="section-head">
+        <div>
+          <p class="hand c-teal-ink">Your turn</p>
+          <h2 class="h2" id="involved-title">Be
+            <span class="scribble">involved<svg class="doodle doodle--draw c-yellow" viewBox="0 0 300 40" preserveAspectRatio="none" aria-hidden="true"><use href="#d-underline"/></svg></span></h2>
+        </div>
+      </div>
+      <div class="involve-grid">
+        <div class="card card--attention sky sky--pink">
+          <svg class="doodle doodle--draw c-yellow" style="--delay:.3s; top:18px; right:22px; width:74px; height:50px; stroke-width:5; transform:rotate(12deg)" viewBox="0 0 120 80" aria-hidden="true"><use href="#d-crown"/></svg>
+          <svg class="doodle doodle--draw doodle--fine c-white" style="--delay:.6s; bottom:24px; right:28px; width:34px; height:34px; stroke-width:9" viewBox="0 0 100 100" aria-hidden="true"><use href="#d-sparkle"/></svg>
+          <div class="card__body">
+            <p class="hand" style="color:var(--ink)">Give where it’s needed</p>
+            <h3 class="h2" style="font-size:clamp(2rem,3.4vw,2.75rem)">Donate</h3>
+            <p>GCash, bank transfer, USD and overseas options. Give to a cause you care about, or where the need is greatest right now.</p>
+            <div><a class="btn btn--ink btn--lg" href="donate.html">Donate now <span aria-hidden="true">→</span></a></div>
+          </div>
+        </div>
+        <a class="card" href="volunteer.html">
+          <div class="card__body">
+            <svg class="doodle card__icon c-teal" viewBox="0 0 160 120" aria-hidden="true"><use href="#d-speech"/></svg>
+            <h3 class="h3 card__title" style="--pillar:var(--teal-500)">Volunteer<svg class="doodle draw-on-hover" viewBox="0 0 300 24" preserveAspectRatio="none" aria-hidden="true"><use href="#d-underline-single"/></svg></h3>
+            <p>Join the Angat Bayanihan Volunteer Network, close to where you live.</p>
+            <span class="link-doodle" style="margin-top:auto">Sign up to volunteer <span class="arrow" aria-hidden="true">→</span></span>
+          </div>
+        </a>
+        <a class="card" href="fundraisers.html">
+          <div class="card__body">
+            <svg class="doodle card__icon c-pink" viewBox="0 0 100 90" aria-hidden="true"><use href="#d-heart"/></svg>
+            <h3 class="h3 card__title" style="--pillar:var(--pink-500)">Join a fundraiser<svg class="doodle draw-on-hover" viewBox="0 0 300 24" preserveAspectRatio="none" aria-hidden="true"><use href="#d-underline-single"/></svg></h3>
+            <p>Runs, concerts and art fairs that fund our programs.</p>
+            <div class="event" id="next-fundraiser"></div>
+            <span class="link-doodle" style="margin-top:.5rem">All fundraisers <span class="arrow" aria-hidden="true">→</span></span>
+          </div>
+        </a>
       </div>
     </div>
   </section>

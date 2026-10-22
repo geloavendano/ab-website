@@ -176,7 +176,7 @@ h1, h2, h3, h4 { font-family: var(--font-display); color: var(--navy); margin: 0
    falls back to the cool hero sky above. Text on it is ink (#1A1A1A), so keep
    the area behind the copy (top-left of the card) light enough to read. */
 .sky--pink::before {
-  /* TODO(human): background: <stacked radial-gradients>, like .sky::before */
+  /* Warm variant not defined in v2; see ab-ui-v3.css. */
 }
 
 /* Faint grain on calm surfaces so the page still feels like one print. */

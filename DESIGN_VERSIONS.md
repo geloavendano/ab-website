@@ -2,7 +2,7 @@
 
 Each approved design checkpoint is committed and tagged before the next direction is developed.
 
-`index.html` remains the neutral structural prototype for client discussions about content, hierarchy, and page flow. The versioned pages below are separate visual-design explorations.
+These v0.x pages are an earlier, archived exploration. The current design track lives in `ui/` (see `ui/VERSIONS.md`); since UI v3, every public page, including `index.html`, uses it. The neutral wireframe styling was retired in v3 and only survives in git history (last commit before the switch: `6e22915`).
 
 ## v0.1 - Playful / doodle-forward
 

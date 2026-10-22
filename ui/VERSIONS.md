@@ -40,3 +40,16 @@ Same system as v1; only the hero changes. v1 stays as the "sky" alternative.
   (`data-start` / `data-end` on the `<video>` can still set a loop window inside a longer file.)
 - Header turns white over the video, then back to navy once it goes solid.
 - **Revision (2026-10-07):** removed the pillar-colour dots from advocacy cards and tags. Pillar colour now shows only in the hover underline.
+
+## v3: Applied site-wide (2026-10-22)
+
+The v2 language now styles every public page of the prototype. The neutral wireframe look is retired (it survives in git history at `6e22915`).
+
+- **Files:** `ab-ui-v3.css` = v2 components + a **site layer** that styles the markup `assets/app.js` renders (cards, chips, tiles, stats, kv lists, numbered steps, tables, tabs, forms, filters, design notes, placeholders). `ab-doodles-v3.js` = v2 behaviour, run after `app.js` renders, plus an enhancer for doodles static shells can't carry. `components-v3.html` documents it.
+- **Homepage (`index.html`):** the v2 video homepage, now data-driven: advocacies, impact stats, stories, regions and the next fundraiser come from `data.js`; all links are real.
+- **Page heroes:** every section page opens on a sky band with a torn-paper bottom edge (a CSS mask, so no extra markup) and one doodle cluster, picked per page so a page always looks the same.
+- **Stories:** the featured story is a video hero using the same 9.3 MB loop; the full video stays on the story page.
+- **Header/footer:** rendered by `app.js` in the design language: doodle-underlined nav with dropdowns, pink Donate always visible, EN/FIL pill, white over video heroes; navy footer.
+- **Cards:** story, project and advocacy cards use the v2 components, with the pillar-coloured underline on hover.
+- **Calm vs loud:** Donate stays the one attention element (header button, and the Donate card on Home, Get involved and each advocacy page).
+- **Not changed:** the staff admin (`admin/`) and the archived v0.x homepages still use `assets/style.css`.

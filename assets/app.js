@@ -85,6 +85,21 @@
   const PH_TAG = ` <span class="sample-tag" title="Placeholder content, to be replaced with Angat Buhay's real copy">PLACEHOLDER</span>`;
   const sampleTag = (o) => (o && o.placeholder ? PH_TAG : o && o.sample ? ` <span class="sample-tag" title="Illustrative content">SAMPLE</span>` : "");
 
+  /* ---- Design layer (ui/ab-ui-v3.css) ----
+   * Doodles are <use> references into the sprite that ui/ab-doodles-v3.js injects. */
+  const PILLAR_VAR = {
+    "public-education": "--pillar-education", "health-nutrition-food-security": "--pillar-health",
+    "climate-action-sustainability": "--pillar-climate", "community-engagement": "--pillar-community", "arts-culture": "--pillar-arts"
+  };
+  /** Inline style giving a block its pillar colour (used by hover underlines and stat underlines). */
+  const pillarStyle = (slug) => PILLAR_VAR[slug] ? `--pillar:var(${PILLAR_VAR[slug]})` : "";
+  const doodle = (cls, id, viewBox, style = "") =>
+    `<svg class="doodle ${cls}" viewBox="${viewBox}" preserveAspectRatio="none"${style ? ` style="${style}"` : ""} aria-hidden="true"><use href="#d-${id}"/></svg>`;
+  /** Crayon underline that draws in when its card or link is hovered. */
+  const HOVER_LINE = doodle("draw-on-hover", "underline-single", "0 0 300 24");
+  const PLAY_ICON = `<svg viewBox="0 0 10 12" fill="currentColor" aria-hidden="true"><path d="M0 0l10 6-10 6z"/></svg>`;
+  const TORN_EDGE = `<svg class="torn" viewBox="0 0 1440 60" preserveAspectRatio="none" aria-hidden="true"><path d="M0 60 L0 22.0 L26.3 18.0 L48.3 21.5 L70.8 24.6 L91.9 22.9 L103.2 19.2 L124.6 14.8 L140.9 26.9 L149.6 21.2 L170.7 23.0 L196.8 26.7 L210.2 25.7 L219.5 18.2 L232.0 27.1 L254.1 29.0 L272.4 21.1 L282.6 30.4 L296.2 23.3 L313.5 16.3 L325.8 19.1 L339.1 21.4 L350.2 26.7 L375.2 22.9 L392.6 21.1 L419.2 19.6 L430.8 22.2 L444.0 19.5 L469.3 15.6 L477.1 19.7 L484.8 27.9 L504.7 16.0 L523.7 15.9 L549.2 26.5 L575.2 24.7 L581.4 17.5 L601.0 17.2 L617.7 23.6 L643.1 17.3 L668.8 15.7 L674.9 26.8 L701.2 14.3 L711.3 27.6 L732.2 17.7 L742.8 29.6 L764.3 24.0 L771.0 15.5 L779.8 23.6 L786.7 26.4 L814.5 27.4 L829.7 17.5 L855.1 19.6 L870.1 26.4 L883.8 22.7 L897.2 24.2 L907.5 18.4 L935.4 22.9 L961.6 16.8 L970.6 21.0 L993.5 27.2 L1003.7 20.3 L1024.2 21.3 L1041.4 24.6 L1063.9 14.4 L1081.8 16.8 L1094.2 17.3 L1109.7 15.1 L1133.8 26.8 L1154.8 35.0 L1174.0 24.1 L1180.8 17.0 L1188.7 14.1 L1215.5 18.7 L1236.3 17.4 L1264.2 19.9 L1287.2 19.6 L1294.6 17.2 L1322.0 16.1 L1339.2 15.7 L1358.4 19.1 L1378.7 21.8 L1406.5 15.1 L1419.4 18.2 L1427.5 17.3 L1440.0 24.7 L1440 60 Z"/></svg>`;
+
   /* ------------------------------------------------------------------
    * Language (English / Filipino). The Filipino strings are a PLACEHOLDER
    * translation of menus and headings only; final copy needs a reviewed
@@ -124,40 +139,50 @@
     });
   }
 
-  function storyCard(s) {
+  /** variant: "" (grid card), "is-feature" (large, rough-cropped photo) or "is-row" (compact, photo left). */
+  function storyCard(s, variant = "") {
+    if (typeof variant !== "string") variant = ""; // called via .map(storyCard), which passes the index
     const p = pillarBy(s.pillar);
     const media = s.format === "video"
-      ? (s.videoUrl ? videoFrame(s.videoUrl) : s.image ? `<div class="video-thumb r-16x9">${img(s.image, "")}</div>`
+      ? (s.image ? `<div class="video-thumb">${img(s.image, "")}</div>` : s.videoUrl ? videoFrame(s.videoUrl)
         : ph(s.embedUrl ? "Instagram reel" : "video thumbnail", "r-16x9 play"))
       : s.format === "infographic" ? img(s.image, "", "r-16x9", "infographic preview") : img(s.image, "");
-    return `<article class="card">
-      <span class="chip fmt">${FORMAT_LABEL[s.format]}</span>
-      ${media}
-      <div class="body">
-        <h3><a class="stretched" href="story.html?s=${esc(s.slug)}">${esc(s.title)}</a>${sampleTag(s)}</h3>
+    return `<article class="card card--story${variant ? " " + variant : ""}" style="${pillarStyle(s.pillar)}">
+      <div class="card__media${variant === "is-feature" ? " rough-bottom" : ""}">${media}</div>
+      <div class="card__body body">
+        <div class="tags">${p ? `<span class="tag">${esc(p.name)}</span>` : ""}<span class="tag tag--format">${FORMAT_LABEL[s.format]}</span></div>
+        <h3 class="h3 card__title"><a class="stretched" href="story.html?s=${esc(s.slug)}"><span class="title-ink">${esc(s.title)}${HOVER_LINE}</span></a>${sampleTag(s)}</h3>
         <p class="sub">${esc(s.subheading)}</p>
-        <div class="meta">${p ? esc(p.name) + " · " : ""}${esc(s.areas.map(areaLabel).slice(0, 2).join("; "))} · ${fmtDate(s.publishedAt)}</div>
+        <div class="meta">${esc(s.areas.map(areaLabel).slice(0, 2).join("; "))} · ${fmtDate(s.publishedAt)}</div>
       </div>
     </article>`;
   }
 
   function projectCard(p) {
-    return `<article class="card">
-      ${img(p.image, "", "r-4x3", "project photo")}
-      <div class="body">
-        <h3><a class="stretched" href="project.html?id=${esc(p.id)}">${esc(p.title)}</a></h3>
+    return `<article class="card card--story card--project" style="${pillarStyle(p.pillar)}">
+      <div class="card__media">${img(p.image, "", "r-4x3", "project photo")}</div>
+      <div class="card__body body">
+        <h3 class="h3 card__title"><a class="stretched" href="project.html?id=${esc(p.id)}"><span class="title-ink">${esc(p.title)}${HOVER_LINE}</span></a></h3>
         <p class="sub">${esc(p.summary)}</p>
         <div class="meta">${projectIsOngoing(p) ? "Ongoing" : "Completed"} · ${fmtMonth(p.start)} – ${p.end ? fmtMonth(p.end) : "present"}</div>
       </div>
     </article>`;
   }
 
+  /** Advocacy card: portrait photo, pillar-coloured underline on hover. */
+  const pillarCard = (p) => `<a class="card card--pillar" href="advocacy.html?p=${esc(p.slug)}" style="${pillarStyle(p.slug)}">
+      <div class="card__media"><img src="${esc(M(p.image))}" alt="" loading="lazy" decoding="async"></div>
+      <div class="card__body"><h3 class="h3 card__title">${esc(p.name)}${HOVER_LINE}</h3><p>${esc(p.tagline)}</p></div>
+    </a>`;
+
   const person = (m) => `<div class="person">${img(m.photo, "", "round")}<b>${esc(m.name)}</b><span>${esc(m.role)}</span></div>`;
 
   function statsBlock(stats) {
     if (!stats.length) return "";
-    return `<div class="stats">${stats.map((s) => `<div class="stat"><b>${esc(s.value)}</b><span>${esc(s.label)}</span></div>`).join("")}</div>
-      <p class="small muted" style="margin-top:8px">As of ${esc(D.impactAsOf)} · Source: <a href="resources.html">${esc(D.impactSource)}</a>${D.impactAsOfPlaceholder ? PH_TAG : ""}</p>`;
+    return `<div class="stats">${stats.map((s, i) => `<div class="stat" style="${pillarStyle(s.pillar)}">
+        <span class="stat__value">${esc(s.value)}${doodle("doodle--draw", "underline-single", "0 0 300 24", `--delay:${(i * 0.12).toFixed(2)}s`)}</span>
+        <span class="stat__label">${esc(s.label)}</span></div>`).join("")}</div>
+      <p class="stats-note small muted">As of ${esc(D.impactAsOf)} · Source: <a href="resources.html">${esc(D.impactSource)}</a>${D.impactAsOfPlaceholder ? PH_TAG : ""}</p>`;
   }
 
   /* ------------------------------------------------------------------
@@ -167,23 +192,22 @@
 
   function header(page) {
     const cur = NAV_CURRENT[page];
-    const a = (href, label, extra = "") => `<a href="${href}"${href === cur ? ' aria-current="page"' : ""} ${extra}>${esc(t(label))}</a>`;
+    const line = doodle("draw-on-hover doodle--fine", "underline-single", "0 0 300 24");
+    const top = (href, label) => `<a class="nav-link" href="${href}"${href === cur ? ' aria-current="page"' : ""}>${esc(t(label))}${line}</a>`;
+    const a = (href, label) => `<a href="${href}"${href === cur ? ' aria-current="page"' : ""}>${esc(t(label))}</a>`;
     const langBtn = (code, label, name) => `<button type="button" data-lang="${code}" aria-pressed="${LANG === code}" lang="${code}" aria-label="${name}">${label}</button>`;
+    const langs = langBtn("en", "EN", "English") + langBtn("fil", "FIL", "Filipino");
     return `<a class="skip" href="#main">${t("Skip to content")}</a>
-    <header class="site-header"><div class="wrap">
-      <a class="logo" href="index.html" aria-label="Angat Buhay home"><img class="brand-logo" src="assets/media/angat-buhay-logo.png" alt="Angat Buhay"></a>
-      <div class="header-tools">
-        <div class="lang-switch" role="group" aria-label="Language / Wika">${langBtn("en", "EN", "English")}${langBtn("fil", "FIL", "Filipino")}</div>
-        <button class="btn small menu-toggle" aria-expanded="false" aria-controls="nav">Menu</button>
-      </div>
-      <nav id="nav" class="nav" aria-label="Main">
-        ${a("stories.html", "Stories")}
-        <details><summary>${t("Advocacies")}</summary><div class="menu">
+    <header class="site-header" data-header><div class="wrap site-header__bar">
+      <a class="brand logo" href="index.html" aria-label="Angat Buhay home"><img class="brand-logo" src="assets/media/angat-buhay-logo.png" alt="Angat Buhay" width="82" height="46"></a>
+      <nav id="nav" class="nav site-nav" aria-label="Main">
+        ${top("stories.html", "Stories")}
+        <details><summary class="nav-link">${t("Advocacies")}${line}</summary><div class="menu">
           ${D.pillars.map((p) => `<a href="advocacy.html?p=${p.slug}">${esc(p.name)}</a>`).join("")}
         </div></details>
-        ${a("presence.html", "Presence")}
-        ${a("about.html", "About")}
-        <details class="menu-end"><summary>${t("Get involved")}</summary><div class="menu">
+        ${top("presence.html", "Presence")}
+        ${top("about.html", "About")}
+        <details class="menu-end"><summary class="nav-link">${t("Get involved")}${line}</summary><div class="menu">
           ${a("involved.html", "Ways to help")}
           ${a("donate.html", "Donate")}
           ${a("volunteer.html", "Volunteer")}
@@ -191,17 +215,25 @@
           ${a("involved.html#partner", "Partner with us")}
           ${a("resources.html", "Reports & resources")}
         </div></details>
-        <a class="btn solid small" href="donate.html">${t("Donate")}</a>
+        <div class="nav-lang lang-switch" role="group" aria-label="Language / Wika">${langs}</div>
       </nav>
+      <div class="header-tools site-header__actions">
+        <div class="lang-switch" role="group" aria-label="Language / Wika">${langs}</div>
+        <a class="btn btn--attention btn--sm" href="donate.html">${esc(t("Donate"))}${doodle("btn__spark doodle--fine", "sparkle", "0 0 100 100")}</a>
+        <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="nav"><span class="visually-hidden">Menu</span>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h10"/></svg></button>
+      </div>
     </div></header>
     ${LANG === "fil" ? `<div class="lang-banner small"><div class="wrap">Filipino${PH_TAG} Menus and headings only. The final Filipino copy will be translated and reviewed by Angat Buhay. <button type="button" class="btn small" data-lang="en">Switch to English</button></div></div>` : ""}`;
   }
 
   function footer() {
     const o = D.org;
-    return `<footer class="site-footer"><div class="wrap">
-      <div class="cols">
-        <div><h4>Angat Buhay</h4><p class="muted">${esc(o.intro)}</p></div>
+    return `<footer class="site-footer">
+      ${doodle("doodle--draw footer-squiggle", "spring", "0 0 300 80", "stroke-width:4")}
+      <div class="wrap">
+      <div class="footer-grid">
+        <div><span class="footer-logo"><img src="assets/media/angat-buhay-logo.png" alt="Angat Buhay" width="82" height="46"></span><p style="margin-top:1.25rem">${esc(o.intro)}</p></div>
         <div><h4>${t("Explore")}</h4><ul>
           <li><a href="stories.html">${t("Stories")}</a></li>
           ${D.pillars.map((p) => `<li><a href="advocacy.html?p=${p.slug}">${esc(p.name)}</a></li>`).join("")}
@@ -219,11 +251,11 @@
           <li><a href="mailto:${o.email}">${o.email}</a></li>
           <li><a href="mailto:${o.partnershipsEmail}">${o.partnershipsEmail}</a></li>
         </ul>
-        <div class="socials" style="margin-top:12px">${o.socials.map((s) => `<a href="${s.url}" target="_blank" rel="noopener">${s.name}</a>`).join("")}</div>
+        <div class="socials" style="margin-top:1rem">${o.socials.map((s) => `<a href="${s.url}" target="_blank" rel="noopener">${s.name}</a>`).join("")}</div>
         </div>
       </div>
-      <p class="small">${esc(o.accreditation)} Operating with DSWD Solicitation Permit No. ${esc(o.solicitationPermit)}.</p>
-      <div class="legal small"><span>© ${NOW.getFullYear()} ${esc(o.legalName)}. All rights reserved.</span>
+      <p class="footer-accred">${esc(o.accreditation)} Operating with DSWD Solicitation Permit No. ${esc(o.solicitationPermit)}.</p>
+      <div class="footer-legal"><span>© ${NOW.getFullYear()} ${esc(o.legalName)}. All rights reserved.</span>
         <span class="socials"><a href="privacy.html">${t("Privacy notice")}</a><a href="admin/index.html">${t("Staff login")}</a><a href="sitemap.html">${t("Prototype guide")}</a></span></div>
     </div></footer>`;
   }
@@ -310,19 +342,34 @@
    * ------------------------------------------------------------------ */
   const pages = {};
 
+  /** Featured story as a full-bleed video hero (Stories page). The loop is the
+   * self-hosted b-roll cut (D.media.heroLoop); the full video plays on the story page. */
   function featuredHero(linkHref, linkLabel, headingTag) {
     const s = listedStories().find((x) => x.featured) || listedStories()[0];
     if (!s) return "";
-    const media = s.videoUrl
-      ? `<video class="hero-media" data-src="${esc(s.videoUrl)}" poster="${esc(M(s.image || D.media.heroPoster))}" muted playsinline preload="none" aria-label="${esc(s.title)} (muted background video)"></video>
-         <button class="video-toggle" type="button">▶ Play video</button>`
-      : s.image ? `<img class="hero-media" src="${esc(M(s.image))}" alt="">` : ph("featured story image / video", "");
-    return `<section class="hero" aria-label="Featured story">
-      ${media}
-      <div class="caption"><div class="wrap">
-        <div><span class="eyebrow">Featured story</span><${headingTag}>${esc(s.title)}</${headingTag}><p>${esc(s.subheading)}</p></div>
-        <a class="btn solid" href="${linkHref || "story.html?s=" + s.slug}">${linkLabel}</a>
-      </div></div>
+    const loop = s.videoUrl && D.media.heroLoop;
+    const media = loop
+      ? `<video data-hero-video data-src="${esc(D.media.heroLoop)}" poster="${esc(D.media.heroLoopPoster)}" muted playsinline preload="none" aria-hidden="true" tabindex="-1"></video>`
+      : s.image ? `<img src="${esc(M(s.image))}" alt="">` : "";
+    return `<section class="hero hero--video hero--story film" aria-labelledby="featured-title">
+      <div class="hero__media">${media}</div>
+      <div class="hero__grade" aria-hidden="true"></div><div class="hero__scrim" aria-hidden="true"></div>
+      ${doodle("doodle--draw c-yellow hide-tablet", "swoop", "0 0 600 300", "--delay:.6s; top:110px; right:8%; width:min(360px,28vw); height:auto; aspect-ratio:2/1; stroke-width:6")}
+      ${doodle("doodle--draw doodle--fine c-white hide-tablet", "sparkle", "0 0 100 100", "--delay:1s; top:40%; right:14%; width:30px; height:30px; stroke-width:9")}
+      <div class="wrap hero__inner">
+        <div class="hero__copy">
+          <p class="hand c-yellow">${t("Featured story")}</p>
+          <${headingTag} class="display" id="featured-title">${esc(s.title)}</${headingTag}>
+          <p class="lede">${esc(s.subheading)}</p>
+          <div class="hero__ctas"><a class="btn btn--white btn--lg" href="${linkHref || "story.html?s=" + s.slug}"><span class="play">${PLAY_ICON}</span>${esc(t(linkLabel))}</a></div>
+        </div>
+        ${loop ? `<div class="hero__now" style="justify-content:flex-end">
+          <button class="video-btn" type="button" data-video-toggle data-state="paused" aria-label="Play background video">
+            <svg class="icon-pause" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><rect x="3" y="2" width="3.6" height="12" rx="1.2"/><rect x="9.4" y="2" width="3.6" height="12" rx="1.2"/></svg>
+            <svg class="icon-play" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M4 2.2v11.6c0 .8.9 1.3 1.6.8l8.6-5.8c.6-.4.6-1.2 0-1.6L5.6 1.4C4.9.9 4 1.4 4 2.2z"/></svg>
+          </button></div>` : ""}
+      </div>
+      ${TORN_EDGE}
     </section>`;
   }
 
@@ -363,11 +410,19 @@
   pages.home = () => {
     const version = document.body.dataset.version;
     if (!version) {
-      fill("hero", featuredHero("stories.html", "Watch more", "h1"));
-      fill("pillars", D.pillars.map((p) => `<a class="tile" href="advocacy.html?p=${p.slug}"><span>${esc(p.name)}<small>${esc(p.tagline)}</small></span></a>`).join(""));
+      // Hero copy is static in index.html; the "Now playing" strip follows the featured story.
+      const f = listedStories().find((x) => x.featured) || listedStories()[0];
+      const now = $("#now-playing");
+      if (f && now) { now.href = "story.html?s=" + f.slug; fill("now-title", esc(f.title)); fill("now-sub", esc(f.subheading)); }
+      fill("pillars", D.pillars.map(pillarCard).join(""));
       // Headline figure per pillar: the first impact stat listed for each, in pillar order.
       fill("home-stats", statsBlock(D.pillars.map((p) => D.impactStats.find((s) => s.pillar === p.slug)).filter(Boolean)));
-      fill("latest", listedStories().slice(0, 3).map(storyCard).join(""));
+      // The hero already plays the featured story, so "More impact" starts after it.
+      const latest = listedStories().filter((s) => s.image && s !== f).slice(0, 4);
+      fill("latest", latest.length ? storyCard(latest[0], "is-feature") + `<div class="story-stack">${latest.slice(1).map((s) => storyCard(s, "is-row")).join("")}</div>` : "");
+      fill("home-regions", D.areas.filter((a) => a.type === "region").map((r) => `<li>${esc(r.name)}</li>`).join(""));
+      const next = D.fundraisers[0];
+      if (next) fill("next-fundraiser", `<span class="small muted">Next up · ${esc(next.date)}</span><b>${esc(next.name)}</b>`);
       return;
     }
     fill("hero", homeHero());
@@ -520,7 +575,7 @@
     const leads = D.team.secretariat.filter((m) => m.pillar === p.slug);
     const team = [...leads, ...D.team.secretariat.filter((m) => !m.pillar)].slice(0, 4);
     fill("pillar-team", team.map(person).join(""));
-    fill("pillar-others", D.pillars.filter((x) => x.slug !== p.slug).map((x) => `<a class="tile" href="advocacy.html?p=${x.slug}">${esc(x.name)}</a>`).join(""));
+    fill("pillar-others", D.pillars.filter((x) => x.slug !== p.slug).map(pillarCard).join(""));
   };
 
   /** Community / LGU journey: can we take part, what's needed, who do we talk to. */

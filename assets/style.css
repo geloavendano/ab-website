@@ -806,3 +806,8 @@ body[data-page="home"][data-version] .site-footer a:hover { color: var(--ab-yell
 }
 .contact-card { flex-direction: row; flex-wrap: wrap; align-items: center; gap: 16px; padding: 16px; margin-top: 16px; }
 .contact-card > div:nth-child(2) { flex: 1 1 200px; min-width: 0; }
+
+/* app.js renders the UI v3 header everywhere; these keep it tidy on the pages
+   still using this stylesheet (archived v0.x homepages). */
+.nav-lang { display: none; }
+.visually-hidden { position: absolute !important; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }

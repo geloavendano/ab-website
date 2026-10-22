@@ -5,13 +5,14 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="robots" content="noindex, nofollow">
   <title>Advocacy · Angat Buhay</title>
-  <link rel="stylesheet" href="assets/style.css">
+  <link rel="stylesheet" href="ui/ab-ui-v3.css">
   <script src="assets/data.js" defer></script>
   <script src="assets/app.js" defer></script>
+  <script src="ui/ab-doodles-v3.js" defer></script>
 </head>
 <body data-page="advocacy">
 <main id="main">
-  <header class="page-hero"><div class="wrap" id="pillar-hero"></div></header>
+  <header class="page-hero sky"><div class="wrap" id="pillar-hero"></div></header>
 
   <section class="section">
     <div class="wrap">
@@ -41,10 +42,26 @@
 
   <section class="section">
     <div class="wrap">
-      <div class="grid c3">
-        <div><h2>Support this advocacy</h2><p class="muted">Every donation and volunteer hour goes into programs like these.</p></div>
-        <a class="tile" href="donate.html"><span>Donate</span></a>
-        <a class="tile" href="volunteer.html"><span>Volunteer</span></a>
+      <div class="section-head"><div><p class="hand c-teal-ink">Your turn</p><h2>Support this advocacy</h2></div></div>
+      <div class="involve-grid" style="grid-template-columns:minmax(0,1.25fr) minmax(0,1fr)">
+        <div class="card card--attention sky sky--pink">
+          <svg class="doodle doodle--draw c-yellow" style="--delay:.3s; top:18px; right:22px; width:74px; height:50px; stroke-width:5; transform:rotate(12deg)" viewBox="0 0 120 80" aria-hidden="true"><use href="#d-crown"/></svg>
+          <svg class="doodle doodle--draw doodle--fine c-white" style="--delay:.6s; bottom:24px; right:28px; width:34px; height:34px; stroke-width:9" viewBox="0 0 100 100" aria-hidden="true"><use href="#d-sparkle"/></svg>
+          <div class="card__body">
+            <p class="hand" style="color:var(--ink)">Give where it’s needed</p>
+            <h3 class="h2" style="font-size:clamp(2rem,3.4vw,2.75rem)">Donate</h3>
+            <p>Every donation goes into programs like these. Choose GCash, bank transfer or an overseas option.</p>
+            <div><a class="btn btn--ink btn--lg" href="donate.html">Donate now <span aria-hidden="true">→</span></a></div>
+          </div>
+        </div>
+        <a class="card" href="volunteer.html">
+          <div class="card__body">
+            <svg class="doodle card__icon c-teal" viewBox="0 0 160 120" aria-hidden="true"><use href="#d-speech"/></svg>
+            <h3 class="h3 card__title" style="--pillar:var(--teal-500)">Volunteer<svg class="doodle draw-on-hover" viewBox="0 0 300 24" preserveAspectRatio="none" aria-hidden="true"><use href="#d-underline-single"/></svg></h3>
+            <p>Give your time to a program near you through the Angat Bayanihan Volunteer Network.</p>
+            <span class="link-doodle" style="margin-top:auto">Sign up to volunteer <span class="arrow" aria-hidden="true">→</span></span>
+          </div>
+        </a>
       </div>
       <div class="note">Added because current program pages explain the advocacy but not how to take part (audit finding).</div>
     </div>
