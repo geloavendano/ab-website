@@ -302,34 +302,39 @@ window.AB = {
   impactAsOfPlaceholder: true,
   impactSource: "Angat Buhay Annual Report 2023–2024",
 
-  /* ---------- TeamMember (photos in the same order as the live Team page) ---------- */
+  /* ---------- TeamMember ----------
+   * Board: officers first, then trustees (list from Angat Buhay, Oct 2026).
+   * Secretariat: filled positions on the Oct 2026 org chart, top-down. Vacant
+   * positions are left out. photo: null shows an initials avatar until a photo
+   * is supplied. pillar: shows the person under "The team" on that advocacy page.
+   * Remote photo paths are relative to media.base; "assets/…" paths are local. */
   team: {
     trustees: [
-      { name: "Maria Leonor Gerona Robredo", role: "Chairperson Emeritus", photo: "2024/09/1-1-300x300.png" },
-      { name: "Rafael Cojuangco Lopa", role: "President", photo: "2024/09/4-300x300.png" },
-      { name: "Camille Tolentino Genuino", role: "Treasurer", photo: "2024/09/2-1-300x300.png" },
-      { name: "Stella Angela Pastores Esquivias", role: "Corporate Secretary", photo: "2024/09/3-1-300x300.png" },
-      { name: "Maximillan Roberts Ventura", role: "Trustee", photo: "2024/09/9-300x300.png" },
-      { name: "Judith Ronquilloa Azarcon-Marquez", role: "Trustee", photo: "2024/09/5-300x300.png" },
-      { name: "Joanne Alvarezs Baylon", role: "Trustee", photo: "2024/09/6-300x300.png" },
+      { name: "Maria Leonor Gerona Robredo", role: "Chairperson Emerita", photo: "2024/09/1-1-300x300.png" },
+      { name: "Camille Tolentino Genuino", role: "President", photo: "2024/09/2-1-300x300.png" },
+      { name: "Edward Lim", role: "Treasurer", photo: "2025/09/AB-LIM-300x300.png" },
+      { name: "Stella Angela Pastores Esquivias", role: "Corporate Secretary · Risk Management Committee", photo: "2024/09/3-1-300x300.png" },
+      { name: "Rafael Cojuangco Lopa", role: "Trustee", photo: "2024/09/4-300x300.png" },
+      { name: "Judith Ronquillo Azarcon-Marquez", role: "Trustee", photo: "2024/09/5-300x300.png" },
+      { name: "Joanne Alvarez Baylon", role: "Trustee", photo: "2024/09/6-300x300.png" },
       { name: "Jose Christopher Belmonte", role: "Trustee", photo: "2024/09/7-300x300.png" },
       { name: "Gabriel De Alban David", role: "Trustee", photo: "2024/09/8-300x300.png" },
-      { name: "Edward Lim", role: "Trustee", photo: "2025/09/AB-LIM-300x300.png" },
+      { name: "Elizabeth Hao Chua Olivan", role: "Trustee", photo: "assets/media/team/elizabeth-olivan.jpg" },
       { name: "Raphael Martin R. Magno", role: "Executive Director", photo: "2024/09/10-1-300x300.png" }
     ],
     secretariat: [
-      { name: "Raphael Martin R. Magno", role: "Executive Director", pillar: null, photo: "2024/09/10-1-300x300.png" },
-      { name: "Marie Joanna Camille D. Belmonte", role: "Deputy Executive Director for Operations", pillar: null, photo: "2024/09/11-300x300.png" },
-      { name: "Patrick Vaughn Emil M. Manuel", role: "Deputy Executive Director for Monitoring, Evaluation, Learning, and Impact", pillar: null, photo: "2024/09/13-300x300.png" },
-      { name: "Joanne Charina S. Astilla", role: "Program Manager for Public Education", pillar: "public-education", photo: "2025/06/Jai-Astilla-300x300.png" },
-      { name: "Menard M. Mabutol", role: "Program Officer for Community Engagement and Empowerment", pillar: "community-engagement", photo: "2024/09/19-300x300.png" },
-      { name: "Danielle Marie S. Bordado", role: "Program Manager for Arts and Culture", pillar: "arts-culture", photo: "2024/09/18-300x300.png" },
-      { name: "Karelle Anne Bulan-Guico", role: "Program Officer for Food Security, Nutrition, and Universal Healthcare", pillar: "health-nutrition-food-security", photo: "2025/09/AB-KARELLE-300x300.png" },
-      { name: "Rona T. Resngit", role: "Arts & Culture Associate", pillar: "arts-culture", photo: "2025/09/AB-RESNGIT-300x300.png" },
-      { name: "Grem Gel Jane R. Montada", role: "Partnerships and Linkages Associate", pillar: null, photo: "2024/09/20-300x300.png" },
-      { name: "Milliesa L. Flores", role: "Communications Manager", pillar: null, photo: "2024/09/21-300x300.png" },
-      { name: "Maria Luiza P. Miguel", role: "Administrative and Finance Associate", pillar: null, photo: "2024/09/22-300x300.png" },
-      { name: "Jeanne Erika L. Pelayo", role: "Administrative and Finance Associate", pillar: null, photo: "2024/09/23-300x300.png" }
+      { name: "Erik Chua", role: "Deputy Executive Director for Partnerships and Communications", pillar: null, photo: null },
+      { name: "Rhyn Anthony Nique Esolana", role: "Deputy Executive Director for Programs and Operations", pillar: null, photo: null },
+      { name: "Alexa Ysabelle O. Ricafort", role: "Partnerships Officer for Program Support", pillar: null, photo: null },
+      { name: "Grem Gel Jane R. Montada", role: "Partnerships Officer for Fundraising", pillar: null, photo: "2024/09/20-300x300.png" },
+      { name: "Justin Diane Panganiban", role: "Admin and Finance Officer (Donations)", pillar: null, photo: null },
+      { name: "Precious V. Cabus", role: "Admin and Finance Officer (Disbursements)", pillar: null, photo: null },
+      { name: "Czarina Ignacio", role: "Admin and Finance Associate (Procurement and HR)", pillar: null, photo: null },
+      { name: "Joanne Charina S. Astilla", role: "Program Manager for Education", pillar: "public-education", photo: "2025/06/Jai-Astilla-300x300.png" },
+      { name: "Lila Decena", role: "Program Associate for Education", pillar: "public-education", photo: null },
+      { name: "Jasper Ruby Vijar, RMT, MD", role: "Program Manager for Health", pillar: "health-nutrition-food-security", photo: null },
+      { name: "Menard Mabutol", role: "Program Manager for Climate Action and Sustainability", pillar: "climate-action-sustainability", photo: "2024/09/19-300x300.png" },
+      { name: "Izza Arnaez", role: "Program Manager for Community Engagement and Empowerment", pillar: "community-engagement", photo: null }
     ]
   },
 

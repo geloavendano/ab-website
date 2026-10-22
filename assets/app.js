@@ -75,7 +75,7 @@
    * ------------------------------------------------------------------ */
   const ph = (label, cls = "r-16x9") => `<div class="ph ${cls}" role="img" aria-label="${esc(label)}"><span>${esc(label)}</span></div>`;
   /** Resolve a media path (relative to AB.media.base) or pass a full URL through. */
-  const M = (p) => (!p ? null : /^https?:/.test(p) ? p : D.media.base + p);
+  const M = (p) => (!p ? null : /^(https?:|assets\/|ui\/)/.test(p) ? p : D.media.base + p); // local files pass through
   /** Real photo if we have one, otherwise the wireframe placeholder. */
   const img = (path, alt, cls = "r-16x9", fallback = "photo") =>
     path ? `<img class="media ${cls}" src="${esc(M(path))}" alt="${esc(alt)}" loading="lazy" decoding="async">` : ph(fallback, cls);
@@ -175,7 +175,13 @@
       <div class="card__body"><h3 class="h3 card__title">${esc(p.name)}${HOVER_LINE}</h3><p>${esc(p.tagline)}</p></div>
     </a>`;
 
-  const person = (m) => `<div class="person">${img(m.photo, "", "round")}<b>${esc(m.name)}</b><span>${esc(m.role)}</span></div>`;
+  /** "Jasper Ruby Vijar, RMT, MD" → "JV": first and last name, credentials after the comma ignored. */
+  const initials = (name) => {
+    const words = name.split(",")[0].trim().split(/\s+/).filter((w) => !/^[A-Z]\.$/.test(w)); // drop middle initials
+    return (words[0][0] + (words.length > 1 ? words[words.length - 1][0] : "")).toUpperCase();
+  };
+  const person = (m) => `<div class="person">${m.photo ? img(m.photo, "", "round")
+      : `<span class="avatar" role="img" aria-label="Photo to follow">${esc(initials(m.name))}</span>`}<b>${esc(m.name)}</b><span>${esc(m.role)}</span></div>`;
 
   function statsBlock(stats) {
     if (!stats.length) return "";

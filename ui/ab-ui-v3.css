@@ -172,11 +172,22 @@ h1, h2, h3, h4 { font-family: var(--font-display); color: var(--navy); margin: 0
 .sky--panel { border-radius: var(--r-xl); }
 .sky--panel::before { inset: -30%; }
 
-/* Warm sky for the attention card (Donate). Until this is defined the card
-   falls back to the cool hero sky above. Text on it is ink (#1A1A1A), so keep
-   the area behind the copy (top-left of the card) light enough to read. */
+/* Warm sky for the attention card (Donate). Panels draw ::before at inset
+   -30%, so only ~19%–81% of these positions is visible.
+   - top-left stays a light bloom: the copy there is ink (#1A1A1A)
+   - top-right is light pink, not yellow, so the yellow crown doodle reads
+   - bottom-right is the saturated pink the white sparkles sit on
+   - a warm yellow glow bottom-left and a small teal accent tie it to the hero
+   Ink on every stop: pink 5.1:1, light pink 6.5:1, yellow 11:1. */
+.sky--pink { background: var(--pink-300); }
 .sky--pink::before {
-  /* TODO(human): background: <stacked radial-gradients>, like .sky::before */
+  background:
+    radial-gradient(34% 34% at 32% 32%, rgba(255, 255, 255, .92) 0%, rgba(255, 255, 255, .55) 40%, rgba(255, 255, 255, 0) 72%),
+    radial-gradient(36% 40% at 74% 24%, var(--pink-300) 0%, rgba(236, 117, 184, 0) 70%),
+    radial-gradient(42% 48% at 74% 74%, var(--pink-500) 0%, rgba(250, 59, 153, 0) 72%),
+    radial-gradient(38% 36% at 26% 80%, rgba(253, 196, 99, .9) 0%, rgba(253, 196, 99, 0) 70%),
+    radial-gradient(18% 22% at 84% 86%, var(--teal-300) 0%, rgba(84, 190, 195, 0) 70%),
+    linear-gradient(135deg, #F6A9CF 0%, var(--pink-300) 45%, var(--pink-500) 100%);
 }
 
 /* Faint grain on calm surfaces so the page still feels like one print. */
@@ -835,6 +846,17 @@ ol.steps > li::before {
 .contact-card > div:nth-child(2) { flex: 1; min-width: 200px; }
 
 /* ---------- Team ---------- */
+/* No photo yet: initials on a small sky, same ring as the photos. */
+.person .avatar {
+  display: grid; place-items: center; width: 112px; height: 112px; margin: 0 auto .8rem; border-radius: 50%;
+  background:
+    radial-gradient(60% 60% at 35% 35%, #fff 0%, rgba(255, 255, 255, 0) 70%),
+    radial-gradient(70% 70% at 85% 20%, var(--teal-300) 0%, rgba(84, 190, 195, 0) 70%),
+    radial-gradient(70% 70% at 20% 90%, var(--pink-300) 0%, rgba(236, 117, 184, 0) 70%),
+    var(--beige-100);
+  box-shadow: 0 0 0 4px #fff, 0 0 0 6px var(--pink-300);
+  font: 700 1.75rem/1 var(--font-display); letter-spacing: .02em; color: var(--navy);
+}
 .people { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 2rem 1.25rem; }
 .person { text-align: center; }
 .person img.media, .person .ph { width: 112px; height: 112px; margin: 0 auto .8rem; box-shadow: 0 0 0 4px #fff, 0 0 0 6px var(--pink-300); }

@@ -53,3 +53,4 @@ The v2 language now styles every public page of the prototype. The neutral wiref
 - **Cards:** story, project and advocacy cards use the v2 components, with the pillar-coloured underline on hover.
 - **Calm vs loud:** Donate stays the one attention element (header button, and the Donate card on Home, Get involved and each advocacy page).
 - **Not changed:** the staff admin (`admin/`) and the archived v0.x homepages still use `assets/style.css`.
+- **Revision (2026-10-22):** Donate card gets its warm sky (`.sky--pink`: light bloom behind the copy, light pink under the yellow crown, saturated pink under the white sparkles, yellow and teal accents). Team pages show an initials avatar on a small sky for anyone without a photo.
