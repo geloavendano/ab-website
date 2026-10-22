@@ -304,9 +304,9 @@ window.AB = {
 
   /* ---------- TeamMember ----------
    * Board: officers first, then trustees (list from Angat Buhay, Oct 2026).
-   * Secretariat: filled positions on the Oct 2026 org chart, top-down. Vacant
-   * positions are left out. photo: null shows an initials avatar until a photo
-   * is supplied. pillar: shows the person under "The team" on that advocacy page.
+   * Secretariat: the Executive Director, then filled positions on the Oct 2026
+   * org chart, top-down. Vacant positions are left out. photo: null shows an
+   * initials avatar until a photo is supplied. pillar: shows the person under "The team" on that advocacy page.
    * Remote photo paths are relative to media.base; "assets/…" paths are local. */
   team: {
     trustees: [
@@ -323,6 +323,7 @@ window.AB = {
       { name: "Raphael Martin R. Magno", role: "Executive Director", photo: "2024/09/10-1-300x300.png" }
     ],
     secretariat: [
+      { name: "Raphael Martin R. Magno", role: "Executive Director", pillar: null, photo: "2024/09/10-1-300x300.png" },
       { name: "Erik Chua", role: "Deputy Executive Director for Partnerships and Communications", pillar: null, photo: null },
       { name: "Rhyn Anthony Nique Esolana", role: "Deputy Executive Director for Programs and Operations", pillar: null, photo: null },
       { name: "Alexa Ysabelle O. Ricafort", role: "Partnerships Officer for Program Support", pillar: null, photo: null },
