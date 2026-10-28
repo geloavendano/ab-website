@@ -222,6 +222,11 @@ h1, h2, h3, h4 { font-family: var(--font-display); color: var(--navy); margin: 0
 }
 .doodle use { filter: url(#ab-crayon); }
 .doodle--fine use { filter: url(#ab-wobble); }
+/* Hero doodles written stroke by stroke (ab-doodles-v3.js copies the paths
+   into a .ink group so each can have its own timing). */
+.doodle g.ink { filter: url(#ab-crayon); }
+.doodle--fine g.ink { filter: url(#ab-wobble); }
+.doodle.is-written path { stroke-dasharray: 1 1.1; }
 .doodle--inline { position: static; display: inline-block; vertical-align: middle; }
 
 /* Draw-in. stroke-dasharray/offset inherit into <use>, and every symbol path
@@ -421,7 +426,7 @@ a.card:hover .card__media img { transform: scale(1.04); }
   font: 500 .9688rem/1 var(--font-display); color: var(--navy); text-decoration: none;
 }
 .nav-link .doodle { left: 10%; bottom: -2px; width: 80%; height: 10px; stroke-width: 9; color: var(--pink-500); }
-.nav-link[aria-current="page"] .doodle use { stroke-dashoffset: 0; }
+.nav-link:is([aria-current="page"], .is-current) .doodle use { stroke-dashoffset: 0; }
 .site-header__actions { display: flex; align-items: center; gap: .6rem; }
 .lang { font: 600 .8125rem/1 var(--font-display); color: var(--navy); background: none; border: 0; padding: .5rem; cursor: pointer; letter-spacing: .04em; }
 .lang b { color: var(--teal-700); }
@@ -607,6 +612,7 @@ a.card:hover .card__media img { transform: scale(1.04); }
 .involve-grid .card:not(.card--attention) .card__body { padding: clamp(1.5rem, 3vw, 2.1rem); gap: .7rem; }
 .involve-grid p { margin: 0; color: var(--text-muted); }
 .event { margin-top: .5rem; padding: .9rem 1rem; border-radius: var(--r-md); background: var(--beige-100); }
+.event:empty { display: none; }
 .event b { display: block; font-family: var(--font-display); color: var(--navy); }
 
 /* Footer */
@@ -920,6 +926,10 @@ fieldset.field legend { font-family: var(--font-display); color: var(--navy); }
 .site-header__bar > * { flex-shrink: 0; }
 .site-nav { align-items: center; }
 .nav details { position: relative; }
+/* Advocacies: a link to the homepage fold on desktop, an expandable list in the phone menu. */
+.site-header .nav:not(.open) .nav-mobile, .site-header .nav.open .nav-desktop { display: none; }
+/* In-page jumps (e.g. index.html#advocacies) land below the fixed header. */
+main [id] { scroll-margin-top: calc(var(--header-h) + 8px); }
 .nav summary { list-style: none; cursor: pointer; }
 .nav summary::-webkit-details-marker { display: none; }
 .nav summary.nav-link::after { content: ""; display: inline-block; width: .4em; height: .4em; margin-left: .45em; vertical-align: .2em; border-right: 2px solid currentColor; border-bottom: 2px solid currentColor; transform: rotate(45deg); opacity: .6; }
@@ -930,7 +940,7 @@ fieldset.field legend { font-family: var(--font-display); color: var(--navy); }
 .nav details.menu-end .menu { left: auto; right: 0; }
 .nav .menu a { padding: .6rem .8rem; border-radius: 10px; color: var(--navy); text-decoration: none; font: 500 .9688rem/1.3 var(--font-display); }
 .nav .menu a:hover, .nav .menu a[aria-current="page"] { background: var(--beige-100); }
-.nav-link[aria-current="page"] .doodle use { stroke-dashoffset: 0; }
+.nav-link:is([aria-current="page"], .is-current) .doodle use { stroke-dashoffset: 0; }
 .nav details[open] > summary .doodle use { stroke-dashoffset: 0; }
 .lang-switch { display: inline-flex; padding: 3px; border-radius: 999px; background: rgba(255, 255, 255, .5); box-shadow: inset 0 0 0 1px rgba(36, 67, 90, .15); }
 .lang-switch button { border: 0; background: none; padding: .35rem .6rem; border-radius: 999px; cursor: pointer; font: 600 .75rem/1 var(--font-display); letter-spacing: .04em; color: var(--navy); }

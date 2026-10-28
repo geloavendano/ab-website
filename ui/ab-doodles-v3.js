@@ -22,6 +22,26 @@
       "M48 34 C 120 25, 200 24, 262 30"]],
     "underline-single": ["0 0 300 24", [
       "M4 16 C 60 6, 140 4, 210 10 C 244 13, 272 18, 296 12"]],
+    // Underline variants. Lines share underline-single's 300×24 box, scribbles
+    // share underline's 300×40 box, so any variant drops into the same slot.
+    "underline-wave": ["0 0 300 24", [
+      "M4 14 C 30 6, 52 21, 80 14 C 108 7, 128 21, 156 14 C 184 7, 204 21, 232 14 C 258 8, 278 17, 296 12"]],
+    "underline-hook": ["0 0 300 24", [
+      "M4 16 C 70 10, 150 9, 232 12 C 260 13, 280 15, 288 9 C 292 3, 278 3, 278 10 C 278 17, 290 20, 298 17"]],
+    "underline-return": ["0 0 300 24", [
+      "M6 11 C 90 7, 190 7, 292 10 C 200 14, 110 16, 22 20"]],
+    "underline-rise": ["0 0 300 24", [
+      "M6 21 C 80 18, 170 13, 294 5"]],
+    "underline-dip": ["0 0 300 24", [
+      "M4 6 C 70 22, 230 22, 296 7"]],
+    "underline-zig": ["0 0 300 24", [
+      "M4 14 L 40 7 L 76 18 L 112 7 L 148 18 L 184 7 L 220 18 L 256 7 L 296 13"]],
+    "underline-loop": ["0 0 300 40", [
+      "M6 26 C 80 19, 160 17, 228 21 C 262 23, 288 19, 282 10 C 276 2, 250 12, 262 25 C 270 35, 290 33, 296 28"]],
+    "underline-scrawl": ["0 0 300 40", [
+      "M8 16 C 100 11, 200 11, 292 15 C 200 20, 100 22, 16 26 C 100 26, 200 27, 288 31"]],
+    "underline-swash": ["0 0 300 40", [
+      "M6 32 C 90 28, 200 23, 294 9", "M60 37 C 130 34, 200 31, 262 25"]],
     "rays": ["0 0 100 70", [
       "M14 62 L 4 42", "M34 46 L 28 12", "M58 44 L 66 8", "M80 60 L 96 42"]],
     "crown": ["0 0 120 80", [
@@ -117,19 +137,104 @@
       head.classList.toggle("is-menu-open", toggle.getAttribute("aria-expanded") === "true"));
   }
 
+  /* Top-fold doodles are written one at a time, stroke by stroke, like a pen
+   * on paper. A <use> keeps its paths in a shadow tree that CSS can't time
+   * separately, so each doodle's paths are copied in place, then animated with
+   * the Web Animations API: duration follows the stroke's on-screen length,
+   * with a short pen lift between strokes and a longer one between doodles.
+   * Order: data-seq (lowest first), then document order. */
+  const PEN_SPEED = 850;                 // px per second along the stroke
+  const STROKE_MS = [160, 950];          // clamp: tiny ticks still visible, long swoops not sluggish
+  const LIFT_MS = 70, NEXT_MS = 170, START_MS = 350;
+
+  function writeHeroDoodles(hero) {
+    const marks = [...hero.querySelectorAll(".doodle--draw")]
+      .filter(svg => svg.getClientRects().length)          // skip ones hidden at this screen size
+      .sort((a, b) => (+a.dataset.seq || 999) - (+b.dataset.seq || 999));
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      marks.forEach(svg => svg.classList.add("is-drawn"));
+      return;
+    }
+    let at = START_MS;
+    marks.forEach(svg => {
+      const use = svg.querySelector("use");
+      const symbol = use && document.getElementById(use.getAttribute("href").split("#")[1]);
+      if (!symbol) return;
+      const ink = document.createElementNS(NS, "g");
+      ink.setAttribute("class", "ink");
+      symbol.querySelectorAll("path").forEach(p => ink.appendChild(p.cloneNode()));
+      use.replaceWith(ink);
+      svg.classList.add("is-written");
+      // viewBox units → screen pixels (doodles stretch, so average both axes)
+      const box = svg.getBoundingClientRect(), vb = svg.viewBox.baseVal;
+      const scale = (box.width / vb.width + box.height / vb.height) / 2;
+      [...ink.children].forEach(path => {
+        const ms = Math.min(STROKE_MS[1], Math.max(STROKE_MS[0], path.getTotalLength() * scale / PEN_SPEED * 1000));
+        path.animate([{ strokeDashoffset: 1.05 }, { strokeDashoffset: 0 }],
+          { duration: ms, delay: at, easing: "cubic-bezier(.5, .05, .35, 1)", fill: "both" });
+        at += ms + LIFT_MS;
+      });
+      at += NEXT_MS;
+    });
+  }
+
+  /* Underlines vary across the site. Markup always says "underline-single"
+   * (lines) or "underline" (section-title scribbles); this swaps each one for
+   * a variant of the same family, cycling in page order from an offset picked
+   * by the page name. Neighbours always differ, and a page looks the same on
+   * every visit. The video progress line keeps its shape (track and fill must
+   * match). */
+  const UNDERLINES = {
+    "underline-single": ["underline-single", "underline-wave", "underline-hook", "underline-return", "underline-rise", "underline-dip", "underline-zig"],
+    "underline": ["underline", "underline-loop", "underline-scrawl", "underline-swash"]
+  };
+  const pageSeed = [...(document.body.dataset.page || location.pathname)].reduce((n, c) => n + c.charCodeAt(0), 0);
+  const used = { "underline-single": 0, "underline": 0 };
+
+  // Header nav items keep one shape on every page, so the line you hover is
+  // the line that marks the page once you're there. Keyed by label, so the
+  // desktop "Advocacies" link and its phone-menu twin match.
+  const navLabels = [];
+  const navShape = (link) => {
+    const label = link.textContent.trim();
+    if (!navLabels.includes(label)) navLabels.push(label);
+    return UNDERLINES["underline-single"][navLabels.indexOf(label) % UNDERLINES["underline-single"].length];
+  };
+
+  function varyUnderlines(root) {
+    root.querySelectorAll("svg.doodle:not(.progress) use").forEach(use => {
+      const [path, id] = use.getAttribute("href").split("#d-");
+      const family = UNDERLINES[id];
+      if (!family || use.dataset.varied) return;
+      const navLink = use.closest(".site-header .nav-link");
+      const pick = navLink ? navShape(navLink) : family[(pageSeed + used[id]++) % family.length];
+      use.setAttribute("href", `${path}#d-${pick}`);
+      use.closest("svg").setAttribute("viewBox", SYMBOLS[pick][0]);
+      use.dataset.varied = "1";
+    });
+  }
+
   function boot() {
     // A <base> element (404.html sets one so its links work at any URL depth)
     // makes "#d-…" resolve against the base URL, i.e. another document.
     // Point every doodle at this document explicitly.
+    // (Runs after enhance() and varyUnderlines(), which add and change references.)
+    enhance();
+    varyUnderlines(document);
     if (document.querySelector("base[href]")) {
       const here = location.pathname + location.search;
       document.querySelectorAll('use[href^="#"]').forEach(u => u.setAttribute("href", here + u.getAttribute("href")));
     }
-    enhance();
+    const main = document.querySelector("main");
+    if (main && "MutationObserver" in window) new MutationObserver(records => records.forEach(r =>
+      r.addedNodes.forEach(n => n.nodeType === 1 && varyUnderlines(n)))).observe(main, { childList: true, subtree: true });
 
     /* Draw doodles in when they scroll into view. Without JS or with reduced
      * motion they are simply shown (see .doodle--draw in the CSS). */
-    const drawables = document.querySelectorAll(".doodle--draw");
+    const hero = document.querySelector("main .hero");
+    if (hero) writeHeroDoodles(hero);
+    // Everything else draws in as it scrolls into view.
+    const drawables = [...document.querySelectorAll(".doodle--draw")].filter(el => !(hero && hero.contains(el)));
     if ("IntersectionObserver" in window) {
       const io = new IntersectionObserver(entries => {
         entries.forEach(e => {

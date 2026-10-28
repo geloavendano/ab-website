@@ -194,7 +194,10 @@
   /* ------------------------------------------------------------------
    * Chrome: header, footer, prototype toolbar
    * ------------------------------------------------------------------ */
-  const NAV_CURRENT = { stories: "stories.html", story: "stories.html", presence: "presence.html", about: "about.html", donate: "donate.html" };
+  const NAV_CURRENT = { stories: "stories.html", story: "stories.html", presence: "presence.html", about: "about.html", donate: "donate.html",
+    advocacy: "index.html#advocacies", project: "index.html#advocacies" };
+  /** Pages that live under the "Get involved" menu (its heading shows as current there). */
+  const INVOLVED_PAGES = ["involved", "donate", "volunteer", "fundraisers", "resources"];
 
   function header(page) {
     const cur = NAV_CURRENT[page];
@@ -208,12 +211,13 @@
       <a class="brand logo" href="index.html" aria-label="Angat Buhay home"><img class="brand-logo" src="assets/media/angat-buhay-logo.png" alt="Angat Buhay" width="82" height="46"></a>
       <nav id="nav" class="nav site-nav" aria-label="Main">
         ${top("stories.html", "Stories")}
-        <details><summary class="nav-link">${t("Advocacies")}${line}</summary><div class="menu">
+        <a class="nav-link nav-desktop" href="index.html#advocacies"${cur === "index.html#advocacies" ? ' aria-current="page"' : ""}>${esc(t("Advocacies"))}${line}</a>
+        <details class="nav-mobile"><summary class="nav-link${cur === "index.html#advocacies" ? " is-current" : ""}">${t("Advocacies")}${line}</summary><div class="menu">
           ${D.pillars.map((p) => `<a href="advocacy.html?p=${p.slug}">${esc(p.name)}</a>`).join("")}
         </div></details>
         ${top("presence.html", "Presence")}
         ${top("about.html", "About")}
-        <details class="menu-end"><summary class="nav-link">${t("Get involved")}${line}</summary><div class="menu">
+        <details class="menu-end"><summary class="nav-link${INVOLVED_PAGES.includes(page) ? " is-current" : ""}">${t("Get involved")}${line}</summary><div class="menu">
           ${a("involved.html", "Ways to help")}
           ${a("donate.html", "Donate")}
           ${a("volunteer.html", "Volunteer")}
@@ -364,7 +368,6 @@
       ${doodle("doodle--draw doodle--fine c-white hide-tablet", "sparkle", "0 0 100 100", "--delay:1s; top:40%; right:14%; width:30px; height:30px; stroke-width:9")}
       <div class="wrap hero__inner">
         <div class="hero__copy">
-          <p class="hand c-yellow">${t("Featured story")}</p>
           <${headingTag} class="display" id="featured-title">${esc(s.title)}</${headingTag}>
           <p class="lede">${esc(s.subheading)}</p>
           <div class="hero__ctas"><a class="btn btn--white btn--lg" href="${linkHref || "story.html?s=" + s.slug}"><span class="play">${PLAY_ICON}</span>${esc(t(linkLabel))}</a></div>
@@ -413,6 +416,17 @@
     </a>`;
   }
 
+  /**
+   * Which fundraiser the homepage "Join a fundraiser" card promotes as "Next up".
+   *
+   * list   D.fundraisers: { name, date (display text), startDate ("YYYY-MM-DD"), … }
+   * today  Date (NOW)
+   * Return one fundraiser object, or null to hide the "Next up" box.
+   */
+  function nextFundraiser(list, today) {
+    // TODO(human)
+  }
+
   pages.home = () => {
     const version = document.body.dataset.version;
     if (!version) {
@@ -427,7 +441,7 @@
       const latest = listedStories().filter((s) => s.image && s !== f).slice(0, 4);
       fill("latest", latest.length ? storyCard(latest[0], "is-feature") + `<div class="story-stack">${latest.slice(1).map((s) => storyCard(s, "is-row")).join("")}</div>` : "");
       fill("home-regions", D.areas.filter((a) => a.type === "region").map((r) => `<li>${esc(r.name)}</li>`).join(""));
-      const next = D.fundraisers[0];
+      const next = nextFundraiser(D.fundraisers, NOW);
       if (next) fill("next-fundraiser", `<span class="small muted">Next up · ${esc(next.date)}</span><b>${esc(next.name)}</b>`);
       return;
     }
@@ -537,7 +551,6 @@
       <a class="back" href="stories.html">All stories</a>
       ${isListedInFeed(s, NOW) ? "" : `<div class="banner">Status: ${esc(s.status)}. This story is hidden from public listings. In production, a direct link would follow the archived/draft URL rule.</div>`}
       <div class="article">
-        <span class="eyebrow">${FORMAT_LABEL[s.format]}${p ? " · " + esc(p.name) : ""}</span>
         <h1>${esc(s.title)}${sampleTag(s)}</h1>
         <p class="lede">${esc(s.subheading)}</p>
       </div>
@@ -545,6 +558,7 @@
       <div class="article">
         <div class="meta-row">
           <span>Published <b>${fmtDate(s.publishedAt)}</b></span>
+          <span>Format <b>${FORMAT_LABEL[s.format]}</b></span>
           <span>By <b>${esc(s.author)}</b></span>
           ${p ? `<span>Advocacy <a href="advocacy.html?p=${p.slug}"><b>${esc(p.name)}</b></a></span>` : ""}
           ${pr ? `<span>Project <a href="project.html?id=${pr.id}"><b>${esc(pr.title)}</b></a></span>` : ""}
@@ -570,7 +584,7 @@
   pages.advocacy = () => {
     const p = pillarBy(param("p")) || D.pillars[0];
     document.title = p.name + " · Angat Buhay";
-    fill("pillar-hero", `<span class="eyebrow">Advocacy</span><h1>${esc(p.name)}</h1><p class="lede">${esc(p.description)}</p>${img(p.image, "", "r-16x9 wide", "pillar hero photo / short video loop")}`);
+    fill("pillar-hero", `<h1>${esc(p.name)}</h1><p class="lede">${esc(p.description)}</p>${img(p.image, "", "r-16x9 wide", "pillar hero photo / short video loop")}`);
     fill("pillar-stats", statsBlock(D.impactStats.filter((s) => s.pillar === p.slug)));
     const projs = D.projects.filter((x) => x.pillar === p.slug && x.status === "published");
     fill("pillar-projects", projs.map(projectCard).join("") || `<p class="muted">No projects yet.</p>`);
@@ -594,7 +608,6 @@
     const body = `Project: ${pr.title}\nOrganization / LGU:\nProvince and city/municipality:\nContact person, role and mobile number:\nWhat you would like to achieve:\nPreferred start (month/year):\n`;
     const mail = `mailto:${D.org.partnershipsEmail}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
     return `<section class="section" id="participate">
-      <span class="eyebrow">For LGUs, schools and community groups</span>
       <h2>Bring this project to your community${PH_TAG}</h2>
       <dl class="kv">
         <dt>Availability</dt><dd><span class="status ${part.status === "open" ? "published" : part.status === "waitlist" ? "scheduled" : "draft"}">${STATUS[part.status]}</span> ${esc(part.label)}</dd>
@@ -629,7 +642,6 @@
     const stories = listedStories().filter((s) => s.project === pr.id);
     fill("project", `
       <a class="back" href="advocacy.html?p=${p.slug}">${esc(p.name)}</a>
-      <span class="eyebrow">Project · ${esc(p.name)}</span>
       <h1>${esc(pr.title)}</h1>
       <p class="lede">${esc(pr.summary)}</p>
       <dl class="kv">

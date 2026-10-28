@@ -351,11 +351,12 @@ window.AB = {
 
   /* ---------- Fundraiser ---------- */
   fundraisers: [
-    { slug: "angat-buhay-makati", name: "Angat Buhay Makati", date: "15 November 2026", location: "Makati City", placeholder: true,
+    { slug: "angat-buhay-makati", name: "Angat Buhay Makati", date: "15 November 2026", startDate: "2026-11-15", location: "Makati City", placeholder: true,
       description: "An evening of performances and stories from our programs. Ticket sales fund Bayan Ko, Titser Ko literacy sites for the 2027 school year." },
-    { slug: "angat-buhay-run-naga", name: "Angat Buhay Run Naga", date: "7 February 2027", location: "Naga City", placeholder: true,
+    { slug: "angat-buhay-run-naga", name: "Angat Buhay Run Naga", date: "7 February 2027", startDate: "2027-02-07", location: "Naga City", placeholder: true,
       description: "3K, 5K and 10K categories. Registration includes a race kit; proceeds support school-based feeding in Camarines Sur." },
-    { slug: "alab", name: "ALAB", date: "March 2027", location: "Metro Manila venue to be announced", placeholder: true,
+    { slug: "alab", name: "ALAB", date: "March 2027", startDate: "2027-03-01", // day not set yet
+      location: "Metro Manila venue to be announced", placeholder: true,
       description: "An art sale featuring Angat Sining fellows and established artists. Proceeds fund the next Angat Sining fellowship cycle." }
   ],
 
