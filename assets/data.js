@@ -47,7 +47,7 @@ window.AB = {
     ]
   },
 
-  /* ---------- AdvocacyPillar ---------- */
+  /* ---------- Pillar (CMS collection AdvocacyPillar) ---------- */
   pillars: [
     { slug: "public-education", image: "2024/09/Day-7_Don-Abella-CS-12-1024x683.jpg", name: "Public Education",
       tagline: "Championing accessible and inclusive quality education for every Filipino",
@@ -68,34 +68,34 @@ window.AB = {
 
   /* ---------- Area (PSGC hierarchy: region > province > city/municipality) ---------- */
   areas: [
-    { id: "ncr", name: "National Capital Region", type: "region", parent: null },
+    { id: "ncr", name: "National Capital Region", type: "region", psgc: 1300000000, parent: null },
     { id: "makati", name: "Makati City", type: "city", parent: "ncr" },
     { id: "quezon-city", name: "Quezon City", type: "city", parent: "ncr" },
 
-    { id: "r5", name: "Bicol Region (Region V)", type: "region", parent: null },
-    { id: "camarines-sur", name: "Camarines Sur", type: "province", parent: "r5" },
+    { id: "r5", name: "Bicol Region (Region V)", type: "region", psgc: 500000000, parent: null },
+    { id: "camarines-sur", name: "Camarines Sur", type: "province", psgc: 501700000, parent: "r5" },
     { id: "naga", name: "Naga City", type: "city", parent: "camarines-sur" },
-    { id: "albay", name: "Albay", type: "province", parent: "r5" },
+    { id: "albay", name: "Albay", type: "province", psgc: 500500000, parent: "r5" },
     { id: "legazpi", name: "Legazpi City", type: "city", parent: "albay" },
-    { id: "catanduanes", name: "Catanduanes", type: "province", parent: "r5" },
-    { id: "sorsogon", name: "Sorsogon", type: "province", parent: "r5" },
+    { id: "catanduanes", name: "Catanduanes", type: "province", psgc: 502000000, parent: "r5" },
+    { id: "sorsogon", name: "Sorsogon", type: "province", psgc: 506200000, parent: "r5" },
 
-    { id: "r4b", name: "MIMAROPA Region", type: "region", parent: null },
-    { id: "palawan", name: "Palawan", type: "province", parent: "r4b" },
+    { id: "r4b", name: "MIMAROPA Region", type: "region", psgc: 1700000000, parent: null },
+    { id: "palawan", name: "Palawan", type: "province", psgc: 1705300000, parent: "r4b" },
 
-    { id: "r6", name: "Western Visayas (Region VI)", type: "region", parent: null },
-    { id: "iloilo", name: "Iloilo", type: "province", parent: "r6" },
+    { id: "r6", name: "Western Visayas (Region VI)", type: "region", psgc: 600000000, parent: null },
+    { id: "iloilo", name: "Iloilo", type: "province", psgc: 603000000, parent: "r6" },
     { id: "ajuy", name: "Ajuy", type: "municipality", parent: "iloilo" },
     { id: "concepcion", name: "Concepcion", type: "municipality", parent: "iloilo" },
     { id: "carles", name: "Carles", type: "municipality", parent: "iloilo" },
     { id: "cabatuan", name: "Cabatuan", type: "municipality", parent: "iloilo" },
 
-    { id: "r7", name: "Central Visayas (Region VII)", type: "region", parent: null },
-    { id: "cebu", name: "Cebu", type: "province", parent: "r7" },
+    { id: "r7", name: "Central Visayas (Region VII)", type: "region", psgc: 700000000, parent: null },
+    { id: "cebu", name: "Cebu", type: "province", psgc: 702200000, parent: "r7" },
     { id: "liloan", name: "Liloan", type: "municipality", parent: "cebu" },
 
-    { id: "r11", name: "Davao Region (Region XI)", type: "region", parent: null },
-    { id: "davao-del-sur", name: "Davao del Sur", type: "province", parent: "r11" }
+    { id: "r11", name: "Davao Region (Region XI)", type: "region", psgc: 1100000000, parent: null },
+    { id: "davao-del-sur", name: "Davao del Sur", type: "province", psgc: 1102400000, parent: "r11" }
   ],
 
   /* ---------- Project (implementation dates ≠ publish dates) ---------- */
@@ -306,7 +306,7 @@ window.AB = {
    * Board: officers first, then trustees (list from Angat Buhay, Oct 2026).
    * Secretariat: the Executive Director, then filled positions on the Oct 2026
    * org chart, top-down. Vacant positions are left out. photo: null shows an
-   * initials avatar until a photo is supplied. pillar: shows the person under "The team" on that advocacy page.
+   * initials avatar until a photo is supplied. pillar: shows the person under "The team" on that pillar page.
    * Remote photo paths are relative to media.base; "assets/…" paths are local. */
   team: {
     trustees: [
@@ -350,6 +350,37 @@ window.AB = {
   ],
 
   /* ---------- Fundraiser ---------- */
+  /* ---------- Promo (bottom sheet) ----------
+   * Campaigns the organization wants to push for a while. The first published promo whose
+   * date window includes today and whose `pages` include the current page is shown.
+   *   layout  "image-text" | "image" (the picture is the link; imageAlt required) | "html"
+   *   html    staff-authored markup for layout "html" (sanitised by the CMS in production)
+   *   link    { href, label }: any page on this site or elsewhere
+   *   pages   page keys (body data-page) or ["all"]
+   *   peek    short line for the minimised bar (falls back to title)
+   * Add ?promo=<id> to any page to preview a promo regardless of status, dates and pages. */
+  promos: [
+    { id: "christmas-cards-2026", status: "published", start: "2026-11-15", end: "2026-12-25", pages: ["home"],
+      layout: "image-text",
+      title: "Send an Angat Buhay Christmas card",
+      body: "Write a card, give from ₱99, and we'll email it to your loved one on the day you choose.",
+      peek: "Christmas cards: give from ₱99",
+      image: "https://angatbuhay.ph/christmas/assets/photos/commun.jpg", imageAlt: "Community members singing together at an Angat Buhay event",
+      link: { href: "https://angatbuhay.ph/christmas", label: "Send a card" } },
+    { id: "sample-image-only", status: "draft", sample: true, start: "2026-01-01", end: "2027-12-31", pages: ["all"],
+      layout: "image",
+      title: "Angat Buhay Run Naga",
+      peek: "Run Naga: registration open",
+      image: "2024/09/Day-7_Don-Abella-CS-60-1024x683.jpg", imageAlt: "Angat Buhay Run Naga, 7 February 2027. Register now.",
+      link: { href: "fundraisers.html", label: "See fundraisers" } },
+    { id: "sample-html", status: "draft", sample: true, start: "2026-01-01", end: "2027-12-31", pages: ["all"],
+      layout: "html",
+      title: "Typhoon relief",
+      peek: "Typhoon relief: how to help",
+      html: "<h3>Typhoon relief is under way</h3><p>Volunteers in <b>Catanduanes</b> and <b>Cebu</b> are packing relief goods this week.</p><ul><li>Donate by GCash or bank transfer</li><li>Volunteer at a packing site</li></ul>",
+      link: { href: "donate.html", label: "Donate to relief" } }
+  ],
+
   fundraisers: [
     { slug: "angat-buhay-makati", name: "Angat Buhay Makati", date: "15 November 2026", startDate: "2026-11-15", location: "Makati City", placeholder: true,
       description: "An evening of performances and stories from our programs. Ticket sales fund Bayan Ko, Titser Ko literacy sites for the 2027 school year." },

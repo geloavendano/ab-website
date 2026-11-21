@@ -106,17 +106,17 @@
    * translation. In production each CMS field is localised (en, fil).
    * ------------------------------------------------------------------ */
   const FIL = {
-    "Skip to content": "Lumaktaw sa nilalaman", "Stories": "Mga Kuwento", "Advocacies": "Mga Adbokasiya",
+    "Skip to content": "Lumaktaw sa nilalaman", "Stories": "Mga Kuwento", "Pillars": "Mga Haligi",
     "Presence": "Saan Kami Naroroon", "About": "Tungkol sa Amin", "Get involved": "Makilahok", "Ways to help": "Mga paraan para tumulong",
     "Donate": "Mag-donate", "Volunteer": "Mag-volunteer", "Fundraisers": "Mga Fundraiser", "Partner with us": "Makipag-partner sa amin",
     "Reports & resources": "Mga ulat at resources", "Explore": "Tuklasin", "Contact": "Makipag-ugnayan", "About us": "Tungkol sa amin",
     "Privacy notice": "Abiso sa privacy", "Staff login": "Login ng staff", "Prototype guide": "Gabay sa prototype",
     "Featured story": "Tampok na kuwento", "Watch more": "Manood pa", "About Angat Buhay": "Tungkol sa Angat Buhay",
     "See where we work": "Tingnan kung saan kami naroroon", "Stories of impact": "Mga kuwento ng pagbabago", "Our impact so far": "Ang aming nagawa sa ngayon", "All stories": "Lahat ng kuwento",
-    "Be involved": "Makilahok", "More impact": "Higit pang pagbabago", "Advocacy": "Adbokasiya", "Region": "Rehiyon",
+    "Be involved": "Makilahok", "More impact": "Higit pang pagbabago", "Pillar": "Haligi", "Region": "Rehiyon",
     "Sort by": "Ayusin ayon sa", "Search": "Maghanap", "Clear": "I-clear", "Load more": "Magpakita pa", "Projects": "Mga Proyekto",
     "Impact": "Epekto", "The team": "Ang aming team", "Meet the rest of the team": "Kilalanin ang buong team",
-    "Support this advocacy": "Suportahan ang adbokasiyang ito", "Other advocacies": "Iba pang adbokasiya", "See other stories": "Iba pang kuwento",
+    "Support this pillar": "Suportahan ang haliging ito", "Other pillars": "Iba pang haligi", "See other stories": "Iba pang kuwento",
     "Mission": "Misyon", "Vision": "Bisyon", "Core values": "Mga pangunahing pagpapahalaga", "Certifications": "Mga sertipikasyon",
     "Where we work": "Saan kami naroroon", "Regions and provinces": "Mga rehiyon at probinsya", "Choose how to give": "Piliin kung paano magbigay",
     "How to give": "Paano magbigay", "After you donate": "Pagkatapos mong mag-donate", "Other ways to give": "Iba pang paraan ng pagbibigay",
@@ -169,7 +169,7 @@
     </article>`;
   }
 
-  /** Advocacy card: portrait photo, pillar-coloured underline on hover. */
+  /** Pillar card: portrait photo, pillar-coloured underline on hover. */
   const pillarCard = (p) => `<a class="card card--pillar" href="advocacy.html?p=${esc(p.slug)}" style="${pillarStyle(p.slug)}">
       <div class="card__media"><img src="${esc(M(p.image))}" alt="" loading="lazy" decoding="async"></div>
       <div class="card__body"><h3 class="h3 card__title">${esc(p.name)}${HOVER_LINE}</h3><p>${esc(p.tagline)}</p></div>
@@ -195,7 +195,7 @@
    * Chrome: header, footer, prototype toolbar
    * ------------------------------------------------------------------ */
   const NAV_CURRENT = { stories: "stories.html", story: "stories.html", presence: "presence.html", about: "about.html", donate: "donate.html",
-    advocacy: "index.html#advocacies", project: "index.html#advocacies" };
+    advocacy: "index.html#pillars", project: "index.html#pillars" };
   /** Pages that live under the "Get involved" menu (its heading shows as current there). */
   const INVOLVED_PAGES = ["involved", "donate", "volunteer", "fundraisers", "resources"];
 
@@ -208,11 +208,13 @@
     const langs = langBtn("en", "EN", "English") + langBtn("fil", "FIL", "Filipino");
     return `<a class="skip" href="#main">${t("Skip to content")}</a>
     <header class="site-header" data-header><div class="wrap site-header__bar">
-      <a class="brand logo" href="index.html" aria-label="Angat Buhay home"><img class="brand-logo" src="assets/media/angat-buhay-logo.png" alt="Angat Buhay" width="82" height="46"></a>
+      <a class="brand logo" href="index.html" aria-label="Angat Buhay home"${page === "home" ? ' aria-current="page"' : ""}><img class="brand-logo" src="assets/media/angat-buhay-logo.png" alt="Angat Buhay" width="82" height="46">${
+        // Home has no nav item of its own, so the logo carries the "you are here" mark: a hand-drawn circle.
+        page === "home" ? doodle("doodle--draw brand-circle c-yellow", "encircle", "0 0 300 120") : ""}</a>
       <nav id="nav" class="nav site-nav" aria-label="Main">
         ${top("stories.html", "Stories")}
-        <a class="nav-link nav-desktop" href="index.html#advocacies"${cur === "index.html#advocacies" ? ' aria-current="page"' : ""}>${esc(t("Advocacies"))}${line}</a>
-        <details class="nav-mobile"><summary class="nav-link${cur === "index.html#advocacies" ? " is-current" : ""}">${t("Advocacies")}${line}</summary><div class="menu">
+        <a class="nav-link nav-desktop" href="index.html#pillars"${cur === "index.html#pillars" ? ' aria-current="page"' : ""}>${esc(t("Pillars"))}${line}</a>
+        <details class="nav-mobile"><summary class="nav-link${cur === "index.html#pillars" ? " is-current" : ""}">${t("Pillars")}${line}</summary><div class="menu">
           ${D.pillars.map((p) => `<a href="advocacy.html?p=${p.slug}">${esc(p.name)}</a>`).join("")}
         </div></details>
         ${top("presence.html", "Presence")}
@@ -266,7 +268,7 @@
       </div>
       <p class="footer-accred">${esc(o.accreditation)} Operating with DSWD Solicitation Permit No. ${esc(o.solicitationPermit)}.</p>
       <div class="footer-legal"><span>© ${NOW.getFullYear()} ${esc(o.legalName)}. All rights reserved.</span>
-        <span class="socials"><a href="privacy.html">${t("Privacy notice")}</a><a href="admin/index.html">${t("Staff login")}</a><a href="sitemap.html">${t("Prototype guide")}</a></span></div>
+        <span class="socials"><a href="privacy.html">${t("Privacy notice")}</a></span></div>
     </div></footer>`;
   }
 
@@ -434,13 +436,14 @@
       const f = listedStories().find((x) => x.featured) || listedStories()[0];
       const now = $("#now-playing");
       if (f && now) { now.href = "story.html?s=" + f.slug; fill("now-title", esc(f.title)); fill("now-sub", esc(f.subheading)); }
-      fill("pillars", D.pillars.map(pillarCard).join(""));
+      fill("pillar-cards", D.pillars.map(pillarCard).join(""));
       // Headline figure per pillar: the first impact stat listed for each, in pillar order.
       fill("home-stats", statsBlock(D.pillars.map((p) => D.impactStats.find((s) => s.pillar === p.slug)).filter(Boolean)));
       // The hero already plays the featured story, so "More impact" starts after it.
       const latest = listedStories().filter((s) => s.image && s !== f).slice(0, 4);
       fill("latest", latest.length ? storyCard(latest[0], "is-feature") + `<div class="story-stack">${latest.slice(1).map((s) => storyCard(s, "is-row")).join("")}</div>` : "");
-      fill("home-regions", D.areas.filter((a) => a.type === "region").map((r) => `<li>${esc(r.name)}</li>`).join(""));
+      const homeMap = presenceMap({ host: $("#home-map"), card: $("#home-map-card"), rows: presenceRows() });
+      if (homeMap) homeMap.update("");
       const next = nextFundraiser(D.fundraisers, NOW);
       if (next) fill("next-fundraiser", `<span class="small muted">Next up · ${esc(next.date)}</span><b>${esc(next.name)}</b>`);
       return;
@@ -458,8 +461,9 @@
       format: param("format") || "", sort: param("sort") || "newest", q: param("q") || "", shown: PAGE
     };
 
-    // Filter controls
-    $("#f-pillar").innerHTML = `<option value="">All advocacies</option>` + D.pillars.map((p) => `<option value="${p.slug}">${esc(p.name)}</option>`).join("");
+    // Filter controls (they filter live; Enter in the search box must not submit the form)
+    $(".filters").addEventListener("submit", (e) => e.preventDefault());
+    $("#f-pillar").innerHTML = `<option value="">All pillars</option>` + D.pillars.map((p) => `<option value="${p.slug}">${esc(p.name)}</option>`).join("");
     const regions = D.areas.filter((a) => a.type === "region");
     $("#f-region").innerHTML = `<option value="">All regions</option>` + regions.map((r) =>
       `<optgroup label="${esc(r.name)}"><option value="${r.id}">All of ${esc(r.name)}</option>${
@@ -560,7 +564,7 @@
           <span>Published <b>${fmtDate(s.publishedAt)}</b></span>
           <span>Format <b>${FORMAT_LABEL[s.format]}</b></span>
           <span>By <b>${esc(s.author)}</b></span>
-          ${p ? `<span>Advocacy <a href="advocacy.html?p=${p.slug}"><b>${esc(p.name)}</b></a></span>` : ""}
+          ${p ? `<span>Pillar <a href="advocacy.html?p=${p.slug}"><b>${esc(p.name)}</b></a></span>` : ""}
           ${pr ? `<span>Project <a href="project.html?id=${pr.id}"><b>${esc(pr.title)}</b></a></span>` : ""}
           <span>Where <b>${esc(s.areas.map(areaLabel).join("; "))}</b></span>
         </div>
@@ -631,7 +635,7 @@
           <b>${lead ? esc(lead.name) : "Partnerships team"}</b><div class="small muted">${lead ? esc(lead.role) : ""} · <a href="mailto:${D.org.partnershipsEmail}">${D.org.partnershipsEmail}</a></div></div>
         <a class="btn solid" href="${mail}">${part.status === "closed" ? "Ask about similar programs" : "Inquire about this project"}</a>
       </div>
-      <div class="note">Availability, eligibility and contact are CMS fields on each project, so LGUs can see whether they can join before writing in. The contact is the advocacy's program lead from the Team collection; the assignment is a placeholder.</div>
+      <div class="note">Availability, eligibility and contact are CMS fields on each project, so LGUs can see whether they can join before writing in. The contact is the pillar's program lead from the Team collection; the assignment is a placeholder.</div>
     </section>`;
   }
 
@@ -665,8 +669,9 @@
     `);
   };
 
-  pages.presence = () => {
-    // Bucket every tagged area to a "row": its province; NCR cities directly; else region-wide.
+  /** Bucket every tagged area into a "row": its province; NCR cities directly; else region-wide.
+   *  Shared by the Presence table, the Presence map and the homepage map. */
+  function presenceRows() {
     function rowKey(areaId) {
       const chain = ancestors(areaId);
       const prov = chain.find((a) => a.type === "province");
@@ -679,9 +684,13 @@
     D.projects.filter((p) => p.status === "published").forEach((p) => p.areas.forEach((a) => { const r = row(rowKey(a)); r.pillars.add(p.pillar); r.projects.add(p.id); }));
     listedStories().forEach((s) => s.areas.forEach((a) => row(rowKey(a)).pillars.add(s.pillar)));
     D.volunteerOrgs.forEach((o) => o.areas.forEach((a) => { const r = row(rowKey(a)); r.orgs.add(o.name); o.pillars.forEach((p) => r.pillars.add(p)); }));
+    return rows;
+  }
 
+  pages.presence = () => {
+    const rows = presenceRows();
     const sel = $("#presence-pillar");
-    sel.innerHTML = `<option value="">All advocacies</option>` + D.pillars.map((p) => `<option value="${p.slug}">${esc(p.name)}</option>`).join("");
+    sel.innerHTML = `<option value="">All pillars</option>` + D.pillars.map((p) => `<option value="${p.slug}">${esc(p.name)}</option>`).join("");
 
     function render() {
       const f = sel.value;
@@ -694,17 +703,134 @@
         provinces += rs.filter((r) => r.area.type !== "region").length;
         return `<tr class="region-row"><th colspan="4" scope="colgroup">${esc(reg.name)}</th></tr>` + rs.map((r) => `<tr id="${r.area.id}">
           <th scope="row">${r.area.type === "region" ? "Region-wide" : esc(r.area.name)}</th>
-          <td data-label="Advocacies"><div class="chips">${[...r.pillars].map((p) => `<a class="chip" href="advocacy.html?p=${p}">${esc(pillarBy(p).name)}</a>`).join("")}</div></td>
+          <td data-label="Pillars"><div class="chips">${[...r.pillars].map((p) => `<a class="chip" href="advocacy.html?p=${p}">${esc(pillarBy(p).name)}</a>`).join("")}</div></td>
           <td data-label="Projects">${[...r.projects].map((id) => `<a href="project.html?id=${id}">${esc(projectBy(id).title)}</a>`).join("<br>") || "—"}</td>
           <td data-label="Volunteer organizations">${[...r.orgs].map(esc).join("<br>") || "—"}</td>
         </tr>`).join("");
       }).join("");
-      $("#presence-table tbody").innerHTML = body || `<tr><td colspan="4">No areas for this advocacy yet.</td></tr>`;
+      $("#presence-table tbody").innerHTML = body || `<tr><td colspan="4">No areas for this pillar yet.</td></tr>`;
       $("#presence-count").textContent = `${provinces} provinces and cities listed`;
+      map && map.update(f);
     }
+    const map = presenceMap({ host: $("#ph-map"), card: $("#map-card"), rows, onPresencePage: true });
+    // The table's header row sticks just below the sticky filter bar, so it needs the bar's height.
+    const bar = $("#presence-bar");
+    const barHeight = () => document.documentElement.style.setProperty("--table-bar-h", bar.offsetHeight + "px");
+    barHeight(); addEventListener("resize", barHeight);
     sel.addEventListener("change", render);
     render();
+
+    // Arriving from the homepage map (presence.html#cebu): flash that province's row.
+    const target = location.hash && document.getElementById(location.hash.slice(1));
+    if (target && target.matches("#presence-table tr")) flashRow(target);
   };
+
+  function flashRow(tr) {
+    tr.scrollIntoView({ behavior: "smooth", block: "center" });
+    tr.classList.add("is-flash");
+    setTimeout(() => tr.classList.toggle("is-flash", false), 1600);
+  }
+
+  /* Province map (Presence hero and homepage panel). Shapes come from
+   * assets/ph-provinces.js (window.AB_MAP, PSGC-coded) and join our data by
+   * PSGC code: a province's own row, plus its region's "region-wide" row.
+   * Metro Manila's four districts act as one shape, matching the table's NCR rows.
+   * Hover previews a province; click (or Enter) pins it, so the card holds still
+   * while the pointer travels to its links. Leaving the map returns to the pin. */
+  function presenceMap({ host, card, rows, onPresencePage }) {
+    if (!host || !card || !window.AB_MAP) return null;
+    const NCR = 1300000000;
+    const regionArea = (code) => D.areas.find((a) => a.type === "region" && a.psgc === code);
+    const groups = {};
+    window.AB_MAP.provinces.forEach((f) => {
+      const key = f.region === NCR ? "ncr" : String(f.psgc);
+      if (groups[key]) return;
+      const reg = regionArea(f.region);
+      const regionName = reg ? reg.name : window.AB_MAP.regions[f.region] || "";
+      if (key === "ncr") {
+        const own = Object.values(rows).filter((r) => r.area && regionOf(r.area.id).id === "ncr");
+        groups[key] = { name: "Metro Manila", region: regionName, own, wide: null };
+      } else {
+        const prov = D.areas.find((a) => a.type === "province" && a.psgc === f.psgc);
+        groups[key] = { name: f.name, region: regionName, own: prov && rows[prov.id] ? [rows[prov.id]] : [], wide: reg ? rows[reg.id] || null : null };
+      }
+    });
+
+    let filter = "", pinned = null;
+    const ownFor = (g) => g.own.filter((r) => !filter || r.pillars.has(filter));
+    const wideFor = (g) => (g.wide && (!filter || g.wide.pillars.has(filter)) ? g.wide : null);
+    const stateOf = (g) => (ownFor(g).length ? "has" : wideFor(g) ? "region" : "none");
+    const chips = (set) => `<div class="chips">${[...set].map((p) => `<a class="chip" href="advocacy.html?p=${p}">${esc(pillarBy(p).name)}</a>`).join("")}</div>`;
+
+    host.innerHTML = `<svg class="ph-map__svg" viewBox="${window.AB_MAP.viewBox}" role="group" aria-label="Map of the Philippines by province">${
+      window.AB_MAP.provinces.map((f) => `<path d="${f.d}" data-key="${f.region === NCR ? "ncr" : f.psgc}"></path>`).join("")}</svg>`;
+    const paths = $$("path", host);
+
+    function intro() {
+      paths.forEach((p) => p.classList.toggle("is-hot", false));
+      const n = Object.values(groups).filter((g) => stateOf(g) === "has").length;
+      card.innerHTML = `<p class="map-card__hint">Point to a province to see the pillars, projects and volunteer organizations there. Click to keep it open.</p>
+        <p class="small muted" style="margin:0">${n} ${n === 1 ? "province has" : "provinces have"} programs${filter ? " in " + esc(pillarBy(filter).name) : ""}. Lighter areas have region-wide work.</p>`;
+    }
+
+    function show(key) {
+      const g = groups[key];
+      if (!g) return;
+      paths.forEach((p) => { p.classList.toggle("is-hot", p.dataset.key === key); p.classList.toggle("is-pinned", p.dataset.key === pinned); });
+      const own = ownFor(g), wide = wideFor(g);
+      const pillars = new Set(), projects = new Set(), orgs = new Set();
+      own.forEach((r) => { r.pillars.forEach((x) => pillars.add(x)); r.projects.forEach((x) => projects.add(x)); r.orgs.forEach((x) => orgs.add(x)); });
+      const rowId = own[0] && own[0].area.id;
+      const more = !own.length ? ""
+        : onPresencePage ? `<button class="link-arrow map-card__more" type="button" data-jump="${esc(key)}">See it in the table</button>`
+        : `<a class="link-arrow map-card__more" href="presence.html#${esc(rowId)}">See it on the Presence page</a>`;
+      card.innerHTML = `<h3 class="map-card__name">${esc(g.name)}</h3>${g.region ? `<p class="map-card__region">${esc(g.region)}</p>` : ""}
+        ${own.length ? `<dl class="map-card__facts">
+            <dt>Pillars</dt><dd>${chips(pillars)}</dd>
+            <dt>Projects</dt><dd>${[...projects].map((id) => `<a href="project.html?id=${id}">${esc(projectBy(id).title)}</a>`).join("<br>") || "—"}</dd>
+            <dt>Volunteer organizations</dt><dd>${[...orgs].map(esc).join("<br>") || "—"}</dd></dl>${more}`
+          : `${wide ? `<p class="small" style="margin:0 0 .35rem">Region-wide work across ${esc(g.region)}:</p>${chips(wide.pillars)}` : ""}
+             <p class="map-card__cta-text">No projects or volunteer organizations here yet. Help bring a program to ${esc(g.name)}.</p>
+             <a class="btn btn--primary btn--sm" href="involved.html#partner">Partner with us <span aria-hidden="true">→</span></a>`}`;
+    }
+
+    const pin = (key) => { pinned = pinned === key ? null : key; pinned ? show(pinned) : intro(); };
+    const jump = (key) => {
+      const r = groups[key] && ownFor(groups[key])[0];
+      const tr = r && document.getElementById(r.area.id);
+      if (tr) flashRow(tr);
+    };
+
+    host.addEventListener("mouseover", (e) => { const p = e.target.closest("path"); if (p) show(p.dataset.key); });
+    host.addEventListener("mouseleave", () => (pinned ? show(pinned) : intro()));
+    host.addEventListener("focusin", (e) => { const p = e.target.closest("path"); if (p) show(p.dataset.key); });
+    host.addEventListener("click", (e) => { const p = e.target.closest("path"); if (p) pin(p.dataset.key); });
+    host.addEventListener("keydown", (e) => {
+      const p = e.target.closest("path");
+      if (p && (e.key === "Enter" || e.key === " ")) { e.preventDefault(); pin(p.dataset.key); }
+    });
+    card.addEventListener("click", (e) => { const b = e.target.closest("[data-jump]"); if (b) jump(b.dataset.jump); });
+
+    const setAttrs = (el, on, attrs) => Object.entries(attrs).forEach(([k, v]) => (on ? el.setAttribute(k, v) : el.removeAttribute(k)));
+    const api = {
+      update(f) {
+        filter = f;
+        pinned = null;
+        const seen = new Set();
+        paths.forEach((p) => {
+          const g = groups[p.dataset.key], state = stateOf(g);
+          p.dataset.state = state;
+          // Keyboard: one tab stop per shape group that has work (Metro Manila is four paths).
+          // Every province still answers to the pointer.
+          const focusable = state !== "none" && !seen.has(p.dataset.key);
+          seen.add(p.dataset.key);
+          setAttrs(p, focusable, { tabindex: "0", role: "button", "aria-label": `${g.name}: show details` });
+        });
+        intro();
+      }
+    };
+    return api;
+  }
 
   pages.about = () => {
     fill("mission", esc(D.org.mission));
@@ -780,6 +906,73 @@ const ACCOUNT_PLACEHOLDER = { "BDO": "0000 000 0000", "BPI": "0000-0000-00", "BP
     fill("sitemap-projects", D.projects.map((p) => `<li><a href="project.html?id=${p.id}">${esc(p.title)}</a> <span class="muted small">(${esc(pillarBy(p.pillar).name)})</span></li>`).join(""));
   };
 
+  pages.placeholder = () => {
+    const what = param("what");
+    if (what) { $("#ph-what").textContent = what; document.title = what + " · Placeholder · Angat Buhay"; }
+    $("#ph-back").addEventListener("click", () => (history.length > 1 ? history.back() : (location.href = "index.html")));
+  };
+
+  pages.notfound = () => {
+    // Links resolve against the <base> the 404 page pins to the site root, so this works at any missing depth.
+    const form = $("#search404");
+    form.addEventListener("submit", (e) => { e.preventDefault(); location.href = "stories.html?q=" + encodeURIComponent(form.q.value); });
+  };
+
+  /* ------------------------------------------------------------------
+   * Promo bottom sheet (D.promos). Expanded the first time a promo is
+   * seen; once minimised it stays as a bar peeking at the bottom. The
+   * choice is remembered per promo in this browser only.
+   * ------------------------------------------------------------------ */
+  const isoDay = (d) => d.toLocaleDateString("en-CA"); // local YYYY-MM-DD (toISOString would give the UTC day)
+
+  function currentPromo(page) {
+    const forced = param("promo");
+    if (forced) return D.promos.find((p) => p.id === forced) || null;
+    const today = isoDay(NOW);
+    return D.promos.find((p) => p.status === "published" && p.start <= today && today <= p.end &&
+      (p.pages.includes("all") || p.pages.includes(page))) || null;
+  }
+
+  function promoSheet(p) {
+    const external = /^https?:/.test(p.link.href) ? ' target="_blank" rel="noopener"' : "";
+    const thumb = p.image ? `<img class="promo__thumb" src="${esc(M(p.image))}" alt="" width="40" height="40">` : "";
+    const content =
+      p.layout === "image" ? `<a class="promo__image-link" href="${esc(p.link.href)}"${external}><img src="${esc(M(p.image))}" alt="${esc(p.imageAlt)}"></a>`
+      : p.layout === "html" ? `<div class="promo__html">${p.html}</div>
+          <a class="btn btn--primary btn--sm" href="${esc(p.link.href)}"${external}>${esc(p.link.label)} <span aria-hidden="true">→</span></a>`
+      : `<div class="promo__media"><img src="${esc(M(p.image))}" alt="${esc(p.imageAlt || "")}"></div>
+          <div class="promo__text"><h2 class="promo__title">${esc(p.title)}</h2><p>${esc(p.body)}</p>
+          <a class="btn btn--primary btn--sm" href="${esc(p.link.href)}"${external}>${esc(p.link.label)} <span aria-hidden="true">→</span></a></div>`;
+    return `<aside class="promo promo--${p.layout}" id="promo" aria-label="${esc(p.title)}" data-promo="${esc(p.id)}">
+      <button class="promo__peek" type="button" aria-expanded="true" aria-controls="promo-body">
+        ${thumb}<span class="promo__peek-text">${esc(p.peek || p.title)}${sampleTag(p)}</span>
+        <svg class="promo__chev" viewBox="0 0 12 8" aria-hidden="true"><path d="M1.5 6.5 6 2l4.5 4.5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <span class="visually-hidden" data-promo-state>Minimise</span>
+      </button>
+      <div class="promo__body" id="promo-body">${content}</div>
+    </aside>`;
+  }
+
+  function wirePromo(page) {
+    const p = currentPromo(page);
+    if (!p) return;
+    document.body.insertAdjacentHTML("beforeend", promoSheet(p));
+    document.body.classList.add("has-promo");
+    const sheet = $("#promo"), btn = $(".promo__peek", sheet), state = $("[data-promo-state]", sheet);
+    const key = "ab-promo-" + p.id;
+    const set = (open, remember) => {
+      sheet.classList.toggle("is-min", !open);
+      btn.setAttribute("aria-expanded", String(open));
+      state.textContent = open ? "Minimise" : "Show";
+      if (remember) try { localStorage.setItem(key, open ? "open" : "min"); } catch (e) {}
+    };
+    let saved = null;
+    try { saved = localStorage.getItem(key); } catch (e) {}
+    set(saved !== "min", false);
+    btn.addEventListener("click", () => set(sheet.classList.contains("is-min"), true));
+    sheet.addEventListener("keydown", (e) => { if (e.key === "Escape" && !sheet.classList.contains("is-min")) { set(false, true); btn.focus(); } });
+  }
+
   /* ------------------------------------------------------------------
    * Boot
    * ------------------------------------------------------------------ */
@@ -791,6 +984,7 @@ const ACCOUNT_PLACEHOLDER = { "BDO": "0000 000 0000", "BPI": "0000-0000-00", "BP
     document.body.insertAdjacentHTML("afterbegin", header(page));
     document.body.insertAdjacentHTML("beforeend", footer());
     wireNav();
+    wirePromo(page);
     if (pages[page]) pages[page]();
     translateStatic();
     designNotes();

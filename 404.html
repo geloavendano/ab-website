@@ -2,6 +2,10 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
+  <!-- The prototype's only inline script, and it must stay inline: it has to run before any relative URL resolves,
+       and an external <script src> would itself be relative. A strict CSP allows it by hash, not 'unsafe-inline':
+       script-src 'sha256-Rko+GGzpGIm0H6I5eJB7DzAUzQ19s50IQoqHpXo+bFM='. Editing the script changes the hash.
+       GitHub Pages only; the Next.js build serves its 404 natively with root-relative links (architecture §5). -->
   <script>
     // GitHub Pages serves this file at whatever missing URL was requested (e.g. /ab-website/old/page/),
     // so relative links would resolve inside that missing folder. Pin every link and asset to the site root.
@@ -22,7 +26,7 @@
 <main id="main" class="wrap section" style="max-width:720px">
   <h1>We couldn't find that page</h1>
   <p class="lede">It may have moved when we redesigned the site. Try one of these:</p>
-  <form role="search" onsubmit="location.href='stories.html?q='+encodeURIComponent(this.q.value);return false" style="display:flex;gap:8px;margin:24px 0">
+  <form role="search" id="search404" style="display:flex;gap:8px;margin:24px 0">
     <label for="q404" class="skip">Search stories</label>
     <input id="q404" name="q" type="search" placeholder="Search stories">
     <button class="btn solid">Search</button>

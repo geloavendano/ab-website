@@ -148,9 +148,11 @@
   const LIFT_MS = 70, NEXT_MS = 170, START_MS = 350;
 
   function writeHeroDoodles(hero) {
-    const marks = [...hero.querySelectorAll(".doodle--draw")]
+    // The homepage logo circle is written first, then the hero's marks by data-seq.
+    const order = el => el.closest(".brand") ? -1 : el.dataset.seq ? Number(el.dataset.seq) : 999;
+    const marks = [...document.querySelectorAll(".brand .doodle--draw"), ...hero.querySelectorAll(".doodle--draw")]
       .filter(svg => svg.getClientRects().length)          // skip ones hidden at this screen size
-      .sort((a, b) => (+a.dataset.seq || 999) - (+b.dataset.seq || 999));
+      .sort((a, b) => order(a) - order(b));
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
       marks.forEach(svg => svg.classList.add("is-drawn"));
       return;
@@ -193,7 +195,7 @@
 
   // Header nav items keep one shape on every page, so the line you hover is
   // the line that marks the page once you're there. Keyed by label, so the
-  // desktop "Advocacies" link and its phone-menu twin match.
+  // desktop "Pillars" link and its phone-menu twin match.
   const navLabels = [];
   const navShape = (link) => {
     const label = link.textContent.trim();
@@ -234,7 +236,8 @@
     const hero = document.querySelector("main .hero");
     if (hero) writeHeroDoodles(hero);
     // Everything else draws in as it scrolls into view.
-    const drawables = [...document.querySelectorAll(".doodle--draw")].filter(el => !(hero && hero.contains(el)));
+    const drawables = [...document.querySelectorAll(".doodle--draw")]
+      .filter(el => !(hero && (hero.contains(el) || el.closest(".brand"))));
     if ("IntersectionObserver" in window) {
       const io = new IntersectionObserver(entries => {
         entries.forEach(e => {
@@ -298,7 +301,27 @@
           progress.style.strokeDashoffset = (1.05 * (1 - Math.min(Math.max(t, 0), 1))).toFixed(4);
         });
       }
-      toggle && toggle.addEventListener("click", () => {
+      // Lightbox: "Watch the film" opens it with sound and full controls. The muted loop
+    // behind it pauses meanwhile, and picks up again on close unless the visitor had paused it.
+    document.querySelectorAll("[data-lightbox-open]").forEach(btn => {
+      const box = document.getElementById(btn.dataset.lightboxOpen);
+      const film = box && box.querySelector("video");
+      if (!film || typeof box.showModal !== "function") return;
+      const speed = box.querySelector("[data-lightbox-speed]");
+      btn.addEventListener("click", () => {
+        if (!film.src) film.src = film.dataset.src;
+        film.playbackRate = Number(speed ? speed.value : 1);
+        box.showModal();
+        if (!video.paused) video.pause();
+        film.play().catch(() => {});
+      });
+      speed && speed.addEventListener("change", () => (film.playbackRate = Number(speed.value)));
+      box.querySelector("[data-lightbox-close]").addEventListener("click", () => box.close());
+      box.addEventListener("click", e => { if (e.target === box) box.close(); }); // click on the backdrop
+      box.addEventListener("close", () => { film.pause(); if (!userPaused) play(); btn.focus(); });
+    });
+
+    toggle && toggle.addEventListener("click", () => {
         if (video.paused) { userPaused = false; play(); }
         else { userPaused = true; video.pause(); }
       });

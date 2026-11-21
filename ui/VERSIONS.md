@@ -55,3 +55,20 @@ The v2 language now styles every public page of the prototype. The neutral wiref
 - **Not changed:** the staff admin (`admin/`) and the archived v0.x homepages still use `assets/style.css`.
 - **Revision (2026-10-22):** Donate card gets its warm sky (`.sky--pink`: light bloom behind the copy, light pink under the yellow crown, saturated pink under the white sparkles, yellow and teal accents). Team pages show an initials avatar on a small sky for anyone without a photo.
 - **Revision (2026-10-28):** top-fold doodles are written stroke by stroke in `data-seq` order (paths copied out of the sprite and timed by on-screen length). Underlines vary site-wide: 7 line shapes and 4 section-title scribbles, cycled per page. Secondary headlines removed site-wide except the Volunteer step numbers and the "Responsible contact" label; story format moved into the meta row. Desktop "Advocacies" links to the homepage fold; the phone menu keeps the list. Homepage headline flagged PLACEHOLDER. Fundraisers carry an ISO `startDate`.
+- **Revision (2026-11-21):**
+  - "Advocacy/Advocacies" is now "Pillar/Pillars" in all visible copy and the admin (homepage anchor `#pillars`; the `advocacy.html` filename and code identifiers are unchanged).
+  - About opens on the "2026 Omnibus" film (`ui/media/about-omnibus.mp4`, 1600 px H.264 + AAC, 13.9 MB, from the 272 MB master, which stays out of git via `.gitignore`); copy sits at the top to clear the film's burned-in subtitles; "Watch with sound" restarts it unmuted in place.
+  - Presence has an interactive province map (desktop): `assets/ph-provinces.js`, built by `ui/tools/build-ph-map.py` from faeldon/philippines-json-maps (MIT, PSGC 3Q 2026), joined to places by PSGC code.
+  - Selects draw their own chevron on the text's inset.
+  - Home: the logo is circled as the current page instead of "together."; the per-word heading scribbles are gone.
+  - New promo bottom sheet driven by `promos` in `data.js` (image + text, image only, or free-form HTML; date window, status, pages); preview any promo with `?promo=<id>`.
+  - Heroes and sky panels use `overflow: clip` so they can't be scrolled internally.
+- **Revision (2026-11-21, round 2):**
+  - Home: the logo circle is yellow and roomier, spilling past the header bar (tighter on phones so it stays on screen).
+  - Home: the "Across the islands" panel shows the province map instead of region labels.
+  - The Donate card floats on hover, with the crown tipping and the sparkles turning.
+  - Map, shared by Home and Presence: every province responds; hover previews and click pins; provinces without programs offer "Partner with us"; region names ship with the map data.
+  - Presence: the pillar filter and the table's header row stick together while scrolling.
+  - About: "Watch the film" opens a lightbox (native `<dialog>`) with full controls and a speed picker; the background loop pauses meanwhile.
+  - Footer: staff login and prototype guide links removed (the guide is still at `sitemap.html`).
+  - Fixes: rounded sky panels clip with `clip-path` (iOS Safari ignores border-radius clipping over blurred or animated children); mobile story rows wrap instead of clipping; the promo bar has no sticky hover colour on touch and its focus ring is drawn inside.

@@ -10,7 +10,7 @@
 
   const COLLECTIONS = [
     ["Content", [["stories", "Stories"], ["projects", "Projects"], ["fundraisers", "Fundraisers"], ["resources", "Reports & resources"]]],
-    ["Organization", [["pillars", "Advocacy pillars"], ["team", "Team members"], ["impact", "Impact stats"], ["certifications", "Certifications"], ["donation", "Donation channels"], ["orgs", "Volunteer orgs"]]],
+    ["Organization", [["pillars", "Pillars"], ["team", "Team members"], ["impact", "Impact stats"], ["certifications", "Certifications"], ["donation", "Donation channels"], ["orgs", "Volunteer orgs"]]],
     ["System", [["areas", "Areas (PSGC)"], ["redirects", "Redirects"], ["users", "Staff users"]]]
   ];
 
@@ -72,12 +72,12 @@
       users: () => [["[Comms lead]", "Admin"], ["[Comms officer]", "Editor"], ["[Program staff]", "Contributor"]].map(([n, r]) => `<tr><th scope="row">${n}</th><td>${r}</td><td>[email]</td></tr>`)
     };
     const heads = {
-      stories: ["Title", "Status", "Format", "Advocacy", "Project", "Published", "On public site?"],
-      projects: ["Title", "Status", "Advocacy", "Implementation", "Progress (derived)", "Stories"],
+      stories: ["Title", "Status", "Format", "Pillar", "Project", "Published", "On public site?"],
+      projects: ["Title", "Status", "Pillar", "Implementation", "Progress (derived)", "Stories"],
       pillars: ["Name", "Tagline", "Projects", "Stories"], areas: ["Name", "Type", "Code"],
-      team: ["Name", "Role", "Group", "Shown on advocacy"], impact: ["Value", "Label", "Advocacy", "As of"],
+      team: ["Name", "Role", "Group", "Shown on pillar"], impact: ["Value", "Label", "Pillar", "As of"],
       certifications: ["Name", "Issuer", "Valid until"], donation: ["Channel", "Currency", "State"],
-      orgs: ["Name", "Areas", "Advocacies"], fundraisers: ["Name", "Date", "Location"],
+      orgs: ["Name", "Areas", "Pillars"], fundraisers: ["Name", "Date", "Location"],
       resources: ["Title", "Type", "Year", "File"], redirects: ["Old URL", "New URL", "Code"], users: ["Name", "Role", "Email"]
     };
     const notes = {
@@ -143,9 +143,9 @@
       <fieldset><legend>Tags</legend>
         <div class="field"><label for="e-project">Project</label>
           <select id="e-project"><option value="">— none —</option>${D.projects.map((p) => `<option value="${p.id}" data-pillar="${p.pillar}"${p.id === v.project ? " selected" : ""}>${esc(p.title)}</option>`).join("")}</select>
-          <div class="help">Choosing a project sets the advocacy automatically.</div></div>
-        <div class="field"><label for="e-pillar">Advocacy</label><select id="e-pillar">${pillarOpts(v.pillar)}</select>
-          <div class="help" id="pillar-help">Must match the project's advocacy.</div></div>
+          <div class="help">Choosing a project sets the pillar automatically.</div></div>
+        <div class="field"><label for="e-pillar">Pillar</label><select id="e-pillar">${pillarOpts(v.pillar)}</select>
+          <div class="help" id="pillar-help">Must match the project's pillar.</div></div>
         <div class="field"><label>Areas</label><div class="chips" style="margin-bottom:8px">${areaChips(v.areas)}</div>
           <input type="search" placeholder="Search region, province, city or municipality" aria-label="Add area"><div class="help">Tag the most specific place. It rolls up to province and region in filters.</div></div>
         <div class="field"><label style="font-weight:400"><input type="checkbox"${v.featured ? " checked" : ""}> Feature on homepage hero</label></div>
@@ -154,7 +154,7 @@
     const projectFields = `
       <fieldset><legend>Project</legend>
         <div class="field"><label class="req" for="e-title">Title</label><input id="e-title" type="text" value="${esc(v.title)}"></div>
-        <div class="field"><label class="req" for="e-pillar">Advocacy</label><select id="e-pillar">${pillarOpts(v.pillar)}</select></div>
+        <div class="field"><label class="req" for="e-pillar">Pillar</label><select id="e-pillar">${pillarOpts(v.pillar)}</select></div>
         <div class="field"><label for="e-sum">Summary</label><textarea id="e-sum">${esc(v.summary)}</textarea></div>
         <div class="field"><label>Cover image</label>${v.image
           ? `<img src="${esc(D.media.base + v.image)}" alt="" style="max-width:320px;width:100%;aspect-ratio:16/9;object-fit:cover;border-radius:4px">`
@@ -176,7 +176,7 @@
         <a class="back" href="index.html?c=${type}">${isStory ? "Stories" : "Projects"}</a>
         <div class="admin-top"><h1>${esc(title)}</h1>${item && isStory ? `<a class="btn small" href="../story.html?s=${v.slug}" target="_blank">Preview</a>` : ""}</div>
         <div class="editor">
-          <form onsubmit="return false">${isStory ? storyFields : projectFields}</form>
+          <form>${isStory ? storyFields : projectFields}</form>
           <aside aria-label="Publishing">
             <h3>Publishing</h3>
             <p>Status: ${statusPill(status)}</p>
@@ -199,18 +199,19 @@
     document.title = title + " · Admin · Angat Buhay";
 
     document.querySelectorAll("[data-act]").forEach((b) => b.addEventListener("click", () => toast("Prototype: " + b.dataset.act)));
+    $(".editor form").addEventListener("submit", (e) => e.preventDefault()); // Enter in a field must not reload the mock
 
     if (isStory) {
       const fmt = $("#e-format");
       const showFormat = () => document.querySelectorAll("[data-for]").forEach((n) => (n.hidden = n.dataset.for !== fmt.value));
       fmt.addEventListener("change", showFormat); showFormat();
 
-      // Rule: a story's advocacy must equal its project's advocacy.
+      // Rule: a story's pillar must equal its project's pillar.
       const proj = $("#e-project"), pil = $("#e-pillar"), help = $("#pillar-help");
       const check = () => {
         const pp = proj.selectedOptions[0]?.dataset.pillar;
         const bad = pp && pil.value && pp !== pil.value;
-        help.innerHTML = bad ? `<b>✕ This project belongs to ${esc(pillarBy(pp).name)}.</b> Saving is blocked until they match.` : "Must match the project's advocacy.";
+        help.innerHTML = bad ? `<b>✕ This project belongs to ${esc(pillarBy(pp).name)}.</b> Saving is blocked until they match.` : "Must match the project's pillar.";
       };
       proj.addEventListener("change", () => { const pp = proj.selectedOptions[0]?.dataset.pillar; if (pp) pil.value = pp; check(); });
       pil.addEventListener("change", check);

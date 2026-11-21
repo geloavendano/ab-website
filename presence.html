@@ -7,26 +7,32 @@
   <title>Presence · Angat Buhay</title>
   <link rel="stylesheet" href="ui/ab-ui-v3.css">
   <script src="assets/data.js" defer></script>
+  <script src="assets/ph-provinces.js" defer></script>
   <script src="assets/app.js" defer></script>
   <script src="ui/ab-doodles-v3.js" defer></script>
 </head>
 <body data-page="presence">
 <main id="main">
-  <header class="page-hero sky"><div class="wrap">
-    <h1>Where we work</h1>
-    <p class="lede">Through its partners, supporters and volunteer organizations, Angat Buhay helps communities in cities and provinces across Luzon, Visayas and Mindanao.</p>
-    <div class="ph r-16x9" role="img" aria-label="Map of the Philippines"><span>&lt;map of PH: provinces shaded by number of advocacies. Tap a province to jump to its row&gt;</span></div>
-  </div></header>
+  <header class="page-hero sky presence-hero"><div class="wrap presence-hero__grid">
+    <div class="presence-hero__copy">
+      <h1>Where we work</h1>
+      <p class="lede">Through its partners, supporters and volunteer organizations, Angat Buhay helps communities in cities and provinces across Luzon, Visayas and Mindanao.</p>
+      <div class="map-card" id="map-card" aria-live="polite"></div>
+    </div>
+    <div class="ph-map" id="ph-map"></div>
+  </div>
+  <div class="wrap"><div class="note">The map is drawn from PSA's official province boundaries (PSGC 3Q 2026, via faeldon/philippines-json-maps, MIT licence) and joined to our places by PSGC code, so every province an editor tags lights up by itself. Desktop only: on phones the table below does the same job and works with screen readers. Keyboard users can tab through the highlighted provinces; Enter jumps to the province's row in the table.</div></div>
+  </header>
 
   <section class="section">
     <div class="wrap">
-      <div class="section-head">
-        <h2>Regions and provinces</h2>
-        <div class="field" style="margin:0;min-width:240px"><label for="presence-pillar">Show advocacy</label><select id="presence-pillar"></select></div>
+      <h2>Regions and provinces</h2>
+      <div class="table-bar" id="presence-bar">
+        <div class="field"><label for="presence-pillar">Show pillar</label><select id="presence-pillar"></select></div>
+        <p class="small muted" id="presence-count" aria-live="polite"></p>
       </div>
-      <p class="small muted" id="presence-count" aria-live="polite"></p>
       <table class="table" id="presence-table">
-        <thead><tr><th scope="col">Province / city</th><th scope="col">Advocacies</th><th scope="col">Projects</th><th scope="col">Volunteer organizations</th></tr></thead>
+        <thead><tr><th scope="col">Province / city</th><th scope="col">Pillars</th><th scope="col">Projects</th><th scope="col">Volunteer organizations</th></tr></thead>
         <tbody></tbody>
       </table>
       <div class="note">This table is <b>computed</b> from the areas tagged on published projects, stories and volunteer orgs, so it updates itself as content is added. A town-level tag (e.g. Ajuy) rolls up to its province (Iloilo). Volunteer organization names are samples. Open question: should staff also be able to curate this table by hand?</div>

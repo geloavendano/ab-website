@@ -8,6 +8,7 @@
   <link rel="icon" href="assets/media/favicon.svg">
   <link rel="stylesheet" href="ui/ab-ui-v3.css">
   <script src="assets/data.js" defer></script>
+  <script src="assets/ph-provinces.js" defer></script>
   <script src="assets/app.js" defer></script>
   <script src="ui/ab-doodles-v3.js" defer></script>
 </head>
@@ -38,9 +39,7 @@
         <span style="position:relative; display:inline-block">Lifting
           <svg data-seq="3" class="doodle doodle--draw c-pink doodle--fine" style="--delay:.5s; left:-58px; top:-6px; width:52px; height:38px; stroke-width:7; transform:rotate(-25deg)" viewBox="0 0 100 70" aria-hidden="true"><use href="#d-rays"/></svg>
         </span> lives,<br>
-        <span class="circled">together.
-          <svg data-seq="1" class="doodle doodle--draw c-yellow" style="--delay:.2s; stroke-width:6" viewBox="0 0 300 120" preserveAspectRatio="none" aria-hidden="true"><use href="#d-encircle"/></svg>
-        </span>
+        together.
         <svg data-seq="2" class="doodle doodle--draw c-pink doodle--inline doodle--fine" style="--delay:.8s; width:.42em; height:.42em; stroke-width:9; vertical-align:top" viewBox="0 0 100 100" aria-hidden="true"><use href="#d-sparkle"/></svg>
         <span class="sample-tag" title="Headline drafted for the prototype. Final copy to come from Angat Buhay.">PLACEHOLDER</span>
       </h1>
@@ -73,17 +72,15 @@
 </section>
   <div class="wrap"><div class="note">The hero loops a 58-second, 9.3 MB cut of the homepage montage (b-roll only), muted, with a pause button. It doesn't start for people who've asked for reduced motion or turned on data saver. "Now playing" and "Watch with sound" open the featured story, which an editor marks "Featured" in the admin.</div></div>
 
-  <section class="section" id="advocacies" aria-labelledby="adv-title">
+  <section class="section" id="pillars" aria-labelledby="adv-title">
     <div class="wrap">
       <div class="section-head">
         <div>
-          <h2 class="h2" id="adv-title">Five ways we
-            <span class="scribble">lift<svg class="doodle doodle--draw c-teal" viewBox="0 0 300 40" preserveAspectRatio="none" aria-hidden="true"><use href="#d-underline"/></svg></span>
-            communities</h2>
+          <h2 class="h2" id="adv-title">Five ways we lift communities</h2>
         </div>
       </div>
-      <div class="pillar-grid" id="pillars"></div>
-      <div class="note">Five advocacy pillars from the CMS. Each opens its own page with projects, impact stories and team.</div>
+      <div class="pillar-grid" id="pillar-cards"></div>
+      <div class="note">Five pillars from the CMS. Each opens its own page with projects, impact stories and team.</div>
     </div>
   </section>
 
@@ -96,7 +93,7 @@
         <a class="link-arrow" href="resources.html">Reports &amp; resources</a>
       </div>
       <div id="home-stats"></div>
-      <div class="note">One headline figure per advocacy pillar, taken from the impact figures each pillar page already shows (CMS "Impact stats"). Every figure names its source report, and the source links to Reports &amp; resources, where the annual reports and audited financial statements can be downloaded.</div>
+      <div class="note">One headline figure per pillar, taken from the impact figures each pillar page already shows (CMS "Impact stats"). Every figure names its source report, and the source links to Reports &amp; resources, where the annual reports and audited financial statements can be downloaded.</div>
     </div>
   </section>
 
@@ -104,8 +101,7 @@
     <div class="wrap">
       <div class="section-head">
         <div>
-          <h2 class="h2" id="stories-title">More
-            <span class="scribble">impact<svg class="doodle doodle--draw c-pink" viewBox="0 0 300 40" preserveAspectRatio="none" aria-hidden="true"><use href="#d-underline"/></svg></span></h2>
+          <h2 class="h2" id="stories-title">More impact</h2>
         </div>
         <a class="link-arrow" href="stories.html">See all stories</a>
       </div>
@@ -115,19 +111,20 @@
 
   <section class="section" id="presence" aria-labelledby="presence-title" style="padding-top:0">
     <div class="wrap">
-      <div class="sky sky--panel presence">
+      <div class="sky sky--panel presence presence--map">
         <svg class="doodle doodle--draw c-yellow hide-mobile" style="--delay:.4s; top:-30px; right:-20px; width:180px; height:108px; stroke-width:3; transform:rotate(-12deg)" viewBox="0 0 200 120" aria-hidden="true"><use href="#d-arcs"/></svg>
-        <div>
+        <div class="presence__copy">
           <h2 class="h2" id="presence-title">Across the islands, through local hands</h2>
-          <p class="lede">Through partners and volunteer organizations, Angat Buhay reaches communities in these regions, with more joining every year.</p>
+          <p class="lede">Through partners and volunteer organizations, Angat Buhay reaches communities across the country, with more joining every year.</p>
           <a class="btn btn--white" href="presence.html">See where we work <span aria-hidden="true">→</span></a>
         </div>
-        <div style="position:relative">
-          <svg class="doodle doodle--draw c-blue hide-mobile" style="--delay:.7s; left:-58px; top:-74px; width:64px; height:64px; stroke-width:4; transform:rotate(10deg)" viewBox="0 0 120 120" aria-hidden="true"><use href="#d-arrow-curl"/></svg>
-          <ul class="region-list" id="home-regions" aria-label="Regions with Angat Buhay programs"></ul>
+        <div class="map-card" id="home-map-card" aria-live="polite"></div>
+        <div class="presence__map">
+          <svg class="doodle doodle--draw c-blue hide-mobile" style="--delay:.7s; left:-30px; top:0; width:64px; height:64px; stroke-width:4; transform:rotate(10deg)" viewBox="0 0 120 120" aria-hidden="true"><use href="#d-arrow-curl"/></svg>
+          <div class="ph-map ph-map--home" id="home-map"></div>
         </div>
       </div>
-      <div class="note">Regions come from the areas tagged on projects, stories and volunteer organizations. The Presence page has the full province table behind the map, so phone and screen-reader users can still find work in their province (audit finding).</div>
+      <div class="note">The same province map as the Presence page, built from the areas tagged on projects, stories and volunteer organizations. Desktop only, like the Presence page; on phones the "See where we work" button leads to the full table, which also serves screen-reader users (audit finding).</div>
     </div>
   </section>
 
@@ -135,8 +132,7 @@
     <div class="wrap">
       <div class="section-head">
         <div>
-          <h2 class="h2" id="involved-title">Be
-            <span class="scribble">involved<svg class="doodle doodle--draw c-yellow" viewBox="0 0 300 40" preserveAspectRatio="none" aria-hidden="true"><use href="#d-underline"/></svg></span></h2>
+          <h2 class="h2" id="involved-title">Be involved</h2>
         </div>
       </div>
       <div class="involve-grid">
