@@ -72,3 +72,12 @@ The v2 language now styles every public page of the prototype. The neutral wiref
   - About: "Watch the film" opens a lightbox (native `<dialog>`) with full controls and a speed picker; the background loop pauses meanwhile.
   - Footer: staff login and prototype guide links removed (the guide is still at `sitemap.html`).
   - Fixes: rounded sky panels clip with `clip-path` (iOS Safari ignores border-radius clipping over blurred or animated children); mobile story rows wrap instead of clipping; the promo bar has no sticky hover colour on touch and its focus ring is drawn inside.
+- **Revision (2026-11-21, round 3):**
+  - Videos re-encoded for phones and in-app browsers. Each background loop comes as AV1 WebM (smallest) and H.264 Main-profile MP4 (plays everywhere, including Facebook/Messenger/Instagram in-app browsers), in a wide cut and a 404×720 portrait centre crop for phones in portrait (`<source media>`), all silent and lightly denoised (the site adds its own grain). The browser takes the first it can play; nothing downloads until the video should play.
+    - Homepage/Stories loop: 4.2 MB AV1 / 5.9 MB H.264 wide; 2.2 / 3.3 MB portrait (was 9.3 MB for everyone).
+    - About loop: 7.6 MB AV1 (1600 px) / 7.0 MB H.264 (1280 px) wide; 3.1 / 3.8 MB portrait (was 13.9 MB with audio).
+    - About film (lightbox, with sound): `about-film-1280.mp4`, 13.3 MB, loads only when opened.
+    - Encode settings: H.264 `-profile:v main -level 4.0 -crf 32`, AV1 `libsvtav1 -preset 6 -crf 52`, denoise `hqdn3d=4:3:8:6`, portrait `crop=ih*9/16:ih,scale=404:720`.
+  - Note: the homepage loop window (0:20–1:18) does contain title cards and Filipino subtitles from the montage; it was never purely b-roll.
+  - Every page section has a stable anchor (e.g. `about.html#mission-vision`, `donate.html#after-you-donate`, `project.html?id=…#participate`); after rendering, app.js jumps to the anchor again once fonts and images have loaded.
+  - Every page declares the favicon (fixes a /favicon.ico 404 on each load).

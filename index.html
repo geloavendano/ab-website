@@ -17,11 +17,14 @@
 
 <section class="hero hero--video film" id="top" aria-labelledby="hero-title">
   <div class="hero__media">
-    <!-- 58 s loop cut from the homepage montage (0:20–1:18, b-roll only), 960×540 H.264, no audio, 9.3 MB.
-         Encoded with ffmpeg -crf 28; see ui/VERSIONS.md for the command. -->
-    <video data-hero-video data-src="ui/media/hero-loop-v2.mp4"
-           poster="ui/media/hero-poster-v2.jpg"
-           muted playsinline preload="none" aria-hidden="true" tabindex="-1"></video>
+    <!-- 58 s silent loop cut from the homepage montage (0:20–1:18, b-roll only). Phones in portrait get a
+         centre crop; each size comes as AV1 WebM and H.264 MP4 (see ui/VERSIONS.md). -->
+    <video data-hero-video poster="ui/media/hero-poster-v2.jpg" muted playsinline preload="none" aria-hidden="true" tabindex="-1">
+      <source data-src="ui/media/hero-loop-portrait.webm" type="video/webm; codecs=&quot;av01.0.05M.08&quot;" media="(max-width: 700px) and (orientation: portrait)">
+      <source data-src="ui/media/hero-loop-portrait.mp4" type="video/mp4" media="(max-width: 700px) and (orientation: portrait)">
+      <source data-src="ui/media/hero-loop-960.webm" type="video/webm; codecs=&quot;av01.0.05M.08&quot;">
+      <source data-src="ui/media/hero-loop-960.mp4" type="video/mp4">
+    </video>
   </div>
   <div class="hero__grade" aria-hidden="true"></div>
   <div class="hero__scrim" aria-hidden="true"></div>

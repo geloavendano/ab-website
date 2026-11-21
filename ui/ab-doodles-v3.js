@@ -216,6 +216,16 @@
     });
   }
 
+  /* Videos list their files as <source data-src> (or one data-src on the <video>), so
+   * nothing downloads until they should play. Sources are ordered phone-first
+   * (media="(max-width: …)": a portrait crop), each as AV1 WebM then H.264 MP4: the
+   * browser takes the first it can play, and old in-app browsers end up on H.264. */
+  function lazyLoad(v) {
+    const sources = v.querySelectorAll("source[data-src]");
+    if (sources.length) { sources.forEach(s => s.setAttribute("src", s.dataset.src)); v.load(); }
+    else v.src = v.dataset.src;
+  }
+
   function boot() {
     // A <base> element (404.html sets one so its links work at any URL depth)
     // makes "#d-…" resolve against the base URL, i.e. another document.
@@ -280,8 +290,8 @@
         toggle.setAttribute("aria-label", playing ? "Pause background video" : "Play background video");
       };
       const play = () => {
-        if (!video.src) {
-          video.src = video.dataset.src;
+        if (!video.currentSrc && !video.src) {
+          lazyLoad(video);
           video.addEventListener("loadedmetadata", () => { if (start) video.currentTime = start; }, { once: true });
         }
         video.play().catch(() => setState(false));
@@ -309,7 +319,7 @@
       if (!film || typeof box.showModal !== "function") return;
       const speed = box.querySelector("[data-lightbox-speed]");
       btn.addEventListener("click", () => {
-        if (!film.src) film.src = film.dataset.src;
+        if (!film.currentSrc && !film.src) lazyLoad(film);
         film.playbackRate = Number(speed ? speed.value : 1);
         box.showModal();
         if (!video.paused) video.pause();

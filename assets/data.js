@@ -19,8 +19,14 @@ window.AB = {
     base: "https://www.angatbuhay.ph/wp-content/uploads/",
     heroVideo: "https://www.neithan.rocks/mid.mp4",
     heroPoster: "2024/09/22-1024x683.jpg",
-    // Self-hosted 58 s, 9.3 MB cut of the montage's b-roll (0:20–1:18) for hero loops.
-    heroLoop: "ui/media/hero-loop-v2.mp4",
+    // Self-hosted silent 58 s cut of the montage's b-roll (0:20–1:18) for hero loops: portrait crop
+    // for phones, wide for everything else, each as AV1 WebM then H.264 MP4 (first playable wins).
+    heroLoop: [
+      { src: "ui/media/hero-loop-portrait.webm", type: 'video/webm; codecs="av01.0.05M.08"', media: "(max-width: 700px) and (orientation: portrait)" },
+      { src: "ui/media/hero-loop-portrait.mp4", type: "video/mp4", media: "(max-width: 700px) and (orientation: portrait)" },
+      { src: "ui/media/hero-loop-960.webm", type: 'video/webm; codecs="av01.0.05M.08"' },
+      { src: "ui/media/hero-loop-960.mp4", type: "video/mp4" }
+    ],
     heroLoopPoster: "ui/media/hero-poster-v2.jpg"
   },
 

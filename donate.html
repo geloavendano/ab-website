@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="robots" content="noindex, nofollow">
   <title>Donate · Angat Buhay</title>
+  <link rel="icon" href="assets/media/favicon.svg">
   <link rel="stylesheet" href="ui/ab-ui-v3.css">
   <script src="assets/data.js" defer></script>
   <script src="assets/app.js" defer></script>
@@ -12,20 +13,20 @@
 </head>
 <body data-page="donate">
 <main id="main">
-  <header class="page-hero sky"><div class="wrap">
+  <header class="page-hero sky" id="intro"><div class="wrap">
     <h1>Share the bayanihan spirit</h1>
     <p class="lede">Your gift funds literacy tutors, greenhouses, relief packs and more. Choose the channel that works for you.</p>
   </div></header>
 
-  <section class="section">
+  <section class="section" id="how-to-give">
     <div class="wrap">
-      <div class="grid c3" style="margin-bottom:32px">
+      <div class="grid c3" id="trust" style="margin-bottom:32px">
         <div class="card"><div class="body"><h3>Tax-deductible</h3><p class="sub">BIR Donee Institution status</p></div></div>
         <div class="card"><div class="body"><h3>Accredited</h3><p class="sub">PCNC · ISO 9001:2015</p></div></div>
         <div class="card"><div class="body"><h3>Authorized</h3><p class="sub">DSWD Solicitation Permit No. DSWD-SB-PSP-S-2025-000049</p></div></div>
       </div>
 
-      <h2>Choose how to give</h2>
+      <h2 id="channels">Choose how to give</h2>
       <div class="tabs" role="tablist" aria-label="Donation channels" id="donate-tabs"></div>
       <div id="donate-panels"></div>
       <div class="note">One click from the homepage straight to channels. The current site adds an extra page and choice first (audit finding). Account numbers are edited in the CMS (Donation Channels), so they're never hard-coded in a page. GCash gives an account number too, so donors on the same phone aren't stuck with "scan this QR".</div>
@@ -34,7 +35,7 @@
 
   <section class="section">
     <div class="wrap grid c2">
-      <div>
+      <div id="after-you-donate">
         <h2>After you donate</h2>
         <ol class="steps">
           <li>Email your proof of transfer to <a href="mailto:donations@angatbuhay.ph"><b>donations@angatbuhay.ph</b></a> with your full name and mailing address. <span class="sample-tag">PLACEHOLDER</span></li>
@@ -43,7 +44,7 @@
         </ol>
         <div class="note">The email address, timings and BIR process are placeholders. The audit found the current site doesn't explain follow-up. Confirm the real steps with the client.</div>
       </div>
-      <div>
+      <div id="other-ways-to-give">
         <h2>Other ways to give</h2>
         <ul>
           <li><a href="fundraisers.html">Join or sponsor a fundraiser</a></li>

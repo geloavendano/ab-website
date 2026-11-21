@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="robots" content="noindex, nofollow">
   <title>About · Angat Buhay</title>
+  <link rel="icon" href="assets/media/favicon.svg">
   <link rel="stylesheet" href="ui/ab-ui-v3.css">
   <script src="assets/data.js" defer></script>
   <script src="assets/app.js" defer></script>
@@ -12,13 +13,17 @@
 </head>
 <body data-page="about">
 <main id="main">
-  <section class="hero hero--video hero--about film" aria-labelledby="about-title">
+  <section class="hero hero--video hero--about film" id="intro" aria-labelledby="about-title">
     <div class="hero__media">
-      <!-- "2026 Omnibus" (1:48), 1600 px wide H.264 + AAC, 13.9 MB. Plays muted on loop; "Watch
-           the film" opens it with sound and full controls in the lightbox below. Its subtitles are burned in at bottom
+      <!-- "2026 Omnibus" (1:48). The background is a silent cut (portrait crop on phones; AV1 WebM
+           and H.264 MP4); "Watch the film" opens the full film with sound in the lightbox below. Its subtitles are burned in at bottom
            centre, so this hero keeps its copy at the top. -->
-      <video data-hero-video data-src="ui/media/about-omnibus.mp4" poster="ui/media/about-omnibus-poster.jpg"
-             muted playsinline preload="none" aria-hidden="true" tabindex="-1"></video>
+      <video data-hero-video poster="ui/media/about-omnibus-poster.jpg" muted playsinline preload="none" aria-hidden="true" tabindex="-1">
+        <source data-src="ui/media/about-loop-portrait.webm" type="video/webm; codecs=&quot;av01.0.05M.08&quot;" media="(max-width: 700px) and (orientation: portrait)">
+        <source data-src="ui/media/about-loop-portrait.mp4" type="video/mp4" media="(max-width: 700px) and (orientation: portrait)">
+        <source data-src="ui/media/about-loop-1600.webm" type="video/webm; codecs=&quot;av01.0.05M.08&quot;">
+        <source data-src="ui/media/about-loop-1280.mp4" type="video/mp4">
+      </video>
     </div>
     <div class="hero__grade" aria-hidden="true"></div>
     <div class="hero__scrim" aria-hidden="true"></div>
@@ -61,17 +66,17 @@
         <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 3l10 10M13 3 3 13" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
       </button>
     </div>
-    <video controls playsinline preload="none" data-src="ui/media/about-omnibus.mp4" poster="ui/media/about-omnibus-poster.jpg"></video>
+    <video controls playsinline preload="none" data-src="ui/media/about-film-1280.mp4" poster="ui/media/about-omnibus-poster.jpg"></video>
   </dialog>
 
-  <section class="section">
+  <section class="section" id="founding-story">
     <div class="wrap grid c2" style="align-items:center">
       <p class="lede" style="margin:0">[Founding story: Angat Buhay was founded in <b>[year]</b> … — to be supplied by the client.]</p>
       <img class="media r-4x3" src="https://www.angatbuhay.ph/wp-content/uploads/2024/09/baklaya-9-1024x768.jpg" alt="A large group of Angat Buhay volunteers holding a #bakLAYA banner" style="border-radius:var(--r-lg)">
     </div>
   </section>
 
-  <section class="section">
+  <section class="section" id="mission-vision">
     <div class="wrap grid c2">
       <div><h2>Mission</h2><p class="lede" id="mission"></p></div>
       <div><h2>Vision</h2><p class="lede" id="vision"></p></div>
@@ -79,7 +84,7 @@
     <div class="wrap"><div class="note">The audit found an old About page that contradicts the current Mission/Vision labels. Confirm with the client which statement is which.</div></div>
   </section>
 
-  <section class="section">
+  <section class="section" id="core-values">
     <div class="wrap">
       <h2>Core values</h2>
       <div class="grid c3" id="values"></div>

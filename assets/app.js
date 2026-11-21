@@ -241,7 +241,7 @@
 
   function footer() {
     const o = D.org;
-    return `<footer class="site-footer">
+    return `<footer class="site-footer" id="footer">
       ${doodle("doodle--draw footer-squiggle", "spring", "0 0 300 80", "stroke-width:4")}
       <div class="wrap">
       <div class="footer-grid">
@@ -361,7 +361,8 @@
     if (!s) return "";
     const loop = s.videoUrl && D.media.heroLoop;
     const media = loop
-      ? `<video data-hero-video data-src="${esc(D.media.heroLoop)}" poster="${esc(D.media.heroLoopPoster)}" muted playsinline preload="none" aria-hidden="true" tabindex="-1"></video>`
+      ? `<video data-hero-video poster="${esc(D.media.heroLoopPoster)}" muted playsinline preload="none" aria-hidden="true" tabindex="-1">${
+          D.media.heroLoop.map((v) => `<source data-src="${esc(v.src)}" type="${esc(v.type)}"${v.media ? ` media="${esc(v.media)}"` : ""}>`).join("")}</video>`
       : s.image ? `<img src="${esc(M(s.image))}" alt="">` : "";
     return `<section class="hero hero--video hero--story film" aria-labelledby="featured-title">
       <div class="hero__media">${media}</div>
@@ -658,13 +659,13 @@
       <div class="note">Status is derived from the implementation end date, never typed in by hand, so it cannot go stale.</div>
       ${img(pr.image, "", "r-16x9", "project photo / gallery")}
       <div class="article" style="margin:32px 0 0;max-width:720px">
-        <h2>About the project</h2>
+        <h2 id="about-project">About the project</h2>
         <p>This section explains the need the project responds to, how Angat Buhay and its partners deliver it, and who benefits. It will be written with the program team.${PH_TAG}</p>
-        <h2>Results</h2>
+        <h2 id="results">Results</h2>
         <p>Key outcomes with figures, each with its reporting period and source.${PH_TAG}</p>
       </div>
       ${participateSection(pr, p)}
-      <section class="section"><div class="section-head"><h2>Stories from this project</h2></div>
+      <section class="section" id="project-stories"><div class="section-head"><h2>Stories from this project</h2></div>
         <div class="grid c3">${stories.map(storyCard).join("") || `<p class="muted">No stories yet.</p>`}</div></section>
     `);
   };
@@ -986,6 +987,19 @@ const ACCOUNT_PLACEHOLDER = { "BDO": "0000 000 0000", "BPI": "0000-0000-00", "BP
     wireNav();
     wirePromo(page);
     if (pages[page]) pages[page]();
+    // Section links (page.html#section) arrive before app.js has drawn the page, so the
+    // browser's own jump can miss. Jump again once rendered. (Presence handles its rows.)
+    const target = location.hash && document.getElementById(decodeURIComponent(location.hash.slice(1)));
+    if (target && !target.closest("#presence-table")) {
+      // Fonts and images arriving later can push the section down, so jump again when they
+      // land, unless the visitor has started scrolling by then.
+      let moved = false;
+      ["wheel", "touchstart", "keydown"].forEach((e) => addEventListener(e, () => (moved = true), { once: true, passive: true }));
+      const jump = () => { if (!moved) target.scrollIntoView(); };
+      jump();
+      if (document.fonts) document.fonts.ready.then(jump);
+      addEventListener("load", jump, { once: true });
+    }
     translateStatic();
     designNotes();
     wireHeroVideo();
