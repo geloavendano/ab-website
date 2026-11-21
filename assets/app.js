@@ -153,7 +153,7 @@
         <div class="tags">${p ? `<span class="tag">${esc(p.name)}</span>` : ""}<span class="tag tag--format">${FORMAT_LABEL[s.format]}</span></div>
         <h3 class="h3 card__title"><a class="stretched" href="story.html?s=${esc(s.slug)}"><span class="title-ink">${esc(s.title)}${HOVER_LINE}</span></a>${sampleTag(s)}</h3>
         <p class="sub">${esc(s.subheading)}</p>
-        <div class="meta">${esc(s.areas.map(areaLabel).slice(0, 2).join("; "))} · ${fmtDate(s.publishedAt)}</div>
+        <div class="meta">${s.areas.length ? esc(s.areas.map(areaLabel).slice(0, 2).join("; ")) + " · " : ""}${fmtDate(s.publishedAt)}</div>
       </div>
     </article>`;
   }
@@ -546,9 +546,21 @@
            <details class="disclosure"><summary>Read this infographic as text</summary><div>${esc(s.textVersion || "[Text version — required field for infographics]")}</div></details>`
         : img(s.image, "", "r-16x9", "Hero photo");
     const g = s.gallery || [];
-    const body = s.body
-      ? s.body.map((para) => `<p>${esc(para)}</p>`).join("")
-      : `<p>[Story body, migrated from angatbuhay.ph. Rich text: paragraphs, sub-headings, pull quotes, photo galleries.]</p><p>[Paragraph]</p>`;
+    // Imported stories carry their text ("## " marks a sub-heading) and in-story photos, which are
+    // spread through the text, one after every few paragraphs. Samples keep the placeholders.
+    let body;
+    if (s.body) {
+      const every = Math.max(2, Math.ceil(s.body.length / (g.length + 1)));
+      body = s.body.map((para, i) => (para.startsWith("## ") ? `<h2>${esc(para.slice(3))}</h2>` : `<p>${esc(para)}</p>`) +
+        ((i + 1) % every === 0 && g[(i + 1) / every - 1] ? `<figure>${img(g[(i + 1) / every - 1], "")}</figure>` : "")).join("");
+      const shown = Math.floor(s.body.length / every);
+      body += g.slice(shown).map((x) => `<figure>${img(x, "")}</figure>`).join("");
+    } else {
+      body = `<p>[Story body, migrated from angatbuhay.ph. Rich text: paragraphs, sub-headings, pull quotes, photo galleries.]</p><p>[Paragraph]</p>
+        <figure>${img(g[0], "", "r-16x9", "In-story photo")}<figcaption>[Caption — required alt text in CMS]</figcaption></figure>
+        <blockquote style="margin:24px 0;padding-left:16px;border-left:3px solid var(--ink);font-size:20px;font-weight:600">“[Pull quote from a community member]”<div class="small muted" style="font-weight:400">— [Name, role]</div></blockquote>
+        ${g[1] ? `<figure>${img(g[1], "")}<figcaption>[Caption]</figcaption></figure>` : "<p>[Paragraph]</p>"}`;
+    }
 
     const related = listedStories().filter((x) => x.slug !== s.slug && x.pillar === s.pillar).slice(0, 3);
 
@@ -567,13 +579,10 @@
           <span>By <b>${esc(s.author)}</b></span>
           ${p ? `<span>Pillar <a href="advocacy.html?p=${p.slug}"><b>${esc(p.name)}</b></a></span>` : ""}
           ${pr ? `<span>Project <a href="project.html?id=${pr.id}"><b>${esc(pr.title)}</b></a></span>` : ""}
-          <span>Where <b>${esc(s.areas.map(areaLabel).join("; "))}</b></span>
+          ${s.areas.length ? `<span>Where <b>${esc(s.areas.map(areaLabel).join("; "))}</b></span>` : ""}
         </div>
         <div class="note">"Published" is when the story went live. The project's implementation period is shown on the project page. The two dates are kept separate in the CMS.</div>
         ${body}
-        <figure>${img(g[0], "", "r-16x9", "In-story photo")}<figcaption>[Caption — required alt text in CMS]</figcaption></figure>
-        <blockquote style="margin:24px 0;padding-left:16px;border-left:3px solid var(--ink);font-size:20px;font-weight:600">“[Pull quote from a community member]”<div class="small muted" style="font-weight:400">— [Name, role]</div></blockquote>
-        ${g[1] ? `<figure>${img(g[1], "")}<figcaption>[Caption]</figcaption></figure>` : "<p>[Paragraph]</p>"}
         <div class="chips" style="margin:24px 0">${s.areas.map((a) => `<a class="chip" href="stories.html?region=${a}">${esc(areaLabel(a))}</a>`).join("")}</div>
         <div class="banner" style="font-weight:400"><b>Support this work.</b> <a href="donate.html">Donate</a> · <a href="volunteer.html">Volunteer</a>${p ? ` · <a href="advocacy.html?p=${p.slug}">More on ${esc(p.name)}</a>` : ""}</div>
         <p class="small muted">Share:
