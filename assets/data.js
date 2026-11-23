@@ -53,21 +53,22 @@ window.AB = {
     ]
   },
 
-  /* ---------- Pillar (CMS collection AdvocacyPillar) ---------- */
+  /* ---------- Pillar (CMS collection AdvocacyPillar) ----------
+   * image: page header photo (1600px); thumb: homepage card (800px). Photos supplied by Angat Buhay, Nov 2026. */
   pillars: [
-    { slug: "public-education", image: "2024/09/Day-7_Don-Abella-CS-12-1024x683.jpg", name: "Public Education",
+    { slug: "public-education", image: "ui/media/pillars/public-education.jpg", thumb: "ui/media/pillars/public-education-card.jpg", name: "Public Education",
       tagline: "Championing accessible and inclusive quality education for every Filipino",
       description: "Angat Buhay champions accessible and inclusive quality education for every Filipino child. Through initiatives that include literacy and numeracy interventions, we promote a love for learning and ensure that students are skilled and equipped for employment. We also work with partners to provide facilities that enable effective learning, especially in the most vulnerable areas of the country." },
-    { slug: "health-nutrition-food-security", image: "2024/09/IMG_1853-1024x683.jpg", name: "Health, Nutrition & Food Security",
+    { slug: "health-nutrition-food-security", image: "ui/media/pillars/health-nutrition-food-security.jpg", thumb: "ui/media/pillars/health-nutrition-food-security-card.jpg", name: "Health, Nutrition & Food Security",
       tagline: "Ensuring that Filipinos have access to quality healthcare and proper nutrition",
       description: "Angat Buhay aims to ensure that every Filipino has access to quality healthcare and proper nutrition. We partner with organizations and mobilize volunteers to provide holistic interventions that improve the mental well-being, nutrition, and overall health of families in need." },
-    { slug: "climate-action-sustainability", image: "2024/09/22-1024x683.jpg", name: "Climate Action & Sustainability",
+    { slug: "climate-action-sustainability", image: "ui/media/pillars/climate-action-sustainability.jpg", thumb: "ui/media/pillars/climate-action-sustainability-card.jpg", name: "Climate Action & Sustainability",
       tagline: "Building resilience and long-term strategies that mitigate the impact of future disasters",
       description: "Angat Buhay assists disaster-stricken areas by providing immediate assistance, supporting rehabilitation initiatives, and delivering interventions for risk reduction and resiliency." },
-    { slug: "community-engagement", image: "2024/09/Kababaihan-10-e1726462055812.jpg", name: "Community Engagement",
+    { slug: "community-engagement", image: "ui/media/pillars/community-engagement.jpg", thumb: "ui/media/pillars/community-engagement-card.jpg", name: "Community Engagement",
       tagline: "Engaging stakeholders, sectors and volunteers towards active social involvement",
       description: "Angat Buhay believes that active citizenship and people's participation and empowerment are essential in the fight against poverty. We harness the true spirit of bayanihan and engage stakeholders and volunteers to become actively involved in projects that uplift their communities." },
-    { slug: "arts-culture", image: "2024/09/weaving-3.jpg", name: "Arts and Culture",
+    { slug: "arts-culture", image: "ui/media/pillars/arts-culture.jpg", thumb: "ui/media/pillars/arts-culture-card.jpg", name: "Arts and Culture",
       tagline: "Empowering young Filipino artists and serving as a platform for inclusive learning",
       description: "Angat Sining fosters an inclusive space for mutual learning, dialogue, and networking between emerging young talent and established artists in the Philippines." }
   ],
@@ -137,7 +138,7 @@ window.AB = {
       summary: "Free teleconsultations bringing healthcare closer to underserved communities.",
       areas: ["ncr"], start: "2022-10-01", end: null, status: "published" },
 
-    { id: "disaster-relief-2025", participation: { status: "closed", label: "Response completed. Contact us for current operations", who: "Typhoon-affected LGUs coordinated through local DRRM offices." }, image: "2024/09/Polillo-Islands-Turnover_4-e1726462290178.jpg", pillar: "climate-action-sustainability", title: "Typhoon Response 2025",
+    { id: "disaster-relief-2025", participation: { status: "closed", label: "Response completed. Contact us for current operations", who: "Typhoon-affected LGUs coordinated through local DRRM offices." }, image: "ui/media/projects/disaster-relief-and-preparedness.jpg", pillar: "climate-action-sustainability", title: "Disaster Relief and Preparedness",
       summary: "From hot meals and food packs to shelter repair kits and livelihood boats: relief and recovery after Typhoons Tino and Uwan.",
       areas: ["liloan", "cebu", "catanduanes"], start: "2025-11-04", end: "2026-05-31", status: "published" },
     { id: "angat-kalikasan", participation: { status: "waitlist", label: "Expressions of interest open for the 2027 cohort", who: "Sangguniang Kabataan councils endorsed by their municipal LGU." }, image: "2024/09/22-1024x683.jpg", pillar: "climate-action-sustainability", title: "Angat Kalikasan",
@@ -156,7 +157,10 @@ window.AB = {
       areas: ["ncr", "naga"], start: "2025-03-01", end: "2025-08-31", status: "published" },
     { id: "museo-ng-pag-asa", participation: { status: "open", label: "Open to visitors and school group tours", who: "Schools, organizations and the general public." }, pillar: "arts-culture", title: "Museo ng Pag-asa",
       summary: "A museum of the 2022 volunteer campaign, inviting visitors into community service and active citizenship.",
-      areas: ["quezon-city"], start: "2022-10-01", end: null, status: "published" }
+      areas: ["quezon-city"], start: "2022-10-01", end: null, status: "published" },
+    // Added Nov 2026 with text from Angat Buhay; no dates were given, so none are shown.
+    {"id": "kusina-ng-pag-asa", "image": "ui/media/projects/kusina-ng-pag-asa.jpg", "pillar": "climate-action-sustainability", "title": "Kusina ng Pag-asa", "summary": "A community-based disaster preparedness and emergency feeding initiative that brings safe, nutritious and dignified meals to people affected by disasters.", "description": ["Kusina ng Pag-asa (KNP) is a community-based disaster preparedness and emergency feeding initiative designed to provide safe, nutritious, and dignified meals to populations affected by disasters in the Philippines. KNP leverages a network of partner restaurants, local food enterprises, and trained volunteers to ensure culturally appropriate and timely meal distribution while promoting local livelihood continuity.", "KNP is designed to be activated within 12-24 hours of a disaster enabling partner kitchens to prepare and distribute meals to affected communities. It is supported by ASA Philippines Foundation and implemented in partnership with the Maginhawa Food Community, mobilizing restaurants, community kitchens, and food sector partners to provide timely and dignified access to hot meals during emergencies."], "partners": ["ASA Philippines Foundation", "Maginhawa Food Community"], "areas": [], "start": null, "end": null, "status": "published"},
+    {"id": "angat-sining-musika", "image": "ui/media/pillars/arts-culture.jpg", "pillar": "arts-culture", "title": "Angat Sining Musika", "summary": "Five days of workshops, mentoring and collaborative practice for 21 young Bicolano musicians, with National Artist for Music Ryan Cayabyab.", "description": ["Angat Sining – Musika, in partnership with National Artist for Music Ryan Cayabyab, brought together 21 young Bicolano musicians, ages 18 to 25, in Naga City for five days of workshops, mentoring, collaborative practice, and peer learning alongside other Filipino music practicioners.", "Through Angat Sining, we seek to democratize art spaces by creating the support, learning opportunities, mentorship, and creative communities that allow more young artists to develop their practice, exercise creative agency, and participate meaningfully in the country’s cultural life."], "partners": ["Ryan Cayabyab, National Artist for Music"], "areas": ["naga"], "start": null, "end": null, "status": "published"}
   ],
 
   /* ---------- Story (feed order = publishedAt only) ----------
@@ -296,9 +300,9 @@ window.AB = {
     { id: "christmas-cards-2026", status: "published", start: "2026-11-15", end: "2026-12-25", pages: ["home"],
       layout: "image-text",
       title: "Send an Angat Buhay Christmas card",
-      body: "Write a card, give from ₱99, and we'll email it to your loved one on the day you choose.",
+      body: "Make someone’s Christmas a little more special with a personalized digital card sent in their honor through a donation to Angat Buhay. You can even choose the date you want your greeting delivered!",
       peek: "Christmas cards: give from ₱99",
-      image: "https://angatbuhay.ph/christmas/assets/photos/commun.jpg", imageAlt: "Community members singing together at an Angat Buhay event",
+      image: "ui/media/christmas-cards-2026.jpg", imageAlt: "Angat Buhay Christmas card: children carrying a bahay kubo, with the greeting “Maligayang Pasko!”",
       link: { href: "https://angatbuhay.ph/christmas", label: "Send a card" } },
     { id: "sample-image-only", status: "draft", sample: true, start: "2026-01-01", end: "2027-12-31", pages: ["all"],
       layout: "image",

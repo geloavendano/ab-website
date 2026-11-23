@@ -1,3 +1,8 @@
 
 # Source video masters (too large for GitHub; web cuts live in ui/media/)
 *.mov
+
+# Original photo/graphic masters (web copies live in ui/media/)
+assets/media/pillars/
+assets/media/projects/
+assets/media/2026 Christmas Cards_*

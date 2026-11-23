@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex, nofollow">
+  <title>Pillar · Angat Buhay</title>
+  <link rel="icon" href="assets/media/favicon.svg">
+  <link rel="stylesheet" href="ui/ab-ui-v3.css">
+  <script src="assets/data.js" defer></script>
+  <script src="assets/app.js" defer></script>
+  <script src="ui/ab-doodles-v3.js" defer></script>
+</head>
+<body data-page="pillar">
+<main id="main">
+  <header class="page-hero sky" id="intro"><div class="wrap" id="pillar-hero"></div></header>
+
+  <section class="section" id="projects">
+    <div class="wrap">
+      <div class="section-head"><h2>Projects</h2></div>
+      <div class="grid c3" id="pillar-projects"></div>
+      <div class="note">Projects belong to exactly one pillar. Each card shows the implementation period, which is separate from any story's publish date.</div>
+    </div>
+  </section>
+
+  <section class="section" id="impact">
+    <div class="wrap">
+      <div class="section-head"><h2>Impact</h2></div>
+      <div id="pillar-stats" style="margin-bottom:28px"></div>
+      <div class="grid c3" id="pillar-stories"></div>
+      <p style="margin-top:20px;text-align:center"><a class="btn" id="see-other" href="stories.html">See other stories</a></p>
+      <div class="note">Only stories tagged to this pillar appear here. Today every pillar page shows the same six stories (audit finding). "See other stories" opens the feed pre-filtered to this pillar.</div>
+    </div>
+  </section>
+
+  <section class="section" id="team">
+    <div class="wrap">
+      <div class="section-head"><h2>The team</h2></div>
+      <div class="people" id="pillar-team"></div>
+      <p style="margin-top:24px;text-align:center"><a class="link-arrow" href="about.html#team">Meet the rest of the team</a></p>
+    </div>
+  </section>
+
+  <section class="section" id="support">
+    <div class="wrap">
+      <div class="section-head"><h2>Support this pillar</h2></div>
+      <div class="involve-grid" style="grid-template-columns:minmax(0,1.25fr) minmax(0,1fr)">
+        <div class="card card--attention sky sky--pink">
+          <svg class="doodle doodle--draw c-yellow" style="--delay:.3s; top:18px; right:22px; width:74px; height:50px; stroke-width:5; transform:rotate(12deg)" viewBox="0 0 120 80" aria-hidden="true"><use href="#d-crown"/></svg>
+          <svg class="doodle doodle--draw doodle--fine c-white" style="--delay:.6s; bottom:24px; right:28px; width:34px; height:34px; stroke-width:9" viewBox="0 0 100 100" aria-hidden="true"><use href="#d-sparkle"/></svg>
+          <div class="card__body">
+            <h3 class="h2" style="font-size:clamp(2rem,3.4vw,2.75rem)">Donate</h3>
+            <p>Every donation goes into programs like these. Choose GCash, bank transfer or an overseas option.</p>
+            <div><a class="btn btn--ink btn--lg" href="donate.html">Donate now <span aria-hidden="true">→</span></a></div>
+          </div>
+        </div>
+        <a class="card" href="volunteer.html">
+          <div class="card__body">
+            <svg class="doodle card__icon c-teal" viewBox="0 0 160 120" aria-hidden="true"><use href="#d-speech"/></svg>
+            <h3 class="h3 card__title" style="--pillar:var(--teal-500)">Volunteer<svg class="doodle draw-on-hover" viewBox="0 0 300 24" preserveAspectRatio="none" aria-hidden="true"><use href="#d-underline-single"/></svg></h3>
+            <p>Give your time to a program near you through the Angat Bayanihan Volunteer Network.</p>
+            <span class="link-doodle" style="margin-top:auto">Sign up to volunteer <span class="arrow" aria-hidden="true">→</span></span>
+          </div>
+        </a>
+      </div>
+      <div class="note">Added because current program pages explain the pillar but not how to take part (audit finding).</div>
+    </div>
+  </section>
+
+  <section class="section" id="other-pillars">
+    <div class="wrap">
+      <div class="section-head"><h2>Other pillars</h2></div>
+      <div class="grid c4" id="pillar-others"></div>
+    </div>
+  </section>
+</main>
+</body>
+</html>

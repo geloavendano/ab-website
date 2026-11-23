@@ -82,3 +82,11 @@ The v2 language now styles every public page of the prototype. The neutral wiref
   - Every page section has a stable anchor (e.g. `about.html#mission-vision`, `donate.html#after-you-donate`, `project.html?id=…#participate`); after rendering, app.js jumps to the anchor again once fonts and images have loaded.
   - Every page declares the favicon (fixes a /favicon.ico 404 on each load).
 - **Content (2026-11-21):** all 33 stories from angatbuhay.ph imported from its WordPress API (title, date, author, summary, featured photo at medium-large size, in-story photos, full text). Pillar, project and place tags are ours, read from each story (the live site files everything under one category), and flagged `tagsToConfirm`. Kept alongside: the Liloan Instagram reel and three samples for the video and infographic formats, plus the hidden status demos. New places: Pasig, Lupi, Camarines Norte, CALABARZON with Rizal (San Mateo) and Quezon (Polillo), Aklan (Malinao). Story pages render the real text with photos spread through it; placeholders remain only on samples.
+- **Revision (2026-11-23):**
+  - Pillar photos from Angat Buhay: 1600 px page headers (`ui/media/pillars/{slug}.jpg`) and 800 px homepage cards (`{slug}-card.jpg`); originals stay out of git.
+  - Pillar pages moved from `advocacy.html` to `pillar.html`; the old address forwards (query and anchor kept) so shared links still work.
+  - Pillar team: Executive Director, Deputy Executive Director for Programs and Operations, then the pillar's Program Manager/Officer.
+  - Projects: no Ongoing/Completed status on cards or pages; dates, places and partners show only when given; project pages render their own description and partners when the CMS has them.
+  - New projects: Kusina ng Pag-asa (Climate Action), Angat Sining Musika (Arts and Culture); "Disaster relief 2025" renamed Disaster Relief and Preparedness with a new photo.
+  - Home: new hero intro, headings "Our five advocacy pillars" and "Stories of Bayanihan"; the impact section is hidden (`hidden` attribute) for now. The Christmas card promo uses the 2026 card art and Angat Buhay's note.
+  - About: new hero intro and founding story.

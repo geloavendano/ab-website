@@ -158,20 +158,23 @@
     </article>`;
   }
 
+  /** "Feb 2024 – Jan 2026", "Sep 2022 – present", or "" when no dates were given. */
+  const projectPeriod = (p) => (p.start ? `${fmtMonth(p.start)} – ${p.end ? fmtMonth(p.end) : "present"}` : "");
+
   function projectCard(p) {
     return `<article class="card card--story card--project" style="${pillarStyle(p.pillar)}">
       <div class="card__media">${img(p.image, "", "r-4x3", "project photo")}</div>
       <div class="card__body body">
         <h3 class="h3 card__title"><a class="stretched" href="project.html?id=${esc(p.id)}"><span class="title-ink">${esc(p.title)}${HOVER_LINE}</span></a></h3>
         <p class="sub">${esc(p.summary)}</p>
-        <div class="meta">${projectIsOngoing(p) ? "Ongoing" : "Completed"} · ${fmtMonth(p.start)} – ${p.end ? fmtMonth(p.end) : "present"}</div>
+        ${projectPeriod(p) ? `<div class="meta">${projectPeriod(p)}</div>` : ""}
       </div>
     </article>`;
   }
 
   /** Pillar card: portrait photo, pillar-coloured underline on hover. */
-  const pillarCard = (p) => `<a class="card card--pillar" href="advocacy.html?p=${esc(p.slug)}" style="${pillarStyle(p.slug)}">
-      <div class="card__media"><img src="${esc(M(p.image))}" alt="" loading="lazy" decoding="async"></div>
+  const pillarCard = (p) => `<a class="card card--pillar" href="pillar.html?p=${esc(p.slug)}" style="${pillarStyle(p.slug)}">
+      <div class="card__media"><img src="${esc(M(p.thumb || p.image))}" alt="" loading="lazy" decoding="async"></div>
       <div class="card__body"><h3 class="h3 card__title">${esc(p.name)}${HOVER_LINE}</h3><p>${esc(p.tagline)}</p></div>
     </a>`;
 
@@ -195,7 +198,7 @@
    * Chrome: header, footer, prototype toolbar
    * ------------------------------------------------------------------ */
   const NAV_CURRENT = { stories: "stories.html", story: "stories.html", presence: "presence.html", about: "about.html", donate: "donate.html",
-    advocacy: "index.html#pillars", project: "index.html#pillars" };
+    pillar: "index.html#pillars", project: "index.html#pillars" };
   /** Pages that live under the "Get involved" menu (its heading shows as current there). */
   const INVOLVED_PAGES = ["involved", "donate", "volunteer", "fundraisers", "resources"];
 
@@ -215,7 +218,7 @@
         ${top("stories.html", "Stories")}
         <a class="nav-link nav-desktop" href="index.html#pillars"${cur === "index.html#pillars" ? ' aria-current="page"' : ""}>${esc(t("Pillars"))}${line}</a>
         <details class="nav-mobile"><summary class="nav-link${cur === "index.html#pillars" ? " is-current" : ""}">${t("Pillars")}${line}</summary><div class="menu">
-          ${D.pillars.map((p) => `<a href="advocacy.html?p=${p.slug}">${esc(p.name)}</a>`).join("")}
+          ${D.pillars.map((p) => `<a href="pillar.html?p=${p.slug}">${esc(p.name)}</a>`).join("")}
         </div></details>
         ${top("presence.html", "Presence")}
         ${top("about.html", "About")}
@@ -248,7 +251,7 @@
         <div><span class="footer-logo"><img src="assets/media/angat-buhay-logo.png" alt="Angat Buhay" width="82" height="46"></span><p style="margin-top:1.25rem">${esc(o.intro)}</p></div>
         <div><h4>${t("Explore")}</h4><ul>
           <li><a href="stories.html">${t("Stories")}</a></li>
-          ${D.pillars.map((p) => `<li><a href="advocacy.html?p=${p.slug}">${esc(p.name)}</a></li>`).join("")}
+          ${D.pillars.map((p) => `<li><a href="pillar.html?p=${p.slug}">${esc(p.name)}</a></li>`).join("")}
           <li><a href="presence.html">${t("Presence")}</a></li>
         </ul></div>
         <div><h4>${t("Get involved")}</h4><ul>
@@ -413,7 +416,7 @@
   }
 
   function homePillarCard(p, index) {
-    return `<a class="pillar-card pillar-card-${index + 1}" href="advocacy.html?p=${esc(p.slug)}" style="--pillar-image:url('${esc(M(p.image))}')">
+    return `<a class="pillar-card pillar-card-${index + 1}" href="pillar.html?p=${esc(p.slug)}" style="--pillar-image:url('${esc(M(p.image))}')">
       <span class="pillar-number">0${index + 1}</span>
       <span class="pillar-card-copy"><strong>${esc(p.name)}</strong><small>${esc(p.tagline)}</small><b>Explore advocacy</b></span>
     </a>`;
@@ -577,14 +580,14 @@
           <span>Published <b>${fmtDate(s.publishedAt)}</b></span>
           <span>Format <b>${FORMAT_LABEL[s.format]}</b></span>
           <span>By <b>${esc(s.author)}</b></span>
-          ${p ? `<span>Pillar <a href="advocacy.html?p=${p.slug}"><b>${esc(p.name)}</b></a></span>` : ""}
+          ${p ? `<span>Pillar <a href="pillar.html?p=${p.slug}"><b>${esc(p.name)}</b></a></span>` : ""}
           ${pr ? `<span>Project <a href="project.html?id=${pr.id}"><b>${esc(pr.title)}</b></a></span>` : ""}
           ${s.areas.length ? `<span>Where <b>${esc(s.areas.map(areaLabel).join("; "))}</b></span>` : ""}
         </div>
         <div class="note">"Published" is when the story went live. The project's implementation period is shown on the project page. The two dates are kept separate in the CMS.</div>
         ${body}
         <div class="chips" style="margin:24px 0">${s.areas.map((a) => `<a class="chip" href="stories.html?region=${a}">${esc(areaLabel(a))}</a>`).join("")}</div>
-        <div class="banner" style="font-weight:400"><b>Support this work.</b> <a href="donate.html">Donate</a> · <a href="volunteer.html">Volunteer</a>${p ? ` · <a href="advocacy.html?p=${p.slug}">More on ${esc(p.name)}</a>` : ""}</div>
+        <div class="banner" style="font-weight:400"><b>Support this work.</b> <a href="donate.html">Donate</a> · <a href="volunteer.html">Volunteer</a>${p ? ` · <a href="pillar.html?p=${p.slug}">More on ${esc(p.name)}</a>` : ""}</div>
         <p class="small muted">Share:
           <a href="https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(location.href)}" target="_blank" rel="noopener">Facebook</a> ·
           <a href="https://x.com/intent/post?url=${encodeURIComponent(location.href)}&text=${encodeURIComponent(s.title)}" target="_blank" rel="noopener">X</a> ·
@@ -595,7 +598,7 @@
     `);
   };
 
-  pages.advocacy = () => {
+  pages.pillar = () => {
     const p = pillarBy(param("p")) || D.pillars[0];
     document.title = p.name + " · Angat Buhay";
     fill("pillar-hero", `<h1>${esc(p.name)}</h1><p class="lede">${esc(p.description)}</p>${img(p.image, "", "r-16x9 wide", "pillar hero photo / short video loop")}`);
@@ -606,8 +609,10 @@
     fill("pillar-stories", stories.slice(0, 3).map(storyCard).join("") || `<p class="muted">No stories yet.</p>`);
     $("#see-other").href = "stories.html?pillar=" + p.slug;
     $("#see-other").textContent = `See all ${stories.length} ${p.name} stories`;
-    const leads = D.team.secretariat.filter((m) => m.pillar === p.slug);
-    const team = [...leads, ...D.team.secretariat.filter((m) => !m.pillar)].slice(0, 4);
+    // Executive Director, Deputy Executive Director for Programs, then this pillar's program staff.
+    const byRole = (re) => D.team.secretariat.find((m) => re.test(m.role));
+    const team = [byRole(/^Executive Director$/), byRole(/Deputy Executive Director for Programs/),
+      ...D.team.secretariat.filter((m) => m.pillar === p.slug && /Program (Manager|Officer)/.test(m.role))].filter(Boolean);
     fill("pillar-team", team.map(person).join(""));
     fill("pillar-others", D.pillars.filter((x) => x.slug !== p.slug).map(pillarCard).join(""));
   };
@@ -655,21 +660,20 @@
     document.title = pr.title + " · Angat Buhay";
     const stories = listedStories().filter((s) => s.project === pr.id);
     fill("project", `
-      <a class="back" href="advocacy.html?p=${p.slug}">${esc(p.name)}</a>
+      <a class="back" href="pillar.html?p=${p.slug}">${esc(p.name)}</a>
       <h1>${esc(pr.title)}</h1>
       <p class="lede">${esc(pr.summary)}</p>
       <dl class="kv">
-        <dt>Status</dt><dd>${projectIsOngoing(pr) ? "Ongoing" : "Completed"}</dd>
-        <dt>Implementation</dt><dd>${fmtMonth(pr.start)} – ${pr.end ? fmtMonth(pr.end) : "present"} <span class="sample-tag">SAMPLE DATES</span></dd>
-        <dt>Where</dt><dd>${pr.areas.map((a) => `<a href="stories.html?region=${a}">${esc(areaLabel(a))}</a>`).join("; ")}</dd>
-        <dt>Partners</dt><dd>Partner LGUs, schools and local organizations${PH_TAG}</dd>
+        ${pr.start ? `<dt>Implementation</dt><dd>${projectPeriod(pr)} <span class="sample-tag">SAMPLE DATES</span></dd>` : ""}
+        ${pr.areas.length ? `<dt>Where</dt><dd>${pr.areas.map((a) => `<a href="stories.html?region=${a}">${esc(areaLabel(a))}</a>`).join("; ")}</dd>` : ""}
+        <dt>Partners</dt><dd>${pr.partners ? pr.partners.map(esc).join("; ") : `Partner LGUs, schools and local organizations${PH_TAG}`}</dd>
         ${pr.participation ? `<dt>Taking part</dt><dd><a href="#participate">${esc(pr.participation.label)}</a></dd>` : ""}
       </dl>
-      <div class="note">Status is derived from the implementation end date, never typed in by hand, so it cannot go stale.</div>
       ${img(pr.image, "", "r-16x9", "project photo / gallery")}
       <div class="article" style="margin:32px 0 0;max-width:720px">
         <h2 id="about-project">About the project</h2>
-        <p>This section explains the need the project responds to, how Angat Buhay and its partners deliver it, and who benefits. It will be written with the program team.${PH_TAG}</p>
+        ${pr.description ? pr.description.map((para) => `<p>${esc(para)}</p>`).join("")
+          : `<p>This section explains the need the project responds to, how Angat Buhay and its partners deliver it, and who benefits. It will be written with the program team.${PH_TAG}</p>`}
         <h2 id="results">Results</h2>
         <p>Key outcomes with figures, each with its reporting period and source.${PH_TAG}</p>
       </div>
@@ -713,7 +717,7 @@
         provinces += rs.filter((r) => r.area.type !== "region").length;
         return `<tr class="region-row"><th colspan="4" scope="colgroup">${esc(reg.name)}</th></tr>` + rs.map((r) => `<tr id="${r.area.id}">
           <th scope="row">${r.area.type === "region" ? "Region-wide" : esc(r.area.name)}</th>
-          <td data-label="Pillars"><div class="chips">${[...r.pillars].map((p) => `<a class="chip" href="advocacy.html?p=${p}">${esc(pillarBy(p).name)}</a>`).join("")}</div></td>
+          <td data-label="Pillars"><div class="chips">${[...r.pillars].map((p) => `<a class="chip" href="pillar.html?p=${p}">${esc(pillarBy(p).name)}</a>`).join("")}</div></td>
           <td data-label="Projects">${[...r.projects].map((id) => `<a href="project.html?id=${id}">${esc(projectBy(id).title)}</a>`).join("<br>") || "—"}</td>
           <td data-label="Volunteer organizations">${[...r.orgs].map(esc).join("<br>") || "—"}</td>
         </tr>`).join("");
@@ -770,7 +774,7 @@
     const ownFor = (g) => g.own.filter((r) => !filter || r.pillars.has(filter));
     const wideFor = (g) => (g.wide && (!filter || g.wide.pillars.has(filter)) ? g.wide : null);
     const stateOf = (g) => (ownFor(g).length ? "has" : wideFor(g) ? "region" : "none");
-    const chips = (set) => `<div class="chips">${[...set].map((p) => `<a class="chip" href="advocacy.html?p=${p}">${esc(pillarBy(p).name)}</a>`).join("")}</div>`;
+    const chips = (set) => `<div class="chips">${[...set].map((p) => `<a class="chip" href="pillar.html?p=${p}">${esc(pillarBy(p).name)}</a>`).join("")}</div>`;
 
     host.innerHTML = `<svg class="ph-map__svg" viewBox="${window.AB_MAP.viewBox}" role="group" aria-label="Map of the Philippines by province">${
       window.AB_MAP.provinces.map((f) => `<path d="${f.d}" data-key="${f.region === NCR ? "ncr" : f.psgc}"></path>`).join("")}</svg>`;
@@ -912,7 +916,7 @@ const ACCOUNT_PLACEHOLDER = { "BDO": "0000 000 0000", "BPI": "0000-0000-00", "BP
   };
 
   pages.sitemap = () => {
-    fill("sitemap-pillars", D.pillars.map((p) => `<li><a href="advocacy.html?p=${p.slug}">${esc(p.name)}</a></li>`).join(""));
+    fill("sitemap-pillars", D.pillars.map((p) => `<li><a href="pillar.html?p=${p.slug}">${esc(p.name)}</a></li>`).join(""));
     fill("sitemap-projects", D.projects.map((p) => `<li><a href="project.html?id=${p.id}">${esc(p.title)}</a> <span class="muted small">(${esc(pillarBy(p.pillar).name)})</span></li>`).join(""));
   };
 
