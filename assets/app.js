@@ -609,10 +609,10 @@
     fill("pillar-stories", stories.slice(0, 3).map(storyCard).join("") || `<p class="muted">No stories yet.</p>`);
     $("#see-other").href = "stories.html?pillar=" + p.slug;
     $("#see-other").textContent = `See all ${stories.length} ${p.name} stories`;
-    // Executive Director, Deputy Executive Director for Programs, then this pillar's program staff.
+    // Executive Director, Deputy Executive Director for Programs, then this pillar's Program Manager/Officer/Associate.
     const byRole = (re) => D.team.secretariat.find((m) => re.test(m.role));
     const team = [byRole(/^Executive Director$/), byRole(/Deputy Executive Director for Programs/),
-      ...D.team.secretariat.filter((m) => m.pillar === p.slug && /Program (Manager|Officer)/.test(m.role))].filter(Boolean);
+      ...D.team.secretariat.filter((m) => m.pillar === p.slug && /Program (Manager|Officer|Associate)/.test(m.role))].filter(Boolean);
     fill("pillar-team", team.map(person).join(""));
     fill("pillar-others", D.pillars.filter((x) => x.slug !== p.slug).map(pillarCard).join(""));
   };

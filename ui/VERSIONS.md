@@ -85,7 +85,7 @@ The v2 language now styles every public page of the prototype. The neutral wiref
 - **Revision (2026-11-23):**
   - Pillar photos from Angat Buhay: 1600 px page headers (`ui/media/pillars/{slug}.jpg`) and 800 px homepage cards (`{slug}-card.jpg`); originals stay out of git.
   - Pillar pages moved from `advocacy.html` to `pillar.html`; the old address forwards (query and anchor kept) so shared links still work.
-  - Pillar team: Executive Director, Deputy Executive Director for Programs and Operations, then the pillar's Program Manager/Officer.
+  - Pillar team: Executive Director, Deputy Executive Director for Programs and Operations, then the pillar's Program Manager/Officer and Associate.
   - Projects: no Ongoing/Completed status on cards or pages; dates, places and partners show only when given; project pages render their own description and partners when the CMS has them.
   - New projects: Kusina ng Pag-asa (Climate Action), Angat Sining Musika (Arts and Culture); "Disaster relief 2025" renamed Disaster Relief and Preparedness with a new photo.
   - Home: new hero intro, headings "Our five advocacy pillars" and "Stories of Bayanihan"; the impact section is hidden (`hidden` attribute) for now. The Christmas card promo uses the 2026 card art and Angat Buhay's note.
