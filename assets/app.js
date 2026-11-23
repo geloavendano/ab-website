@@ -125,8 +125,11 @@
     "We empower Filipinos to become communities of active citizens by mobilizing the largest volunteer network in implementing Bayanihan programs.":
       "Tinutulungan namin ang mga Pilipino na maging mga komunidad ng aktibong mamamayan sa pamamagitan ng pagpapakilos sa pinakamalaking volunteer network sa pagpapatupad ng mga programang Bayanihan."
   };
-  let LANG = param("lang") === "fil" ? "fil" : param("lang") === "en" ? "en" : null;
-  try { LANG = LANG || localStorage.getItem("ab-lang") || "en"; if (LANG) localStorage.setItem("ab-lang", LANG); } catch (e) { LANG = LANG || "en"; }
+  // EN/FIL switch hidden for now (Nov 2026); set to true to bring it back. While off, every page
+  // is English, even for visitors who chose Filipino earlier (they'd have no way to switch back).
+  const LANG_SWITCH = false;
+  let LANG = !LANG_SWITCH ? "en" : param("lang") === "fil" ? "fil" : param("lang") === "en" ? "en" : null;
+  try { LANG = LANG || localStorage.getItem("ab-lang") || "en"; if (LANG_SWITCH) localStorage.setItem("ab-lang", LANG); } catch (e) { LANG = LANG || "en"; }
   const t = (en) => (LANG === "fil" && FIL[en]) || en;
   /** Translate static headings/buttons already in the page HTML. */
   function translateStatic() {
@@ -209,6 +212,7 @@
     const a = (href, label) => `<a href="${href}"${href === cur ? ' aria-current="page"' : ""}>${esc(t(label))}</a>`;
     const langBtn = (code, label, name) => `<button type="button" data-lang="${code}" aria-pressed="${LANG === code}" lang="${code}" aria-label="${name}">${label}</button>`;
     const langs = langBtn("en", "EN", "English") + langBtn("fil", "FIL", "Filipino");
+    const langGroup = (cls) => (LANG_SWITCH ? `<div class="${cls}" role="group" aria-label="Language / Wika">${langs}</div>` : "");
     return `<a class="skip" href="#main">${t("Skip to content")}</a>
     <header class="site-header" data-header><div class="wrap site-header__bar">
       <a class="brand logo" href="index.html" aria-label="Angat Buhay home"${page === "home" ? ' aria-current="page"' : ""}><img class="brand-logo" src="assets/media/angat-buhay-logo.png" alt="Angat Buhay" width="82" height="46">${
@@ -230,10 +234,10 @@
           ${a("involved.html#partner", "Partner with us")}
           ${a("resources.html", "Reports & resources")}
         </div></details>
-        <div class="nav-lang lang-switch" role="group" aria-label="Language / Wika">${langs}</div>
+        ${langGroup("nav-lang lang-switch")}
       </nav>
       <div class="header-tools site-header__actions">
-        <div class="lang-switch" role="group" aria-label="Language / Wika">${langs}</div>
+        ${langGroup("lang-switch")}
         <a class="btn btn--attention btn--sm" href="donate.html">${esc(t("Donate"))}${doodle("btn__spark doodle--fine", "sparkle", "0 0 100 100")}</a>
         <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="nav"><span class="visually-hidden">Menu</span>
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h10"/></svg></button>

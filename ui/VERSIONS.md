@@ -90,3 +90,4 @@ The v2 language now styles every public page of the prototype. The neutral wiref
   - New projects: Kusina ng Pag-asa (Climate Action), Angat Sining Musika (Arts and Culture); "Disaster relief 2025" renamed Disaster Relief and Preparedness with a new photo.
   - Home: new hero intro, headings "Our five advocacy pillars" and "Stories of Bayanihan"; the impact section is hidden (`hidden` attribute) for now. The Christmas card promo uses the 2026 card art and Angat Buhay's note.
   - About: new hero intro and founding story.
+  - The EN/FIL language switch is hidden for now (`LANG_SWITCH` in `assets/app.js`); every page shows English. The Filipino strings stay in place.
