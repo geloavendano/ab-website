@@ -187,7 +187,7 @@
     return (words[0][0] + (words.length > 1 ? words[words.length - 1][0] : "")).toUpperCase();
   };
   const person = (m) => `<div class="person">${m.photo ? img(m.photo, "", "round")
-      : `<span class="avatar" role="img" aria-label="Photo to follow">${esc(initials(m.name))}</span>`}<b>${esc(m.name)}</b><span>${esc(m.role)}</span></div>`;
+      : `<span class="avatar" role="img" aria-label="Photo to follow">${esc(initials(m.name))}</span>`}<b>${esc(m.name)}</b><span>${esc(m.role)}</span>${m.note ? `<small class="person__note">${esc(m.note)}</small>` : ""}</div>`;
 
   function statsBlock(stats) {
     if (!stats.length) return "";
@@ -853,7 +853,13 @@
   pages.about = () => {
     fill("mission", esc(D.org.mission));
     fill("vision", esc(D.org.vision));
-    fill("values", D.org.values.map((v) => `<div class="card"><div class="body"><h3>${esc(v.en)}</h3><p class="sub"><i>${esc(v.fil)}</i></p></div></div>`).join(""));
+    // Illustration cards: a sky in the value's colour, its symbol drawn in crayon, Filipino first.
+    const VALUE_ICON_BOX = { bulb: "0 0 120 120", bayanihan: "0 0 160 120", sun: "0 0 120 120" };
+    fill("values", D.org.values.map((v, i) => `<div class="card value-card sky sky--panel sky--${esc(v.sky)}">
+      <svg class="doodle doodle--draw value-card__icon" style="--delay:${(0.2 + i * 0.25).toFixed(2)}s" viewBox="${VALUE_ICON_BOX[v.icon]}" aria-hidden="true"><use href="#d-${esc(v.icon)}"/></svg>
+      <svg class="doodle doodle--draw doodle--fine value-card__spark c-white" style="--delay:${(0.6 + i * 0.25).toFixed(2)}s" viewBox="0 0 100 100" aria-hidden="true"><use href="#d-sparkle"/></svg>
+      <div class="card__body"><h3 class="h3" lang="fil">${esc(v.fil)}</h3><p>${esc(v.en)}</p></div>
+    </div>`).join(""));
     fill("trustees", D.team.trustees.map(person).join(""));
     fill("secretariat", D.team.secretariat.map(person).join(""));
     fill("certs", D.certifications.map((c) => `<div class="card">${ph("certificate / logo", "r-4x3")}<div class="body"><h3>${esc(c.name)}</h3><p class="sub">${esc(c.issuer)}</p><p class="small muted" style="margin:0">${esc(c.detail)}${c.placeholder ? PH_TAG : ""}</p></div></div>`).join(""));

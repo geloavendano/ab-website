@@ -91,3 +91,10 @@ The v2 language now styles every public page of the prototype. The neutral wiref
   - Home: new hero intro, headings "Our five advocacy pillars" and "Stories of Bayanihan"; the impact section is hidden (`hidden` attribute) for now. The Christmas card promo uses the 2026 card art and Angat Buhay's note.
   - About: new hero intro and founding story.
   - The EN/FIL language switch is hidden for now (`LANG_SWITCH` in `assets/app.js`); every page shows English. The Filipino strings stay in place.
+- **Revision (2026-11-24):**
+  - About: the film lightbox is titled "This is Angat Buhay"; new Mission and Vision text (the two statements swap places, per Angat Buhay); new founding-story photo (`ui/media/about/founding-story.jpg`, 1600 px; the 3072 px original stays out of git).
+  - Core values are illustration cards: Filipino first, English under it, each on its own sky (`.sky--teal`, `.sky--yellow`, `.sky--blue`, the Donate card's recipe; pink stays Donate's) with a crayon symbol drawn in on scroll: a light bulb, bayanihan (people carrying a bahay kubo), the flag's sun with a heart. Symbols live in `ab-doodles-v3.js`.
+  - Board: a smaller second line under the role for committees (Edward Lim: Investment Management Committee; Atty. Stella Esquivias: Risk Management Committee).
+  - Elizabeth Olivan's photo is re-cut from the original Angat Buhay sent, with its blue-grey backdrop lightened to match the other trustees (`ui/tools/whiten-portrait-bg.py`).
+  - Get involved: "Current partners" is hidden (`hidden` on `#current-partners`) until there are logos.
+  - Stories: the eight 2023 stories are archived, so they leave the feed, homepage and pillar pages (29 stories listed).

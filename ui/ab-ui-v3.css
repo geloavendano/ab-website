@@ -196,6 +196,46 @@ h1, h2, h3, h4 { font-family: var(--font-display); color: var(--navy); margin: 0
     linear-gradient(135deg, #F6A9CF 0%, var(--pink-300) 45%, var(--pink-500) 100%);
 }
 
+/* Core value cards (About): the Donate card's recipe in three other brand colours.
+   Pink stays Donate's. Same layout of light: a white bloom behind the ink copy, a
+   deeper corner bottom-right for the white sparkle, a warm accent bottom-left.
+   Ink on every base: teal-300 8.3:1, yellow 11:1, light blue 8.6:1. */
+.sky--teal { background: var(--teal-300); }
+.sky--teal::before {
+  background:
+    radial-gradient(34% 34% at 30% 70%, rgba(255, 255, 255, .7) 0%, rgba(255, 255, 255, 0) 72%),
+    radial-gradient(42% 48% at 76% 76%, var(--teal-500) 0%, rgba(20, 174, 187, 0) 72%),
+    radial-gradient(30% 30% at 24% 24%, rgba(253, 196, 99, .55) 0%, rgba(253, 196, 99, 0) 70%),
+    linear-gradient(135deg, #9ADADD 0%, var(--teal-300) 50%, var(--teal-500) 100%);
+}
+.sky--yellow { background: var(--yellow-400); }
+.sky--yellow::before {
+  background:
+    radial-gradient(34% 34% at 30% 70%, rgba(255, 255, 255, .75) 0%, rgba(255, 255, 255, 0) 72%),
+    radial-gradient(42% 48% at 76% 76%, #F59E2E 0%, rgba(245, 158, 46, 0) 72%),
+    radial-gradient(26% 28% at 80% 22%, rgba(236, 117, 184, .5) 0%, rgba(236, 117, 184, 0) 70%),
+    linear-gradient(135deg, #FFE3A8 0%, var(--yellow-400) 55%, #F7B04A 100%);
+}
+.sky--blue { background: #A9BCEB; }
+.sky--blue::before {
+  background:
+    radial-gradient(34% 34% at 30% 70%, rgba(255, 255, 255, .75) 0%, rgba(255, 255, 255, 0) 72%),
+    radial-gradient(42% 48% at 78% 78%, #7187CB 0%, rgba(113, 135, 203, 0) 72%),
+    radial-gradient(28% 30% at 22% 24%, rgba(84, 190, 195, .5) 0%, rgba(84, 190, 195, 0) 70%),
+    linear-gradient(135deg, #D3DDF6 0%, #A9BCEB 50%, #8EA3DD 100%);
+}
+.values-grid { gap: clamp(1rem, 2vw, 1.5rem); }
+@media (min-width: 900px) { .grid.c3.values-grid { grid-template-columns: repeat(3, 1fr); } }
+.value-card { box-shadow: 0 24px 50px -32px rgba(36, 67, 90, .55); min-height: 340px; color: var(--ink); }
+.value-card .card__body { padding: clamp(1.5rem, 3vw, 2rem); padding-top: 168px; gap: .5rem; position: relative; z-index: 2; margin-top: auto; }
+.value-card h3 { color: var(--ink); font-size: clamp(1.35rem, 2vw, 1.6rem); line-height: 1.2; }
+.value-card p { margin: 0; color: var(--ink); font-size: 1rem; }
+.value-card__icon { top: 24px; left: clamp(1.1rem, 2.6vw, 1.6rem); width: 132px; height: 124px; stroke-width: 4.5; z-index: 1; }
+.value-card:nth-child(1) .value-card__icon { color: var(--navy); transform: rotate(-6deg); }
+.value-card:nth-child(2) .value-card__icon { color: var(--pink-700); width: 172px; }
+.value-card:nth-child(3) .value-card__icon { color: var(--pink-700); transform: rotate(8deg); }
+.value-card__spark { right: 24px; bottom: 22px; width: 30px; height: 30px; stroke-width: 9; }
+
 /* Faint grain on calm surfaces so the page still feels like one print. */
 .paper-grain { position: relative; isolation: isolate; }
 .paper-grain::after {
@@ -910,6 +950,8 @@ ol.steps > li::before {
 .person img.media, .person .ph { width: 112px; height: 112px; margin: 0 auto .8rem; box-shadow: 0 0 0 4px #fff, 0 0 0 6px var(--pink-300); }
 .person b { display: block; font: 600 .9688rem/1.3 var(--font-display); color: var(--navy); }
 .person span { display: block; margin-top: .25rem; font-size: .8125rem; color: var(--text-muted); }
+/* A second line under the role (e.g. a board committee), one step smaller. */
+.person .person__note { display: block; margin-top: .2rem; font-size: .6875rem; line-height: 1.35; color: var(--text-muted); }
 
 /* ---------- Tables ---------- */
 .table { width: 100%; border-collapse: separate; border-spacing: 0; font-size: .9688rem; background: var(--surface); border-radius: var(--r-lg); box-shadow: var(--shadow-1); overflow: hidden; }
