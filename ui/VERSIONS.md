@@ -97,4 +97,4 @@ The v2 language now styles every public page of the prototype. The neutral wiref
   - Board: a smaller second line under the role for committees (Edward Lim: Investment Management Committee; Atty. Stella Esquivias: Risk Management Committee).
   - Elizabeth Olivan's photo is re-cut from the original Angat Buhay sent, with its blue-grey backdrop lightened to match the other trustees (`ui/tools/whiten-portrait-bg.py`).
   - Get involved: "Current partners" is hidden (`hidden` on `#current-partners`) until there are logos.
-  - Stories: the eight 2023 stories are archived, so they leave the feed, homepage and pillar pages (29 stories listed).
+  - Stories: archived per Angat Buhay's marks in the content doc: the eight 2023 stories and "Call for Bids on Classroom Projects!" (a procurement notice). They leave the feed, homepage and pillar pages; 24 of the 33 imported stories stay listed.
