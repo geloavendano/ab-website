@@ -932,6 +932,9 @@ ol.steps > li::before {
 
 .contact-card { flex-direction: row; align-items: center; gap: 1rem; flex-wrap: wrap; margin-top: 1.5rem; padding: 1.25rem; }
 .contact-card > div:nth-child(2) { flex: 1; min-width: 200px; }
+/* Label in the name's typeface (Rubik) but lighter, in the eyebrow pink; its own line, no tilt. */
+.contact-card__label { display: block; margin-bottom: .2rem; font: 500 .875rem/1.3 var(--font-display); letter-spacing: .01em; color: var(--pink-700); }
+.contact-card__name { display: block; font: 600 1.125rem/1.3 var(--font-display); color: var(--navy); }
 
 /* ---------- Team ---------- */
 /* No photo yet: initials on a small sky, same ring as the photos. */

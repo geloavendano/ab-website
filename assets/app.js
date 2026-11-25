@@ -648,8 +648,8 @@
       </div>
       <div class="card contact-card">
         ${lead ? `<div style="width:64px;flex:none">${img(lead.photo, "", "round")}</div>` : ""}
-        <div><span class="eyebrow">Responsible contact</span>
-          <b>${lead ? esc(lead.name) : "Partnerships team"}</b><div class="small muted">${lead ? esc(lead.role) : ""} · <a href="mailto:${D.org.partnershipsEmail}">${D.org.partnershipsEmail}</a></div></div>
+        <div><span class="contact-card__label">Responsible contact</span>
+          <b class="contact-card__name">${lead ? esc(lead.name) : "Partnerships team"}</b><div class="small muted">${lead ? esc(lead.role) : ""} · <a href="mailto:${D.org.partnershipsEmail}">${D.org.partnershipsEmail}</a></div></div>
         <a class="btn solid" href="${mail}">${part.status === "closed" ? "Ask about similar programs" : "Inquire about this project"}</a>
       </div>
       <div class="note">Availability, eligibility and contact are CMS fields on each project, so LGUs can see whether they can join before writing in. The contact is the pillar's program lead from the Team collection; the assignment is a placeholder.</div>
