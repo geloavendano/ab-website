@@ -113,3 +113,8 @@ The v2 language now styles every public page of the prototype. The neutral wiref
   - Project pages: no Results section; a project's results are told through its stories ("Stories from this project").
   - Project pages: the "Responsible contact" label is set in Rubik 500 (the name's typeface, lighter) in pink, on its own line above the name, instead of the tilted Kalam eyebrow.
   - Project contact: each pillar's Program Manager (Education: Joanne Astilla; Health: Jasper Vijar; Climate: Menard Mabutol; Community: Izza Arnaez); Arts and Culture, which has none, goes to Rhyn Esolana (Deputy Executive Director for Programs and Operations). Contacts without a photo get the Team page's initials avatar.
+- **Revision (2026-11-25, round 4):**
+  - Project contact: Rhyn Esolana (Deputy Executive Director for Programs and Operations) for every project.
+  - The three sample stories (Bayanihan in Action, A Day with a Reading Volunteer, Bayan Ko, Titser Ko: Impact at a Glance) are archived; the feed lists 25 stories.
+  - Stories hero: no longer a featured story. The silent montage loop plays behind "Bayanihan in action" (intro line drafted, PLACEHOLDER) with two buttons: "Watch the video" opens the full 3:52 montage with sound in a lightbox (streamed from the same third-party host the live homepage uses; it starts playing at once and supports seeking), and "Our stories" scrolls to the feed.
+  - Home: the hero's "Watch with sound" button is now "Learn more" and goes to the Stories page.

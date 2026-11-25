@@ -359,35 +359,49 @@
    * ------------------------------------------------------------------ */
   const pages = {};
 
-  /** Featured story as a full-bleed video hero (Stories page). The loop is the
-   * self-hosted b-roll cut (D.media.heroLoop); the full video plays on the story page. */
-  function featuredHero(linkHref, linkLabel, headingTag) {
-    const s = listedStories().find((x) => x.featured) || listedStories()[0];
-    if (!s) return "";
-    const loop = s.videoUrl && D.media.heroLoop;
-    const media = loop
-      ? `<video data-hero-video poster="${esc(D.media.heroLoopPoster)}" muted playsinline preload="none" aria-hidden="true" tabindex="-1">${
-          D.media.heroLoop.map((v) => `<source data-src="${esc(v.src)}" type="${esc(v.type)}"${v.media ? ` media="${esc(v.media)}"` : ""}>`).join("")}</video>`
-      : s.image ? `<img src="${esc(M(s.image))}" alt="">` : "";
-    return `<section class="hero hero--video hero--story film" aria-labelledby="featured-title">
-      <div class="hero__media">${media}</div>
+  /** Stories page hero: the silent montage loop (D.media.heroLoop) behind the page intro.
+   * "Watch the video" opens the full montage with sound (D.media.heroVideo, the video the live
+   * homepage plays) in a lightbox; "Our stories" scrolls to the feed. */
+  function storiesHero() {
+    const loop = D.media.heroLoop;
+    return `<section class="hero hero--video hero--story film" aria-labelledby="stories-hero-title">
+      <div class="hero__media"><video data-hero-video poster="${esc(D.media.heroLoopPoster)}" muted playsinline preload="none" aria-hidden="true" tabindex="-1">${
+        loop.map((v) => `<source data-src="${esc(v.src)}" type="${esc(v.type)}"${v.media ? ` media="${esc(v.media)}"` : ""}>`).join("")}</video></div>
       <div class="hero__grade" aria-hidden="true"></div><div class="hero__scrim" aria-hidden="true"></div>
       ${doodle("doodle--draw c-yellow hide-tablet", "swoop", "0 0 600 300", "--delay:.6s; top:110px; right:8%; width:min(360px,28vw); height:auto; aspect-ratio:2/1; stroke-width:6")}
       ${doodle("doodle--draw doodle--fine c-white hide-tablet", "sparkle", "0 0 100 100", "--delay:1s; top:40%; right:14%; width:30px; height:30px; stroke-width:9")}
       <div class="wrap hero__inner">
         <div class="hero__copy">
-          <${headingTag} class="display" id="featured-title">${esc(s.title)}</${headingTag}>
-          <p class="lede">${esc(s.subheading)}</p>
-          <div class="hero__ctas"><a class="btn btn--white btn--lg" href="${linkHref || "story.html?s=" + s.slug}"><span class="play">${PLAY_ICON}</span>${esc(t(linkLabel))}</a></div>
+          <h2 class="display" id="stories-hero-title">Bayanihan in action</h2>
+          <p class="lede">Volunteers, partners and communities across the Philippines, in their own words.${PH_TAG}</p>
+          <div class="hero__ctas">
+            <button class="btn btn--white btn--lg" type="button" data-lightbox-open="montage"><span class="play">${PLAY_ICON}</span>Watch the video</button>
+            <a class="btn btn--glass-dark btn--lg" href="#feed">Our stories</a>
+          </div>
         </div>
-        ${loop ? `<div class="hero__now" style="justify-content:flex-end">
+        <div class="hero__now" style="justify-content:flex-end">
           <button class="video-btn" type="button" data-video-toggle data-state="paused" aria-label="Play background video">
             <svg class="icon-pause" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><rect x="3" y="2" width="3.6" height="12" rx="1.2"/><rect x="9.4" y="2" width="3.6" height="12" rx="1.2"/></svg>
             <svg class="icon-play" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M4 2.2v11.6c0 .8.9 1.3 1.6.8l8.6-5.8c.6-.4.6-1.2 0-1.6L5.6 1.4C4.9.9 4 1.4 4 2.2z"/></svg>
-          </button></div>` : ""}
+          </button></div>
       </div>
       ${TORN_EDGE}
-    </section>`;
+    </section>
+    <dialog class="lightbox" id="montage" aria-labelledby="montage-title">
+      <div class="lightbox__bar">
+        <h2 class="lightbox__title" id="montage-title">Bayanihan in action</h2>
+        <label class="lightbox__speed">Speed
+          <select data-lightbox-speed>
+            <option value="0.5">0.5×</option><option value="0.75">0.75×</option><option value="1" selected>1×</option>
+            <option value="1.25">1.25×</option><option value="1.5">1.5×</option><option value="2">2×</option>
+          </select>
+        </label>
+        <button class="lightbox__close" type="button" data-lightbox-close aria-label="Close video">
+          <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 3l10 10M13 3 3 13" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+        </button>
+      </div>
+      <video controls playsinline preload="none" data-src="${esc(D.media.heroVideo)}" poster="${esc(D.media.heroLoopPoster)}"></video>
+    </dialog>`;
   }
 
   function homeHero() {
@@ -460,7 +474,7 @@
   };
 
   pages.stories = () => {
-    fill("hero", featuredHero(null, "Watch more", "h2"));
+    fill("hero", storiesHero());
     const PAGE = 6;
     const st = {
       pillar: param("pillar") || "", region: param("region") || "",
@@ -624,10 +638,8 @@
     const part = pr.participation;
     if (!part) return "";
     const STATUS = { open: "Accepting", waitlist: "Waitlist / upcoming call", closed: "Not accepting now" };
-    // Contact: the pillar's Program Manager; pillars without one (Arts and Culture) go to the
-    // Deputy Executive Director for Programs.
-    const lead = D.team.secretariat.find((m) => m.pillar === p.slug && /^Program Manager/.test(m.role))
-      || D.team.secretariat.find((m) => /Deputy Executive Director for Programs/.test(m.role));
+    // Contact for every project: the Deputy Executive Director for Programs and Operations (Rhyn), per Angat Buhay.
+    const lead = D.team.secretariat.find((m) => /Deputy Executive Director for Programs/.test(m.role));
     const subject = `Partnership inquiry: ${pr.title}`;
     const body = `Project: ${pr.title}\nOrganization / LGU:\nProvince and city/municipality:\nContact person, role and mobile number:\nWhat you would like to achieve:\nPreferred start (month/year):\n`;
     const mail = `mailto:${D.org.partnershipsEmail}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
@@ -656,7 +668,7 @@
           <b class="contact-card__name">${lead ? esc(lead.name) : "Partnerships team"}</b><div class="small muted">${lead ? esc(lead.role) : ""} · <a href="mailto:${D.org.partnershipsEmail}">${D.org.partnershipsEmail}</a></div></div>
         <a class="btn solid" href="${mail}">${part.status === "closed" ? "Ask about similar programs" : "Inquire about this project"}</a>
       </div>
-      <div class="note">Availability, eligibility and contact are CMS fields on each project, so LGUs can see whether they can join before writing in. The contact is the pillar's Program Manager from the Team collection (Rhyn, Deputy Executive Director for Programs, for Arts and Culture).</div>
+      <div class="note">Availability, eligibility and contact are CMS fields on each project, so LGUs can see whether they can join before writing in. The contact for every project is Rhyn Esolana, Deputy Executive Director for Programs and Operations, from the Team collection.</div>
     </section>`;
   }
 
