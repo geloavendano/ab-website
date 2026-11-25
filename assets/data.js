@@ -336,7 +336,7 @@ window.AB = {
       video: {
         title: "Angat Bayanihan Run 2026 – Naga",
         poster: "ui/media/fundraisers/run-naga-poster.jpg",
-        film: "ui/media/fundraisers/run-naga-film-1280.mp4", // 0:36 with sound, 10.6 MB
+        film: "ui/media/fundraisers/run-naga-film-1280.mp4", // 0:00–0:31 with sound (cut before the outdated "Next stop" card, per Angat Buhay), 9.3 MB
         loop: [ // silent 0:02–0:31 cut for the Fundraisers hero (skips the title and "Next stop" cards)
           { src: "ui/media/fundraisers/run-naga-loop-portrait.webm", type: 'video/webm; codecs="av01.0.05M.08"', media: "(max-width: 700px) and (orientation: portrait)" },
           { src: "ui/media/fundraisers/run-naga-loop-portrait.mp4", type: "video/mp4", media: "(max-width: 700px) and (orientation: portrait)" },
