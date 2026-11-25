@@ -866,7 +866,8 @@
   };
 
 const ACCOUNT_PLACEHOLDER = { "BDO": "0000 000 0000", "BPI": "0000-0000-00", "BPI (USD)": "0000 0000 00" };
-  const copyable = (v) => `<span class="mono">${esc(v)}</span> <button class="btn small" type="button" data-copy="${esc(v)}">Copy</button>${PH_TAG}`;
+  /** Account number with a Copy button (digits only go to the clipboard, which bank apps accept). */
+  const copyable = (v, placeholder) => `<span class="mono">${esc(v)}</span> <button class="btn small" type="button" data-copy="${esc(v.replace(/\D/g, ""))}">Copy</button>${placeholder ? PH_TAG : ""}`;
 
   pages.donate = () => {
     const ch = D.donationChannels;
@@ -877,7 +878,7 @@ const ACCOUNT_PLACEHOLDER = { "BDO": "0000 000 0000", "BPI": "0000-0000-00", "BP
         ? `<img class="qr" src="${esc(c.qr.src)}" alt="${esc(c.qr.alt)}" width="220" height="220">
           <p class="small"><a href="${esc(c.qr.src)}" download="angat-buhay-${esc(c.id)}-qr.png">Download QR image</a> (${esc(c.qr.size)}). On a phone, save it, then choose “Upload QR” in the ${esc(c.name)} app.</p>`
         : `<img class="qr" src="assets/media/gcash-qr-placeholder.svg" alt="${esc(c.qr.alt)}" width="220" height="220"><p class="small">QR code to follow.${PH_TAG}</p>`}
-      ${(c.accounts || []).map(([bank, name]) => `<dl class="kv"><dt>Bank</dt><dd>${esc(bank)}</dd><dt>Account name</dt><dd>${esc(name)}</dd><dt>Account number</dt><dd>${copyable(ACCOUNT_PLACEHOLDER[bank] || "0000 0000 00")}</dd>${c.swift ? `<dt>SWIFT</dt><dd>${c.swift}</dd><dt>Bank address</dt><dd>Makati City, Philippines</dd>` : ""}</dl>`).join("")}
+      ${(c.accounts || []).map(([bank, name, number]) => `<dl class="kv"><dt>Bank</dt><dd>${esc(bank)}</dd><dt>Account name</dt><dd>${esc(name)}</dd><dt>Account number</dt><dd>${number ? copyable(number) : copyable(ACCOUNT_PLACEHOLDER[bank] || "0000 0000 00", true)}</dd>${c.swift ? `<dt>SWIFT</dt><dd>${c.swift}</dd><dt>Bank address</dt><dd>Makati City, Philippines</dd>` : ""}</dl>`).join("")}
       <h4>How to give${c.placeholder ? PH_TAG : ""}</h4>
       <ol class="steps">${c.steps.map((s) => `<li>${esc(s)}</li>`).join("")}</ol>
     </div>`).join(""));

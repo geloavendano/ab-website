@@ -356,10 +356,11 @@ window.AB = {
     { id: "gbayanihan", name: "GBayanihan", currency: "PHP",
       steps: ["Open the GCash app and tap View All.", "Scroll down and tap GBayanihan.", "Choose a cause and select Angat Pinas Inc.", "Enter your donation amount and tap Give Support to complete the transfer."] },
     { id: "palawanpay", name: "PalawanPay", currency: "PHP",
-      qr: { placeholder: true, alt: "Angat Buhay's PalawanPay QR code (placeholder)" },
+      // Same QR Ph code as GCash: QR Ph is interoperable, so PalawanPay scans it too (per Angat Buhay).
+      qr: { src: "ui/media/donate/gcash-qr.png", alt: "Angat Buhay's QR Ph code for PalawanPay", size: "PNG, 166 KB" },
       steps: ["Open the PalawanPay app and log in to your account.", "Tap the QR / Scan option on the app.", "Scan Angat Buhay's official QR code above.", "Verify the recipient's name and enter your donation amount.", "Review the details and confirm the transaction."] },
     { id: "bank", name: "Bank transfer (BDO / BPI)", currency: "PHP",
-      accounts: [["BDO", "Angat Pinas Inc."], ["BPI", "Angat Pinas, Inc."]],
+      accounts: [["BDO", "Angat Pinas Inc.", "00 277 801 6986"], ["BPI", "Angat Pinas, Inc.", "0011-1921-65"]], // from Angat Buhay's channels graphic
       steps: ["Log in to your bank's app or online banking.", "Choose “Send money” / “Transfer to another account”.", "Enter the account details above and the amount.", "Review, confirm, and keep the confirmation."] },
     { id: "bpi-usd", name: "BPI USD / International wire", currency: "USD",
       accounts: [["BPI (USD)", "Angat Pinas, Inc."]], swift: "BOPIPHMM",
