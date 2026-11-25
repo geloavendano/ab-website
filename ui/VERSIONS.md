@@ -112,3 +112,4 @@ The v2 language now styles every public page of the prototype. The neutral wiref
   - "How to apply" step 4: "Partnership formalization agreement, then implementation and reporting."
   - Project pages: no Results section; a project's results are told through its stories ("Stories from this project").
   - Project pages: the "Responsible contact" label is set in Rubik 500 (the name's typeface, lighter) in pink, on its own line above the name, instead of the tilted Kalam eyebrow.
+  - Project contact: each pillar's Program Manager (Education: Joanne Astilla; Health: Jasper Vijar; Climate: Menard Mabutol; Community: Izza Arnaez); Arts and Culture, which has none, goes to Rhyn Esolana (Deputy Executive Director for Programs and Operations). Contacts without a photo get the Team page's initials avatar.

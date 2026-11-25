@@ -624,7 +624,10 @@
     const part = pr.participation;
     if (!part) return "";
     const STATUS = { open: "Accepting", waitlist: "Waitlist / upcoming call", closed: "Not accepting now" };
-    const lead = D.team.secretariat.find((m) => m.pillar === p.slug) || D.team.secretariat.find((m) => /Partnerships/.test(m.role));
+    // Contact: the pillar's Program Manager; pillars without one (Arts and Culture) go to the
+    // Deputy Executive Director for Programs.
+    const lead = D.team.secretariat.find((m) => m.pillar === p.slug && /^Program Manager/.test(m.role))
+      || D.team.secretariat.find((m) => /Deputy Executive Director for Programs/.test(m.role));
     const subject = `Partnership inquiry: ${pr.title}`;
     const body = `Project: ${pr.title}\nOrganization / LGU:\nProvince and city/municipality:\nContact person, role and mobile number:\nWhat you would like to achieve:\nPreferred start (month/year):\n`;
     const mail = `mailto:${D.org.partnershipsEmail}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
@@ -647,12 +650,13 @@
           <li>Partnership formalization agreement, then implementation and reporting.</li></ol></div>
       </div>
       <div class="card contact-card">
-        ${lead ? `<div style="width:64px;flex:none">${img(lead.photo, "", "round")}</div>` : ""}
+        ${lead ? `<div style="width:64px;flex:none">${lead.photo ? img(lead.photo, "", "round")
+          : `<span class="avatar" role="img" aria-label="Photo to follow">${esc(initials(lead.name))}</span>`}</div>` : ""}
         <div><span class="contact-card__label">Responsible contact</span>
           <b class="contact-card__name">${lead ? esc(lead.name) : "Partnerships team"}</b><div class="small muted">${lead ? esc(lead.role) : ""} · <a href="mailto:${D.org.partnershipsEmail}">${D.org.partnershipsEmail}</a></div></div>
         <a class="btn solid" href="${mail}">${part.status === "closed" ? "Ask about similar programs" : "Inquire about this project"}</a>
       </div>
-      <div class="note">Availability, eligibility and contact are CMS fields on each project, so LGUs can see whether they can join before writing in. The contact is the pillar's program lead from the Team collection; the assignment is a placeholder.</div>
+      <div class="note">Availability, eligibility and contact are CMS fields on each project, so LGUs can see whether they can join before writing in. The contact is the pillar's Program Manager from the Team collection (Rhyn, Deputy Executive Director for Programs, for Arts and Culture).</div>
     </section>`;
   }
 
