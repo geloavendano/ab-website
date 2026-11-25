@@ -107,3 +107,6 @@ The v2 language now styles every public page of the prototype. The neutral wiref
   - Donate: real BDO and BPI account numbers (from Angat Buhay's channels graphic; Copy puts digits only on the clipboard); PalawanPay shows the same QR Ph code as GCash. BPI USD stays a placeholder.
   - Stories feed heading: "Stories of Bayanihan".
   - Pillar pages: the impact figures are hidden (as on the homepage); the pillar's stories stay, under "Stories of Bayanihan" (section anchor `#impact` unchanged so existing links work).
+- **Revision (2026-11-25, round 3, from the content doc 5.3–5.7):**
+  - Project pages: the Implementation / Where / Partners / Taking part bar is removed for now; project cards drop their (sample) dates too. Dates, areas and partners stay in the data (the map still uses areas) for a later round.
+  - "How to apply" step 4: "Partnership formalization agreement, then implementation and reporting."

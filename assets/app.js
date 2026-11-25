@@ -161,8 +161,6 @@
     </article>`;
   }
 
-  /** "Feb 2024 – Jan 2026", "Sep 2022 – present", or "" when no dates were given. */
-  const projectPeriod = (p) => (p.start ? `${fmtMonth(p.start)} – ${p.end ? fmtMonth(p.end) : "present"}` : "");
 
   function projectCard(p) {
     return `<article class="card card--story card--project" style="${pillarStyle(p.pillar)}">
@@ -170,7 +168,7 @@
       <div class="card__body body">
         <h3 class="h3 card__title"><a class="stretched" href="project.html?id=${esc(p.id)}"><span class="title-ink">${esc(p.title)}${HOVER_LINE}</span></a></h3>
         <p class="sub">${esc(p.summary)}</p>
-        ${projectPeriod(p) ? `<div class="meta">${projectPeriod(p)}</div>` : ""}
+
       </div>
     </article>`;
   }
@@ -646,7 +644,7 @@
           <li>Email us using the button below. The template lists what we need.</li>
           <li>Our partnerships team replies within <b>5 working days</b>.</li>
           <li>Scoping call and, if needed, a site visit.</li>
-          <li>Memorandum of agreement, then implementation and reporting.</li></ol></div>
+          <li>Partnership formalization agreement, then implementation and reporting.</li></ol></div>
       </div>
       <div class="card contact-card">
         ${lead ? `<div style="width:64px;flex:none">${img(lead.photo, "", "round")}</div>` : ""}
@@ -667,12 +665,8 @@
       <a class="back" href="pillar.html?p=${p.slug}">${esc(p.name)}</a>
       <h1>${esc(pr.title)}</h1>
       <p class="lede">${esc(pr.summary)}</p>
-      <dl class="kv">
-        ${pr.start ? `<dt>Implementation</dt><dd>${projectPeriod(pr)} <span class="sample-tag">SAMPLE DATES</span></dd>` : ""}
-        ${pr.areas.length ? `<dt>Where</dt><dd>${pr.areas.map((a) => `<a href="stories.html?region=${a}">${esc(areaLabel(a))}</a>`).join("; ")}</dd>` : ""}
-        <dt>Partners</dt><dd>${pr.partners ? pr.partners.map(esc).join("; ") : `Partner LGUs, schools and local organizations${PH_TAG}`}</dd>
-        ${pr.participation ? `<dt>Taking part</dt><dd><a href="#participate">${esc(pr.participation.label)}</a></dd>` : ""}
-      </dl>
+      <!-- The Implementation / Where / Partners / Taking part bar is off for now (Angat Buhay, doc 5.3–5.5);
+           dates, areas and partners stay in the data for the map and a later round. -->
       ${img(pr.image, "", "r-16x9", "project photo / gallery")}
       <div class="article" style="margin:32px 0 0;max-width:720px">
         <h2 id="about-project">About the project</h2>
