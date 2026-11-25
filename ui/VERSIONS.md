@@ -110,3 +110,4 @@ The v2 language now styles every public page of the prototype. The neutral wiref
 - **Revision (2026-11-25, round 3, from the content doc 5.3–5.7):**
   - Project pages: the Implementation / Where / Partners / Taking part bar is removed for now; project cards drop their (sample) dates too. Dates, areas and partners stay in the data (the map still uses areas) for a later round.
   - "How to apply" step 4: "Partnership formalization agreement, then implementation and reporting."
+  - Project pages: no Results section; a project's results are told through its stories ("Stories from this project").

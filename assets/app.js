@@ -672,8 +672,7 @@
         <h2 id="about-project">About the project</h2>
         ${pr.description ? pr.description.map((para) => `<p>${esc(para)}</p>`).join("")
           : `<p>This section explains the need the project responds to, how Angat Buhay and its partners deliver it, and who benefits. It will be written with the program team.${PH_TAG}</p>`}
-        <h2 id="results">Results</h2>
-        <p>Key outcomes with figures, each with its reporting period and source.${PH_TAG}</p>
+        <!-- No Results section: a project's results are told through its stories (below). -->
       </div>
       ${participateSection(pr, p)}
       <section class="section" id="project-stories"><div class="section-head"><h2>Stories from this project</h2></div>
