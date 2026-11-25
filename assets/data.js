@@ -34,8 +34,8 @@ window.AB = {
     name: "Angat Buhay",
     legalName: "Angat Pinas, Inc.",
     intro: "Angat Pinas, Inc., commonly known as Angat Buhay, is a Filipino non-profit organization that aims to empower Filipinos to become communities of active citizens by mobilizing the largest volunteer network in implementing Bayanihan programs.",
-    mission: "To empower Filipinos in becoming communities of active citizens as we collectively pursue a life of dignity and hope",
-    vision: "Responding to the needs of marginalized communities by mobilizing the largest volunteer network in implementing Bayanihan programs",
+    mission: "To empower Filipinos in becoming communities of active citizens as we collectively pursue a life of dignity and hope.",
+    vision: "Responding to the needs of marginalized communities by mobilizing the largest volunteer network in implementing Bayanihan programs.",
     values: [
       // Shown Filipino first. icon = doodle in ab-doodles-v3.js; sky = card colour (.sky--{sky}).
       { fil: "Malikhain at mahusay na pagtugon", en: "Creative and effective responsiveness", icon: "bulb", sky: "teal" },
@@ -287,7 +287,6 @@ window.AB = {
     { name: "Member", issuer: "Association of Foundations (AF)", detail: "A network of NGOs developing sustainable community programs." }
   ],
 
-  /* ---------- Fundraiser ---------- */
   /* ---------- Promo (bottom sheet) ----------
    * Campaigns the organization wants to push for a while. The first published promo whose
    * date window includes today and whose `pages` include the current page is shown.
@@ -319,26 +318,52 @@ window.AB = {
       link: { href: "donate.html", label: "Donate to relief" } }
   ],
 
+  /* ---------- Fundraiser ----------
+   * Upcoming (startDate today or later) and past events are split on the Fundraisers page by date.
+   *   image   card + page photo; video { loop: [...sources], poster, film } for a run film (Naga)
+   *   link    optional registration / tickets URL (upcoming only) */
   fundraisers: [
-    { slug: "angat-buhay-makati", name: "Angat Buhay Makati", date: "15 November 2026", startDate: "2026-11-15", location: "Makati City", placeholder: true,
-      description: "An evening of performances and stories from our programs. Ticket sales fund Bayan Ko, Titser Ko literacy sites for the 2027 school year." },
-    { slug: "angat-buhay-run-naga", name: "Angat Buhay Run Naga", date: "7 February 2027", startDate: "2027-02-07", location: "Naga City", placeholder: true,
-      description: "3K, 5K and 10K categories. Registration includes a race kit; proceeds support school-based feeding in Camarines Sur." },
+    { slug: "angat-bayanihan-run-general-santos-2026", name: "Angat Bayanihan Run General Santos", date: "29 November 2026", startDate: "2026-11-29",
+      location: "General Santos City", placeholder: true, // from the "Next stop" card in the Naga run film; details to confirm
+      description: "The next stop of the 2026 Angat Bayanihan Run." },
     { slug: "alab", name: "ALAB", date: "March 2027", startDate: "2027-03-01", // day not set yet
       location: "Metro Manila venue to be announced", placeholder: true,
-      description: "An art sale featuring Angat Sining fellows and established artists. Proceeds fund the next Angat Sining fellowship cycle." }
+      description: "An art sale featuring Angat Sining fellows and established artists. Proceeds fund the next Angat Sining fellowship cycle." },
+    { slug: "angat-bayanihan-run-iloilo-2026", name: "Angat Bayanihan Run Iloilo", date: "18 October 2026", startDate: "2026-10-18",
+      location: "Iloilo City", image: "ui/media/fundraisers/run-iloilo.jpg", imageAlt: "Runners at the Angat Bayanihan Run in Iloilo" },
+    { slug: "angat-bayanihan-run-naga-2026", name: "Angat Bayanihan Run Naga", date: "16 August 2026", startDate: "2026-08-16",
+      location: "Naga City", image: "ui/media/fundraisers/run-naga.jpg", imageAlt: "Runners at the Angat Bayanihan Run in Naga",
+      video: {
+        title: "Angat Bayanihan Run 2026 – Naga",
+        poster: "ui/media/fundraisers/run-naga-poster.jpg",
+        film: "ui/media/fundraisers/run-naga-film-1280.mp4", // 0:36 with sound, 10.6 MB
+        loop: [ // silent 0:02–0:31 cut for the Fundraisers hero (skips the title and "Next stop" cards)
+          { src: "ui/media/fundraisers/run-naga-loop-portrait.webm", type: 'video/webm; codecs="av01.0.05M.08"', media: "(max-width: 700px) and (orientation: portrait)" },
+          { src: "ui/media/fundraisers/run-naga-loop-portrait.mp4", type: "video/mp4", media: "(max-width: 700px) and (orientation: portrait)" },
+          { src: "ui/media/fundraisers/run-naga-loop-1280.webm", type: 'video/webm; codecs="av01.0.05M.08"' },
+          { src: "ui/media/fundraisers/run-naga-loop-1280.mp4", type: "video/mp4" }
+        ] } },
+    { slug: "angat-bayanihan-run-makati-2026", name: "Angat Bayanihan Run Makati", date: "19 July 2026", startDate: "2026-07-19",
+      location: "Makati City", image: "ui/media/fundraisers/run-makati.jpg", imageAlt: "Runners at the Angat Bayanihan Run in Makati" }
   ],
 
   /* ---------- DonationChannel (account numbers managed in CMS) ---------- */
   donationChannels: [
+    // qr: { src, alt } shows a QR code above the steps (with a download link); { placeholder: true } shows a stand-in.
     { id: "gcash", name: "GCash", currency: "PHP",
-      steps: ["Open the GCash app and log in.", "Tap “Pay QR”, then scan or upload the QR code below.", "Enter the amount and confirm.", "Keep the confirmation for your records."] },
+      qr: { src: "ui/media/donate/gcash-qr.png", alt: "Angat Buhay's GCash QR code (QR Ph)", size: "PNG, 166 KB" },
+      steps: ["Open the GCash app and log in.", "Tap “Pay QR”, then scan or upload the QR code above.", "Enter the amount and confirm.", "Keep the confirmation for your records."] },
+    { id: "gbayanihan", name: "GBayanihan", currency: "PHP",
+      steps: ["Open the GCash app and tap View All.", "Scroll down and tap GBayanihan.", "Choose a cause and select Angat Pinas Inc.", "Enter your donation amount and tap Give Support to complete the transfer."] },
+    { id: "palawanpay", name: "PalawanPay", currency: "PHP",
+      qr: { placeholder: true, alt: "Angat Buhay's PalawanPay QR code (placeholder)" },
+      steps: ["Open the PalawanPay app and log in to your account.", "Tap the QR / Scan option on the app.", "Scan Angat Buhay's official QR code above.", "Verify the recipient's name and enter your donation amount.", "Review the details and confirm the transaction."] },
     { id: "bank", name: "Bank transfer (BDO / BPI)", currency: "PHP",
       accounts: [["BDO", "Angat Pinas Inc."], ["BPI", "Angat Pinas, Inc."]],
-      steps: ["Log in to your bank's app or online banking.", "Choose “Send money” / “Transfer to another account”.", "Enter the account details below and the amount.", "Review, confirm, and keep the confirmation."] },
+      steps: ["Log in to your bank's app or online banking.", "Choose “Send money” / “Transfer to another account”.", "Enter the account details above and the amount.", "Review, confirm, and keep the confirmation."] },
     { id: "bpi-usd", name: "BPI USD / International wire", currency: "USD",
       accounts: [["BPI (USD)", "Angat Pinas, Inc."]], swift: "BOPIPHMM",
-      steps: ["From a BPI account: Fund Transfer → Third-party BPI account → select USD.", "From another bank or overseas: request an international wire with the details below.", "Confirm fees and processing time with your bank.", "Keep the transaction receipt."] },
+      steps: ["From a BPI account: Fund Transfer → Third-party BPI account → select USD.", "From another bank or overseas: request an international wire with the details above.", "Confirm fees and processing time with your bank.", "Keep the transaction receipt."] },
     { id: "bpi-edonate", name: "BPI eDonate", currency: "PHP",
       placeholder: true,
       steps: ["Open the BPI app and go to “Pay Bills”.", "Search for “Angat Pinas Inc.” as the biller.", "Enter the amount and your email address as the reference number.", "Confirm, then keep the confirmation for your records."] },

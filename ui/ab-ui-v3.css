@@ -1252,3 +1252,8 @@ body.show-notes .note { display: block; }
   .btn, .card, .card__media img, .tile { transition: none; }
   .loader.loading .dot { animation: none; }
 }
+
+/* Donate: QR codes sit on white with a hairline so their quiet zone reads on paper. */
+.panel .qr { display: block; width: 220px; height: 220px; padding: 6px; background: #fff; border: 1px solid var(--line); border-radius: var(--r-lg); margin: .5rem 0 .25rem; }
+/* Fundraiser page: the run film fills the column. */
+.run-film { width: 100%; height: auto; background: #000; border-radius: var(--r-lg); }

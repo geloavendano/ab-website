@@ -203,7 +203,7 @@
   const NAV_CURRENT = { stories: "stories.html", story: "stories.html", presence: "presence.html", about: "about.html", donate: "donate.html",
     pillar: "index.html#pillars", project: "index.html#pillars" };
   /** Pages that live under the "Get involved" menu (its heading shows as current there). */
-  const INVOLVED_PAGES = ["involved", "donate", "volunteer", "fundraisers", "resources"];
+  const INVOLVED_PAGES = ["involved", "donate", "volunteer", "fundraisers", "fundraiser", "resources"];
 
   function header(page) {
     const cur = NAV_CURRENT[page];
@@ -873,9 +873,10 @@ const ACCOUNT_PLACEHOLDER = { "BDO": "0000 000 0000", "BPI": "0000-0000-00", "BP
     fill("donate-tabs", ch.map((c, i) => `<button role="tab" id="tab-${c.id}" aria-controls="panel-${c.id}" aria-selected="${i === 0}" tabindex="${i === 0 ? 0 : -1}">${esc(c.name)}</button>`).join(""));
     fill("donate-panels", ch.map((c, i) => `<div class="panel" role="tabpanel" id="panel-${c.id}" aria-labelledby="tab-${c.id}" ${i ? "hidden" : ""}>
       <h3>${esc(c.name)} <span class="chip">${esc(c.currency)}</span></h3>
-      ${c.id === "gcash" ? `<img src="assets/media/gcash-qr-placeholder.svg" alt="GCash QR code (placeholder)" width="220" height="220" style="border:1px solid var(--line)">
-        <p class="small"><a href="assets/media/gcash-qr-placeholder.svg" download="angat-buhay-gcash-qr.svg">Download QR image</a> (SVG, 1 KB). On a phone, save it, then choose “Upload QR” in GCash. Or send to the number below.${PH_TAG}</p>
-        <dl class="kv"><dt>Account name</dt><dd>Angat Pinas, Inc.</dd><dt>GCash number</dt><dd>${copyable("0917 000 0000")}</dd></dl>` : ""}
+      ${!c.qr ? "" : c.qr.src
+        ? `<img class="qr" src="${esc(c.qr.src)}" alt="${esc(c.qr.alt)}" width="220" height="220">
+          <p class="small"><a href="${esc(c.qr.src)}" download="angat-buhay-${esc(c.id)}-qr.png">Download QR image</a> (${esc(c.qr.size)}). On a phone, save it, then choose “Upload QR” in the ${esc(c.name)} app.</p>`
+        : `<img class="qr" src="assets/media/gcash-qr-placeholder.svg" alt="${esc(c.qr.alt)}" width="220" height="220"><p class="small">QR code to follow.${PH_TAG}</p>`}
       ${(c.accounts || []).map(([bank, name]) => `<dl class="kv"><dt>Bank</dt><dd>${esc(bank)}</dd><dt>Account name</dt><dd>${esc(name)}</dd><dt>Account number</dt><dd>${copyable(ACCOUNT_PLACEHOLDER[bank] || "0000 0000 00")}</dd>${c.swift ? `<dt>SWIFT</dt><dd>${c.swift}</dd><dt>Bank address</dt><dd>Makati City, Philippines</dd>` : ""}</dl>`).join("")}
       <h4>How to give${c.placeholder ? PH_TAG : ""}</h4>
       <ol class="steps">${c.steps.map((s) => `<li>${esc(s)}</li>`).join("")}</ol>
@@ -912,11 +913,67 @@ const ACCOUNT_PLACEHOLDER = { "BDO": "0000 000 0000", "BPI": "0000-0000-00", "BP
     });
   };
 
+  /* Fundraisers split by date: upcoming (today or later, soonest first) and past (latest first). */
+  const isUpcoming = (f) => f.startDate >= NOW.toLocaleDateString("en-CA"); // local YYYY-MM-DD
+  const fundraiserCard = (f) => `<article class="card">${img(f.image, f.imageAlt || "", "r-4x3", f.name + " photo")}<div class="body">
+      <h3 class="card__title"><a class="stretched" href="fundraiser.html?f=${esc(f.slug)}">${esc(f.name)}</a>${sampleTag(f)}</h3>
+      <p class="sub">${esc(f.date)} · ${esc(f.location)}</p>
+      ${f.video ? `<p class="small" style="margin:0">With the run film</p>` : ""}
+    </div></article>`;
+
   pages.fundraisers = () => {
-    fill("fundraiser-list", D.fundraisers.map((f) => `<article class="card">${img(f.image, "", "r-4x3", f.name + " photo")}<div class="body">
-      <h3>${esc(f.name)}${sampleTag(f)}</h3><p class="sub">${esc(f.date)} · ${esc(f.location)}</p>
-      <details class="disclosure" style="margin-top:8px"><summary>Details</summary><div><p>${esc(f.description)}</p><a class="btn small" href="placeholder.html?what=${encodeURIComponent(f.name + " registration")}">Register / buy tickets</a></div></details>
-    </div></article>`).join(""));
+    const up = D.fundraisers.filter(isUpcoming).sort((x, y) => x.startDate.localeCompare(y.startDate));
+    const past = D.fundraisers.filter((f) => !isUpcoming(f)).sort((x, y) => y.startDate.localeCompare(x.startDate));
+    fill("fundraiser-list", up.map(fundraiserCard).join("") || `<p class="muted">New fundraisers will be announced here.</p>`);
+    fill("past-fundraiser-list", past.map(fundraiserCard).join(""));
+    // Hero: the newest past event with a run film loops in the background; the button opens its page.
+    const filmed = past.find((f) => f.video);
+    if (filmed) fill("hero", fundraiserHero(filmed));
+  };
+
+  function fundraiserHero(f) {
+    const v = f.video;
+    return `<section class="hero hero--video hero--about film" id="intro" aria-labelledby="fundraisers-title">
+      <div class="hero__media"><video data-hero-video poster="${esc(v.poster)}" muted playsinline preload="none" aria-hidden="true" tabindex="-1">${
+        v.loop.map((x) => `<source data-src="${esc(x.src)}" type="${esc(x.type)}"${x.media ? ` media="${esc(x.media)}"` : ""}>`).join("")}</video></div>
+      <div class="hero__grade" aria-hidden="true"></div><div class="hero__scrim" aria-hidden="true"></div>
+      ${doodle("doodle--draw c-yellow hide-tablet", "swoop", "0 0 600 300", "--delay:.6s; top:120px; right:7%; width:min(320px,24vw); height:auto; aspect-ratio:2/1; stroke-width:6")}
+      ${doodle("doodle--draw doodle--fine c-white hide-tablet", "sparkle", "0 0 100 100", "--delay:1s; top:calc(120px + 12vw); right:20%; width:30px; height:30px; stroke-width:9")}
+      <div class="wrap hero__inner">
+        <div class="hero__copy">
+          <h1 class="display" id="fundraisers-title">Fundraisers</h1>
+          <p class="lede">Runs, events and campaigns that fund our programs. Join one, bring your friends, or sponsor.</p>
+          <div class="hero__ctas"><a class="btn btn--white btn--lg" href="fundraiser.html?f=${esc(f.slug)}#video"><span class="play">${PLAY_ICON}</span>Watch the ${esc(f.name)} film</a></div>
+        </div>
+        <div class="hero__now" style="justify-content:flex-end">
+          <button class="video-btn" type="button" data-video-toggle data-state="paused" aria-label="Play background video">
+            <svg class="icon-pause" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><rect x="3" y="2" width="3.6" height="12" rx="1.2"/><rect x="9.4" y="2" width="3.6" height="12" rx="1.2"/></svg>
+            <svg class="icon-play" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M4 2.2v11.6c0 .8.9 1.3 1.6.8l8.6-5.8c.6-.4.6-1.2 0-1.6L5.6 1.4C4.9.9 4 1.4 4 2.2z"/></svg>
+          </button></div>
+      </div>
+      ${TORN_EDGE}
+    </section>`;
+  }
+
+  pages.fundraiser = () => {
+    const f = D.fundraisers.find((x) => x.slug === param("f")) || D.fundraisers[0];
+    document.title = f.name + " · Angat Buhay";
+    const upcoming = isUpcoming(f);
+    fill("fundraiser", `
+      <a class="back" href="fundraisers.html#${upcoming ? "events" : "past-events"}">Fundraisers</a>
+      <h1>${esc(f.name)}${sampleTag(f)}</h1>
+      <dl class="kv"><dt>Date</dt><dd>${esc(f.date)}</dd><dt>Where</dt><dd>${esc(f.location)}</dd></dl>
+      ${f.description ? `<p class="lede">${esc(f.description)}</p>` : ""}
+      ${f.video ? `<section id="video" aria-labelledby="video-title" style="margin-top:32px">
+          <h2 id="video-title">${esc(f.video.title)}</h2>
+          <video class="media r-16x9 run-film" controls playsinline preload="none" poster="${esc(f.video.poster)}" src="${esc(f.video.film)}"></video>
+        </section>` : ""}
+      ${f.image ? `<section id="photos" style="margin-top:32px">${img(f.image, f.imageAlt || "", "r-16x9")}</section>` : ""}
+      <section id="take-part" style="margin-top:32px">
+        ${upcoming
+          ? `<a class="btn btn--primary" href="${esc(f.link || "placeholder.html?what=" + encodeURIComponent(f.name + " registration"))}">Register / buy tickets</a>`
+          : `<p class="muted">This event has ended. Thank you to every runner, volunteer and partner who joined. <a href="fundraisers.html#events">See upcoming fundraisers</a>.</p>`}
+      </section>`);
   };
 
   pages.resources = () => {

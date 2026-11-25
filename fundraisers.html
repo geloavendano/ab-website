@@ -13,14 +13,19 @@
 </head>
 <body data-page="fundraisers">
 <main id="main">
-  <header class="page-hero sky" id="intro"><div class="wrap">
-    <h1>Fundraisers</h1>
-    <p class="lede">Runs, events and campaigns that fund our programs. Join one, bring your friends, or sponsor.</p>
-  </div></header>
+  <!-- Video hero rendered by app.js from the newest past fundraiser that has a run film. -->
+  <div id="hero"></div>
   <section class="section" id="events">
     <div class="wrap">
+      <h2>Upcoming</h2>
       <div class="grid c3" id="fundraiser-list"></div>
-      <div class="note">Event names are from the wireframe. Dates, venues and descriptions are placeholders. Each fundraiser is a CMS entry with an event date and an optional external registration link. Past events could move to an "Archive" section.</div>
+    </div>
+  </section>
+  <section class="section" id="past-events">
+    <div class="wrap">
+      <h2>Past fundraisers</h2>
+      <div class="grid c3" id="past-fundraiser-list"></div>
+      <div class="note">Each fundraiser is a CMS entry with an event date; it moves from Upcoming to Past on its own once the date passes. General Santos is taken from the "Next stop" card at the end of the Naga run film; ALAB is from the wireframe.</div>
     </div>
   </section>
 </main>
