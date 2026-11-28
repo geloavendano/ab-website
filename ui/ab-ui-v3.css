@@ -227,13 +227,16 @@ h1, h2, h3, h4 { font-family: var(--font-display); color: var(--navy); margin: 0
 .values-grid { gap: clamp(1rem, 2vw, 1.5rem); }
 @media (min-width: 900px) { .grid.c3.values-grid { grid-template-columns: repeat(3, 1fr); } }
 .value-card { box-shadow: 0 24px 50px -32px rgba(36, 67, 90, .55); min-height: 340px; color: var(--ink); }
-.value-card .card__body { padding: clamp(1.5rem, 3vw, 2rem); padding-top: 168px; gap: .5rem; position: relative; z-index: 2; margin-top: auto; }
+.value-card .card__body { padding: clamp(1.5rem, 3vw, 2rem); padding-top: 186px; gap: .5rem; position: relative; z-index: 2; margin-top: auto; }
 .value-card h3 { color: var(--ink); font-size: clamp(1.35rem, 2vw, 1.6rem); line-height: 1.2; }
 .value-card p { margin: 0; color: var(--ink); font-size: 1rem; }
-.value-card__icon { top: 24px; left: clamp(1.1rem, 2.6vw, 1.6rem); width: 132px; height: 124px; stroke-width: 4.5; z-index: 1; }
-.value-card:nth-child(1) .value-card__icon { color: var(--navy); transform: rotate(-6deg); }
-.value-card:nth-child(2) .value-card__icon { color: var(--pink-700); width: 172px; }
-.value-card:nth-child(3) .value-card__icon { color: var(--pink-700); transform: rotate(8deg); }
+/* Angat Buhay's painted symbols (ui/media/values/*.webp, transparent) on a white disc, so the teal bulb
+   and blue sun stay legible on their own-colour cards. */
+.value-card__icon { position: absolute; top: 22px; left: clamp(1.1rem, 2.6vw, 1.6rem); z-index: 1; pointer-events: none;
+  width: 140px; height: 140px; padding: 20px; object-fit: contain; border-radius: 50%; background: rgba(255, 255, 255, .92);
+  box-shadow: 0 14px 30px -18px rgba(36, 67, 90, .55); }
+.value-card:nth-child(1) .value-card__icon { transform: rotate(-4deg); }
+.value-card:nth-child(3) .value-card__icon { transform: rotate(6deg); }
 .value-card__spark { right: 24px; bottom: 22px; width: 30px; height: 30px; stroke-width: 9; }
 
 /* Faint grain on calm surfaces so the page still feels like one print. */
@@ -973,10 +976,17 @@ ol.steps > li::before {
 }
 
 /* ---------- Tabs (Donate) ---------- */
-.tabs { display: inline-flex; flex-wrap: wrap; gap: .3rem; margin: .5rem 0 1.25rem; padding: .3rem; border-radius: 999px; background: rgba(36, 67, 90, .07); }
-.tabs button { border: 0; border-radius: 999px; padding: .6rem 1.1rem; background: transparent; cursor: pointer; font: 600 .9375rem/1 var(--font-display); color: var(--navy); }
+/* Segmented tabs. Concentric corners: the track's radius is the tab's radius plus the track padding,
+   and the gap equals that padding, so spacing stays even whether the tabs sit on one row or wrap. */
+.tabs { --tab-h: 2.5rem; --tab-pad: .3125rem; display: inline-flex; flex-wrap: wrap; gap: var(--tab-pad); margin: .5rem 0 1.25rem; padding: var(--tab-pad); border-radius: calc(var(--tab-h) / 2 + var(--tab-pad)); background: rgba(36, 67, 90, .07); }
+.tabs button { display: inline-flex; align-items: center; height: var(--tab-h); border: 0; border-radius: calc(var(--tab-h) / 2); padding: 0 1rem; background: transparent; white-space: nowrap; cursor: pointer; font: 600 .9375rem/1 var(--font-display); color: var(--navy); }
 .tabs button:hover { background: rgba(255, 255, 255, .6); }
 .tabs button[aria-selected="true"] { background: var(--navy); color: #fff; box-shadow: var(--shadow-1); }
+/* Phones: an even two-column grid instead of ragged wrapped rows; long labels wrap inside their tab. */
+@media (max-width: 640px) {
+  .tabs { display: grid; grid-template-columns: 1fr 1fr; }
+  .tabs button { height: auto; min-height: var(--tab-h); padding: .5rem .75rem; justify-content: center; text-align: center; white-space: normal; line-height: 1.2; }
+}
 .panel { padding: clamp(1.25rem, 3vw, 2rem); border-radius: var(--r-lg); background: var(--surface); box-shadow: var(--shadow-1); }
 .panel[hidden] { display: none; }
 .panel img { border-radius: var(--r-md); }

@@ -118,8 +118,8 @@
     "Impact": "Epekto", "The team": "Ang aming team", "Meet the rest of the team": "Kilalanin ang buong team",
     "Support this pillar": "Suportahan ang haliging ito", "Other pillars": "Iba pang haligi", "See other stories": "Iba pang kuwento",
     "Mission": "Misyon", "Vision": "Bisyon", "Core values": "Mga pangunahing pagpapahalaga", "Certifications": "Mga sertipikasyon",
-    "Where we work": "Saan kami naroroon", "Regions and provinces": "Mga rehiyon at probinsya", "Choose how to give": "Piliin kung paano magbigay",
-    "How to give": "Paano magbigay", "After you donate": "Pagkatapos mong mag-donate", "Other ways to give": "Iba pang paraan ng pagbibigay",
+    "Where we work": "Saan kami naroroon", "Regions and provinces": "Mga rehiyon at probinsya", "Choose how to donate": "Piliin kung paano mag-donate",
+    "How to donate": "Paano mag-donate", "After you donate": "Pagkatapos mong mag-donate", "Other ways to give": "Iba pang paraan ng pagbibigay",
     "How it works": "Paano ito gumagana", "Sign up": "Mag-sign up", "Send": "Ipadala", "Share the bayanihan spirit": "Ibahagi ang diwa ng bayanihan",
     "Bring this project to your community": "Dalhin ang proyektong ito sa inyong komunidad", "Stories from this project": "Mga kuwento mula sa proyektong ito",
     "We empower Filipinos to become communities of active citizens by mobilizing the largest volunteer network in implementing Bayanihan programs.":
@@ -862,10 +862,9 @@
   pages.about = () => {
     fill("mission", esc(D.org.mission));
     fill("vision", esc(D.org.vision));
-    // Illustration cards: a sky in the value's colour, its symbol drawn in crayon, Filipino first.
-    const VALUE_ICON_BOX = { bulb: "0 0 120 120", bayanihan: "0 0 160 120", sun: "0 0 120 120" };
+    // Illustration cards: a sky in the value's colour with Angat Buhay's painted symbol, Filipino first.
     fill("values", D.org.values.map((v, i) => `<div class="card value-card sky sky--panel sky--${esc(v.sky)}">
-      <svg class="doodle doodle--draw value-card__icon" style="--delay:${(0.2 + i * 0.25).toFixed(2)}s" viewBox="${VALUE_ICON_BOX[v.icon]}" aria-hidden="true"><use href="#d-${esc(v.icon)}"/></svg>
+      <img class="value-card__icon" src="ui/media/values/${esc(v.icon)}.webp" alt="" width="440" height="440" loading="lazy" decoding="async">
       <svg class="doodle doodle--draw doodle--fine value-card__spark c-white" style="--delay:${(0.6 + i * 0.25).toFixed(2)}s" viewBox="0 0 100 100" aria-hidden="true"><use href="#d-sparkle"/></svg>
       <div class="card__body"><h3 class="h3" lang="fil">${esc(v.fil)}</h3><p>${esc(v.en)}</p></div>
     </div>`).join(""));
@@ -878,6 +877,9 @@ const ACCOUNT_PLACEHOLDER = { "BDO": "0000 000 0000", "BPI": "0000-0000-00", "BP
   /** Account number with a Copy button (digits only go to the clipboard, which bank apps accept). */
   const copyable = (v, placeholder) => `<span class="mono">${esc(v)}</span> <button class="btn small" type="button" data-copy="${esc(v.replace(/\D/g, ""))}">Copy</button>${placeholder ? PH_TAG : ""}`;
 
+  // Last step on every channel (per Angat Buhay), kept here so the CMS steps don't repeat it.
+  const PROOF_STEP = `Email the proof of transfer to <a href="mailto:donations@angatbuhay.ph">donations@angatbuhay.ph</a>.`;
+
   pages.donate = () => {
     const ch = D.donationChannels;
     fill("donate-tabs", ch.map((c, i) => `<button role="tab" id="tab-${c.id}" aria-controls="panel-${c.id}" aria-selected="${i === 0}" tabindex="${i === 0 ? 0 : -1}">${esc(c.name)}</button>`).join(""));
@@ -888,8 +890,9 @@ const ACCOUNT_PLACEHOLDER = { "BDO": "0000 000 0000", "BPI": "0000-0000-00", "BP
           <p class="small"><a href="${esc(c.qr.src)}" download="angat-buhay-${esc(c.id)}-qr.png">Download QR image</a> (${esc(c.qr.size)}). On a phone, save it, then choose “Upload QR” in the ${esc(c.name)} app.</p>`
         : `<img class="qr" src="assets/media/gcash-qr-placeholder.svg" alt="${esc(c.qr.alt)}" width="220" height="220"><p class="small">QR code to follow.${PH_TAG}</p>`}
       ${(c.accounts || []).map(([bank, name, number]) => `<dl class="kv"><dt>Bank</dt><dd>${esc(bank)}</dd><dt>Account name</dt><dd>${esc(name)}</dd><dt>Account number</dt><dd>${number ? copyable(number) : copyable(ACCOUNT_PLACEHOLDER[bank] || "0000 0000 00", true)}</dd>${c.swift ? `<dt>SWIFT</dt><dd>${c.swift}</dd><dt>Bank address</dt><dd>Makati City, Philippines</dd>` : ""}</dl>`).join("")}
-      <h4>How to give${c.placeholder ? PH_TAG : ""}</h4>
-      <ol class="steps">${c.steps.map((s) => `<li>${esc(s)}</li>`).join("")}</ol>
+      ${c.link ? `<p><a class="btn btn--primary" href="${esc(c.link.href)}" target="_blank" rel="noopener">${esc(c.link.label)} <span aria-hidden="true">↗</span><span class="visually-hidden"> (opens in a new tab)</span></a></p>` : ""}
+      <h4>How to donate${c.placeholder ? PH_TAG : ""}</h4>
+      <ol class="steps">${c.steps.map((s) => `<li>${esc(s)}</li>`).join("")}<li>${PROOF_STEP}</li></ol>
     </div>`).join(""));
     const tabs = $$("#donate-tabs [role=tab]");
     function select(t) {

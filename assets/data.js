@@ -37,7 +37,7 @@ window.AB = {
     mission: "To empower Filipinos in becoming communities of active citizens as we collectively pursue a life of dignity and hope.",
     vision: "Responding to the needs of marginalized communities by mobilizing the largest volunteer network in implementing Bayanihan programs.",
     values: [
-      // Shown Filipino first. icon = doodle in ab-doodles-v3.js; sky = card colour (.sky--{sky}).
+      // Shown Filipino first. icon = painted symbol in ui/media/values/{icon}.webp; sky = card colour (.sky--{sky}).
       { fil: "Malikhain at mahusay na pagtugon", en: "Creative and effective responsiveness", icon: "bulb", sky: "teal" },
       { fil: "Bayanihan tungo sa pakikipagkapwa", en: "Collective spirit of community towards solidarity", icon: "bayanihan", sky: "yellow" },
       { fil: "Pananagutan para sa bayan", en: "Accountability in the service to the nation", icon: "sun", sky: "blue" }
@@ -363,17 +363,18 @@ window.AB = {
       accounts: [["BDO", "Angat Pinas Inc.", "00 277 801 6986"], ["BPI", "Angat Pinas, Inc.", "0011-1921-65"]], // from Angat Buhay's channels graphic
       steps: ["Log in to your bank's app or online banking.", "Choose “Send money” / “Transfer to another account”.", "Enter the account details above and the amount.", "Review, confirm, and keep the confirmation."] },
     { id: "bpi-usd", name: "BPI USD / International wire", currency: "USD",
-      accounts: [["BPI (USD)", "Angat Pinas, Inc."]], swift: "BOPIPHMM",
-      steps: ["From a BPI account: Fund Transfer → Third-party BPI account → select USD.", "From another bank or overseas: request an international wire with the details above.", "Confirm fees and processing time with your bank.", "Keep the transaction receipt."] },
+      accounts: [["BPI (USD)", "Angat Pinas, Inc.", "0014 2705 58"]], swift: "BOPIPHMM",
+      steps: ["From a BPI account: Fund Transfer → Third-party BPI account → select USD.", "From another bank or overseas: request an international wire with the details above, and put “Donation” as the purpose of transfer.", "Confirm fees and processing time with your bank (overseas wires usually take 3–5 banking days).", "Keep the transaction receipt."] },
+    // link: { href, label } shows a button to the channel's own donation page, above the steps.
     { id: "bpi-edonate", name: "BPI eDonate", currency: "PHP",
-      placeholder: true,
-      steps: ["Open the BPI app and go to “Pay Bills”.", "Search for “Angat Pinas Inc.” as the biller.", "Enter the amount and your email address as the reference number.", "Confirm, then keep the confirmation for your records."] },
+      link: { href: "https://bpiedonate.com/ab", label: "Donate at bpiedonate.com/ab" },
+      steps: ["Go to the BPI app.", "Tap “More Services”.", "Scroll down to Payments and Wallet and select “eDonate”.", "Choose Angat Buhay."] }, // from Angat Buhay's BPI eDonate graphic
     { id: "myriad-au", name: "Myriad Australia", currency: "AUD",
-      placeholder: true,
-      steps: ["Go to the Myriad Australia donation page for Angat Buhay.", "Choose a one-off or monthly gift in AUD.", "Myriad issues an Australian tax-deductible receipt by email.", "Myriad transfers the funds to Angat Buhay quarterly."] },
+      link: { href: "https://myriadaustralia.org/services/donate/angatpinas/", label: "Donate via Myriad Australia" },
+      steps: ["Go to Angat Pinas Inc.'s page on Myriad Australia and click Donate.", "Choose a payment method, then a monthly or one-time gift.", "Enter the amount in AUD. You can add a note or a public message.", "Review the breakdown, enter your name, email and card details, and complete the donation."] },
     { id: "myriad-us", name: "Myriad USA", currency: "USD",
-      placeholder: true,
-      steps: ["Go to the Myriad USA donation page for Angat Buhay.", "Give by card, bank transfer (ACH) or donor-advised fund in USD.", "Myriad USA issues a US tax-deductible receipt by email.", "Myriad USA grants the funds to Angat Buhay."] }
+      link: { href: "https://www.every.org/angat-pinas-inc", label: "Donate via Myriad USA (Every.org)" },
+      steps: ["Go to Angat Pinas Inc.'s page on Every.org and click Donate.", "Choose a payment method: card, PayPal, Venmo, bank, donor-advised fund, stocks, crypto or gift card.", "Choose a monthly or one-time gift and enter the amount in USD.", "Review the breakdown, enter your name and email, and complete the donation."] }
   ],
 
   /* ---------- Resource ---------- */

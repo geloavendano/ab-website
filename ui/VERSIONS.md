@@ -118,3 +118,10 @@ The v2 language now styles every public page of the prototype. The neutral wiref
   - The three sample stories (Bayanihan in Action, A Day with a Reading Volunteer, Bayan Ko, Titser Ko: Impact at a Glance) are archived; the feed lists 25 stories.
   - Stories hero: no longer a featured story. The silent montage loop plays behind "Bayanihan in action" (intro line drafted, PLACEHOLDER) with two buttons: "Watch the video" opens the full 3:52 montage with sound in a lightbox (streamed from the same third-party host the live homepage uses; it starts playing at once and supports seeking), and "Our stories" scrolls to the feed.
   - Home: the hero's "Watch with sound" button is now "Learn more" and goes to the Stories page.
+- **Revision (2026-11-28):**
+  - Donate: the channel tab bar follows concentric corners (track radius = tab radius + padding) with even spacing (gap = padding), so it stays tidy when it wraps; on phones it becomes an even two-column grid.
+  - Donate: "Choose how to give" / "How to give" read "Choose how to donate" / "How to donate". Every channel ends with "Email the proof of transfer to donations@angatbuhay.ph." (added once in the renderer, not repeated in each channel's steps).
+  - Donate: BPI USD account number 0014 2705 58. BPI eDonate uses the steps from Angat Buhay's eDonate graphic plus a button to bpiedonate.com/ab. Myriad Australia and Myriad USA (Every.org) take their steps and links from angatbuhay.ph/ab-be-involved, each with a button to its donation page. No channel is a placeholder now.
+  - Donate, Other ways to give: "For in-kind donations, kindly reach out through donations@angatbuhay.ph".
+  - Get involved, Partner with us: step 3 is "Together, we scope the project and if ideal, formalize the partnership agreement."; step 2 loses its placeholder label.
+  - About, Core values: Angat Buhay's painted symbols (bulb, bayanihan, sun; `ui/media/values/*.webp`, trimmed and resized from the 3000 px masters) replace the drawn doodles, each on a white disc so the teal and blue symbols read on their own-colour cards.
