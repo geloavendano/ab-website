@@ -452,15 +452,20 @@
   pages.home = () => {
     const version = document.body.dataset.version;
     if (!version) {
-      // Hero copy is static in index.html; the "Now playing" strip follows the featured story.
-      const f = listedStories().find((x) => x.featured) || listedStories()[0];
+      // Highlighted stories (Angat Buhay's picks, in order) lead; the latest stories top them up.
+      const highlighted = (D.highlightedStories || []).map((slug) => listedStories().find((x) => x.slug === slug)).filter(Boolean);
+      // Hero copy is static in index.html; the "Now playing" strip follows the first highlight (else the featured or latest story).
+      const f = highlighted[0] || listedStories().find((x) => x.featured) || listedStories()[0];
       const now = $("#now-playing");
-      if (f && now) { now.href = "story.html?s=" + f.slug; fill("now-title", esc(f.title)); fill("now-sub", esc(f.subheading)); }
+      if (f && now) {
+        now.href = "story.html?s=" + f.slug; fill("now-title", esc(f.title)); fill("now-sub", esc(f.subheading));
+        fill("now-watch", `Watch the story${f.videoDuration ? " · " + esc(f.videoDuration) : ""} →`);
+      }
       fill("pillar-cards", D.pillars.map(pillarCard).join(""));
       // Headline figure per pillar: the first impact stat listed for each, in pillar order.
       fill("home-stats", statsBlock(D.pillars.map((p) => D.impactStats.find((s) => s.pillar === p.slug)).filter(Boolean)));
-      // The hero already plays the featured story, so "More impact" starts after it.
-      const latest = listedStories().filter((s) => s.image && s !== f).slice(0, 4);
+      // The hero strip already shows f, so this section starts after it.
+      const latest = [...new Set([...highlighted, ...listedStories()])].filter((s) => s.image && s !== f).slice(0, 4);
       fill("latest", latest.length ? storyCard(latest[0], "is-feature") + `<div class="story-stack">${latest.slice(1).map((s) => storyCard(s, "is-row")).join("")}</div>` : "");
       const homeMap = presenceMap({ host: $("#home-map"), card: $("#home-map-card"), rows: presenceRows() });
       if (homeMap) homeMap.update("");
@@ -559,7 +564,7 @@
           : s.embedUrl
             ? `<iframe class="embed-vertical" src="${esc(s.embedUrl)}" title="${esc(s.title)} (video)" loading="lazy" allowfullscreen scrolling="no"></iframe>`
             : ph("Video embed (YouTube, privacy-enhanced) · captions on", "r-16x9 play")) +
-        `<p class="small muted">${(s.alsoOn || []).map(([n, u]) => `<a href="${esc(u)}" target="_blank" rel="noopener">Watch on ${esc(n)}</a> · `).join("")}Transcript available below the video.</p>`
+        `<p class="small muted">${s.videoPreview ? `Preview: a 15-second cut of the ${esc(s.videoDuration || "full")} video, for the prototype. ` : ""}${(s.alsoOn || []).map(([n, u]) => `<a href="${esc(u)}" target="_blank" rel="noopener">Watch on ${esc(n)}</a> · `).join("")}Transcript available below the video.</p>`
       : s.format === "infographic"
         ? `${img(s.image, "", "r-3x4", "Infographic (full width, tap to zoom)")}
            <details class="disclosure"><summary>Read this infographic as text</summary><div>${esc(s.textVersion || "[Text version — required field for infographics]")}</div></details>`
